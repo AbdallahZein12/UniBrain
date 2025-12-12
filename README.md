@@ -88,6 +88,7 @@ Registrar advising financial aid housing.
 
 ## 🏗 Project Structure
 
+```
 UNIBRAIN
 │
 ├── app
@@ -109,7 +110,7 @@ UNIBRAIN
 ├── requirements.txt
 ├── .env
 └── README.md
-
+```
 ---
 
 ## 🛠 Tech Stack
@@ -129,21 +130,31 @@ UNIBRAIN
 ```bash
 git clone https://github.com/AbdallahZein12/unibrain.git
 cd unibrain
+```
 
 ### 2 Create and activate a virtual environment  
+```bash
 python -m venv env  
-source env/bin/activate        macOS and Linux  
-env\Scripts\activate           Windows  
+source env/bin/activate        macOS and Linux 
+
+env\Scripts\activate           Windows
+``` 
 
 ### 3 Install dependencies  
-pip install -r requirements.txt  
+```bash
+pip install -r requirements.txt
+```
 
 ### 4 Run the development server  
-python main.py  
+```bash
+python main.py
+```  
 
 ### 5 Open the app  
+```bash
 Visit  
-http://localhost:5000  
+http://localhost:5000
+```
 
 You should see the UniBrain home page.
 
