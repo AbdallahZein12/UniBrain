@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}UniBrain{% endblock %}</title>
+
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="{{ url_for('v1.static', filename='css/style.css') }}">
+
+    <!-- Page-specific CSS -->
+    {% block css %}{% endblock %}
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="/" class="logo">UniBrain</a>
+        </div>
+        <div class="nav-right">
+            <a href="/">Home</a>
+            <a href="/assist">Assist</a>
+            <a href="/about">About</a>
+        </div>
+    </nav>
+
+    <!-- Main content -->
+    <main class="container">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- Global JS -->
+    <script src="{{ url_for('v1.static', filename='js/script.js') }}"></script>
+
+    <!-- Page-specific scripts -->
+    {% block scripts %}{% endblock %}
+
+</body>
+</html>

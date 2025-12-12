@@ -1,0 +1,73 @@
+# ================================
+# Python
+# ================================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pdb
+*.egg-info/
+*.manifest
+*.spec
+
+# Virtual env
+env/
+venv/
+.venv/
+
+# ================================
+# Flask / Instance
+# ================================
+instance/
+*.db
+*.sqlite3
+
+# ================================
+# Environment variables
+# ================================
+.env
+*.env
+
+# ================================
+# Logs
+# ================================
+*.log
+logs/
+*.out
+
+# ================================
+# Node / SCSS (if you compile SCSS)
+# ================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# SCSS build artifacts
+*.css.map
+*.sass-cache/
+
+# ================================
+# VS Code
+# ================================
+.vscode/
+.history/
+
+# ================================
+# OS files
+# ================================
+.DS_Store
+Thumbs.db
+
+# ================================
+# Compiled Frontend Assets
+# ================================
+dist/
+build/
+
+# ================================
+# Python caches and lock files
+# ================================
+pip-wheel-metadata/
+poetry.lock
+__pypackages__/

@@ -1,0 +1,170 @@
+{% extends "base.html" %}
+
+{% block title %}UniBrain – The Intelligence Layer for Your University{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <span class="hero-badge">v1 • Demo Preview</span>
+      <h1>The brain of your university.</h1>
+      <p class="hero-subtitle">
+        UniBrain unifies programs, requirements, and campus knowledge into a single,
+        intelligent interface for students, advisors, and administrators.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#demo" class="btn btn-primary">View Demo Flow</a>
+        <a href="#features" class="btn btn-ghost">Explore Features</a>
+      </div>
+
+      <div class="hero-meta">
+        <div>
+          <span class="hero-meta-label">Built for</span>
+          <span class="hero-meta-value">LIU Brooklyn (v1)</span>
+        </div>
+        <div>
+          <span class="hero-meta-label">Focus</span>
+          <span class="hero-meta-value">Programs • Requirements • Contacts</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="hero-card glass">
+        <div class="hero-card-header">
+          <span class="dot dot-red"></span>
+          <span class="dot dot-yellow"></span>
+          <span class="dot dot-green"></span>
+          <span class="hero-card-title">UniBrain Assist</span>
+        </div>
+        <div class="hero-chat">
+          <div class="bubble bubble-user">
+            “What do I still need to graduate as a CS major?”
+          </div>
+          <div class="bubble bubble-ai">
+            <span class="bubble-ai-label">UniBrain</span>
+            Based on your current record, you’ve completed 72 of 120 credits.
+            You still need:
+            <ul>
+              <li>CS 220 – Algorithms</li>
+              <li>CS 310 – Operating Systems</li>
+              <li>1 advanced CS elective</li>
+              <li>2 core curriculum courses</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-image">
+        <img src="{{ url_for('v1.static', filename='img/campus-hero.jpg') }}"
+             alt="Abstract campus data visualization">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="features" class="section">
+  <div class="section-header">
+    <h2>Why UniBrain?</h2>
+    <p>Start with the fundamentals that every campus needs, then grow into a full intelligence platform.</p>
+  </div>
+
+  <div class="feature-grid">
+    <div class="feature-card">
+      <div class="feature-icon">🎓</div>
+      <h3>Programs & Majors</h3>
+      <p>
+        Model every program, major, and track in a single structured ontology, instead of scattering
+        requirements across PDFs and outdated web pages.
+      </p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">📚</div>
+      <h3>Course Requirements</h3>
+      <p>
+        Let students ask natural questions like “What do I need next semester?” and get
+        precise answers powered by UniBrain’s requirement engine.
+      </p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">📇</div>
+      <h3>Contacts & Offices</h3>
+      <p>
+        One place to discover who handles what: registrar, advising, financial aid, housing, and more –
+        with hours, emails, and locations.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="demo" class="section section-alt">
+  <div class="section-header">
+    <h2>Demo flow for v1</h2>
+    <p>
+      For this prototype, UniBrain runs entirely on dummy data modeled after publicly available
+      LIU information, ready to plug into real systems later.
+    </p>
+  </div>
+
+  <div class="demo-grid">
+    <ol class="demo-steps">
+      <li>
+        <strong>Ingest public data.</strong>
+        Programs, majors, requirements, and key office contacts from the LIU website.
+      </li>
+      <li>
+        <strong>Build the UniBrain Graph.</strong>
+        Connect majors → requirements → courses → departments → offices.
+      </li>
+      <li>
+        <strong>Expose UniBrain Assist.</strong>
+        A simple chat UI where students can ask questions about majors and requirements.
+      </li>
+      <li>
+        <strong>Future: plug into real systems.</strong>
+        Integrate safely with SIS, LMS, and advising once IT approves.
+      </li>
+    </ol>
+
+    <div class="demo-visual glass">
+      <h3>Graph snapshot</h3>
+      <p class="demo-caption">
+        A simplified view of how UniBrain understands your university.
+      </p>
+      <div class="graph-preview">
+        <div class="node node-main">Computer Science (BS)</div>
+        <div class="graph-row">
+          <div class="node">CS 101<br><span>Intro to Programming</span></div>
+          <div class="node">CS 102<br><span>Data Structures</span></div>
+          <div class="node">CS 220<br><span>Algorithms</span></div>
+        </div>
+        <div class="graph-row">
+          <div class="node">Registrar<br><span>Records & Enrollment</span></div>
+          <div class="node">Advising<br><span>Degree Planning</span></div>
+          <div class="node">Financial Aid<br><span>Funding & Aid</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-tight">
+  <div class="cta">
+    <div>
+      <h2>Ready to make your university think?</h2>
+      <p>
+        UniBrain v1 is focused on one campus, one ontology, and one clear goal:
+        proving that an AI “brain” for universities is not just possible — it’s inevitable.
+      </p>
+    </div>
+    <div>
+      <a href="#demo" class="btn btn-primary btn-lg">Scroll to demo</a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
