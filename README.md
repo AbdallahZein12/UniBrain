@@ -153,7 +153,7 @@ python main.py
 ### 5 Open the app  
 ```bash
 Visit  
-http://localhost:5000
+http://localhost:5000/{version}/home
 ```
 
 You should see the UniBrain home page.
