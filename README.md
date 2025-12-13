@@ -196,7 +196,7 @@ Compliance FERPA and data security
 
 > 12/12/2025 Added models diagram 
 
-![img]("models.png")
+![img](./models.png)
 
 
 
