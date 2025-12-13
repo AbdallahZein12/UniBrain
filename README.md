@@ -163,11 +163,11 @@ You should see the UniBrain home page.
 ## 🚧 Planned Features After v1
 
 ### Near term
-Add more majors and requirement schemas  
-Add search and assistant endpoint  
-Data ingestion pipeline for public LIU pages  
-Graph visualization UI  
-Student dummy profiles for degree progress queries  
+- [X] Add more majors and requirement schemas  
+[ ] Add search and assistant endpoint  
+[ ] Data ingestion pipeline for public LIU pages  
+[ ] Graph visualization UI  
+[ ] Student dummy profiles for degree progress queries  
 
 ### Long term
 SIS integration  
@@ -188,7 +188,15 @@ LIU IT
 Deputy CIO  
 Registrar  
 Academic affairs  
-Compliance FERPA and data security  
+Compliance FERPA and data security 
+
+--- 
+
+## Updates ⚙️
+
+> 12/12/2025 Added models diagram 
+
+![img]("models.png")
 
 
 
