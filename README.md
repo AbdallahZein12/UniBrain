@@ -198,6 +198,8 @@ Compliance FERPA and data security
 
 ![img](./models.png)
 
+> 12/15/2025 Added landing page desgin, logo and login portal (dev_login_feature)
+
 
 
 
