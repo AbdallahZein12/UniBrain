@@ -1,41 +1,229 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}UniBrain{% endblock %}</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>UniBrain</title>
 
-    <!-- Global CSS -->
-    <link rel="stylesheet" href="{{ url_for('v1.static', filename='css/style.css') }}">
+  <!-- Optional: nicer font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="{{ url_for('v1.static', filename='img/logo.svg') }}" type="image/svg+xml">
 
-    <!-- Page-specific CSS -->
-    {% block css %}{% endblock %}
+  <link rel="stylesheet" href="{{ url_for('v1.static', filename='css/style.css') }}">
+
+  <!-- Defer so DOM is ready before the script runs -->
+  <script defer src="{{ url_for('v1.static', filename='js/unigraph.js') }}"></script>
 </head>
 <body>
 
-    <!-- Navbar -->
+  <!-- Top glow / background decor -->
+  <div class="bg-decor">
+    <div class="glow g1"></div>
+    <div class="glow g2"></div>
+    <div class="glow g3"></div>
+    <div class="noise"></div>
+  </div>
+
+  <!-- NAVBAR -->
+  <header class="nav-wrap">
     <nav class="navbar">
-        <div class="nav-left">
-            <a href="/" class="logo">UniBrain</a>
-        </div>
-        <div class="nav-right">
-            <a href="/">Home</a>
-            <a href="/assist">Assist</a>
-            <a href="/about">About</a>
-        </div>
+      <a class="brand" href="#" aria-label="UniBrain Home">
+        <img
+          class="brand-logo"
+          src="{{ url_for('v1.static', filename='img/logo.svg') }}"
+          alt="UniBrain"
+        />
+        <span class="brand-name">UniBrain</span>
+        <span class="brand-tag">Ontology-Driven Advising</span>
+      </a>
+
+      <div class="nav-links">
+        <a href="#ontology">Ontology</a>
+        <a href="#how">How it Works</a>
+        <a href="#usecases">Use Cases</a>
+        <a href="#faq">FAQ</a>
+      </div>
+
+      <div class="nav-actions">
+        <!-- <button class="btn ghost" id="openUniAssistTop">UniAssist</button> -->
+        <button class="btn primary" id="openUniAssistTop2">Get Started</button>
+      </div>
+
+      <button class="burger" id="burgerBtn"
+              aria-label="Open menu"
+              aria-controls="mobileMenu"
+              aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
     </nav>
 
-    <!-- Main content -->
-    <main class="container">
-        {% block content %}
-        {% endblock %}
-    </main>
+    <!-- Mobile menu -->
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#ontology">Ontology</a>
+      <a href="#how">How it Works</a>
+      <a href="#usecases">Use Cases</a>
+      <a href="#faq">FAQ</a>
+      <!-- <button class="btn ghost w100" id="openUniAssistMobile">UniAssist</button> -->
+      <button class="btn primary w100" id="openUniAssistMobile2">Get Started</button>
+    </div>
+  </header>
 
-    <!-- Global JS -->
-    <script src="{{ url_for('v1.static', filename='js/script.js') }}"></script>
+  {% block content %}{% endblock %}
 
-    <!-- Page-specific scripts -->
-    {% block scripts %}{% endblock %}
+  <!-- UNIASSIST MODAL (fixed centered popup) -->
+  <div class="modal" id="uniAssistModal" aria-hidden="true">
+    <div class="modal-backdrop" id="modalBackdrop"></div>
+
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="uaTitle">
+      <button class="modal-close" id="closeModal" aria-label="Close">✕</button>
+
+      <div class="modal-head">
+        <div class="pill">UniAssist</div>
+        <h2 id="uaTitle">Your academic copilot</h2>
+        <p>Login or create a student profile. UniBrain uses your profile + degree rules to guide your next move.</p>
+      </div>
+
+      <div class="tabs">
+        <button class="tab active" data-tab="loginPanel" type="button">Login</button>
+        <button class="tab" data-tab="signupPanel" type="button">Sign Up</button>
+      </div>
+
+      <div class="tab-panels">
+        <section class="tab-panel active" id="loginPanel">
+          <label class="field">
+            <span>Email</span>
+            <input type="email" placeholder="you@liu.edu" autocomplete="email">
+          </label>
+          <label class="field">
+            <span>Password</span>
+            <input type="password" placeholder="••••••••" autocomplete="current-password">
+          </label>
+
+          <button class="btn primary w100" type="button">Login</button>
+          <div class="hint-row">
+            <span class="hint">No account?</span>
+            <button class="linklike" data-switch="signupPanel" type="button">Create one</button>
+          </div>
+        </section>
+
+        <section class="tab-panel" id="signupPanel">
+          <div class="grid-2">
+            <label class="field">
+              <span>Full Name</span>
+              <input type="text" placeholder="Jane Doe" autocomplete="name">
+            </label>
+            <label class="field">
+              <span>Major</span>
+              <input type="text" placeholder="Computer Science">
+            </label>
+          </div>
+
+          <label class="field">
+            <span>Email</span>
+            <input type="email" placeholder="you@liu.edu" autocomplete="email">
+          </label>
+
+          <label class="field">
+            <span>Password</span>
+            <input type="password" placeholder="Create a password" autocomplete="new-password">
+          </label>
+
+          <div class="mini">
+            <div class="mini-card">
+              <strong>What we store</strong>
+              <p>Completed + in-progress courses, declared program, and rule results. No creepy stuff.</p>
+            </div>
+            <div class="mini-card">
+              <strong>What you get</strong>
+              <p>Clear requirements, substitutions, and a plan that adapts when you switch majors.</p>
+            </div>
+          </div>
+
+          <button class="btn primary w100" type="button">Create Profile</button>
+          <div class="hint-row">
+            <span class="hint">Already have an account?</span>
+            <button class="linklike" data-switch="loginPanel" type="button">Login</button>
+          </div>
+        </section>
+      </div>
+
+      <div class="modal-foot">
+        <span class="fineprint">UniBrain is an ontology-driven MVP — designed to be explainable, not vague.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ✅ Keep ONE tooltip portal globally (so home.html shouldn't include it) -->
+  <div class="neo-tooltip neo-tooltip-portal" id="neoTooltip" role="tooltip" aria-hidden="true"></div>
+
+  <script>
+
+    // Mobile menu
+    const burgerBtn = document.getElementById("burgerBtn");
+    const mobileMenu = document.getElementById("mobileMenu");
+
+    function setMenuOpen(isOpen) {
+      mobileMenu.classList.toggle("open", isOpen);
+      burgerBtn.setAttribute("aria-expanded", String(isOpen));
+    }
+
+    if (burgerBtn && mobileMenu) {
+      burgerBtn.addEventListener("click", () => {
+        setMenuOpen(!mobileMenu.classList.contains("open"));
+      });
+
+      // close menu when clicking any link inside it
+      mobileMenu.querySelectorAll("a").forEach(a => {
+        a.addEventListener("click", () => setMenuOpen(false));
+      });
+    }
+
+    // Modal controls
+    const modal = document.getElementById("uniAssistModal");
+    const modalBackdrop = document.getElementById("modalBackdrop");
+    const closeModalBtn = document.getElementById("closeModal");
+
+    function openModal() {
+      modal.classList.add("open");
+      modal.setAttribute("aria-hidden", "false");
+      document.body.classList.add("no-scroll");
+      mobileMenu?.classList.remove("open");
+    }
+
+    function closeModal() {
+      modal.classList.remove("open");
+      modal.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("no-scroll");
+    }
+
+    ["openUniAssistTop","openUniAssistTop2","openUniAssistMobile","openUniAssistMobile2"]
+      .forEach(id => document.getElementById(id)?.addEventListener("click", openModal));
+
+    closeModalBtn?.addEventListener("click", closeModal);
+    modalBackdrop?.addEventListener("click", closeModal);
+
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && modal.classList.contains("open")) closeModal();
+    });
+
+    // Tabs
+    const tabs = document.querySelectorAll(".tab");
+    const panels = document.querySelectorAll(".tab-panel");
+
+    function activate(panelId) {
+      tabs.forEach(t => t.classList.toggle("active", t.dataset.tab === panelId));
+      panels.forEach(p => p.classList.toggle("active", p.id === panelId));
+    }
+
+    tabs.forEach(tab => tab.addEventListener("click", () => activate(tab.dataset.tab)));
+
+    document.querySelectorAll("[data-switch]").forEach(btn => {
+      btn.addEventListener("click", () => activate(btn.dataset.switch));
+    });
+  </script>
 
 </body>
 </html>

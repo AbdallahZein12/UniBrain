@@ -1,170 +1,775 @@
 {% extends "base.html" %}
-
-{% block title %}UniBrain – The Intelligence Layer for Your University{% endblock %}
-
 {% block content %}
 
+<!-- HERO -->
 <section class="hero">
-  <div class="hero-inner">
-    <div class="hero-text">
-      <span class="hero-badge">v1 • Demo Preview</span>
-      <h1>The brain of your university.</h1>
-      <p class="hero-subtitle">
-        UniBrain unifies programs, requirements, and campus knowledge into a single,
-        intelligent interface for students, advisors, and administrators.
-      </p>
+  <div class="container hero-grid">
 
-      <div class="hero-actions">
-        <a href="#demo" class="btn btn-primary">View Demo Flow</a>
-        <a href="#features" class="btn btn-ghost">Explore Features</a>
+    <div class="hero-copy">
+      <div class="kicker">
+        <span class="dot"></span>
+        Ontology-Driven University Intelligence
       </div>
 
-      <div class="hero-meta">
-        <div>
-          <span class="hero-meta-label">Built for</span>
-          <span class="hero-meta-value">LIU Brooklyn (v1)</span>
+      <h1>
+        One place to <span class="accent">reason</span> about your university —
+        built for real academic decisions.
+      </h1>
+
+      <p class="lede">
+        UniBrain is an ontology-driven academic system that turns catalogs, requirements, substitutions,
+        and policies into a connected knowledge graph. UniAssist can answer questions with receipts,
+        help advisers move faster, and even let you browse university directories and resources without
+        digging through a hundred pages.
+      </p>
+
+      <div class="hero-cta">
+        <button class="btn primary" id="openUniAssistHero">Try UniAssist</button>
+        <a class="btn ghost" href="#ontology">See the Ontology</a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-num">Explainable</div>
+          <div class="stat-label">recommendations,not guesses</div>
         </div>
-        <div>
-          <span class="hero-meta-label">Focus</span>
-          <span class="hero-meta-value">Programs • Requirements • Contacts</span>
+        <div class="stat">
+          <div class="stat-num">Rule-Aware</div>
+          <div class="stat-label">substitutions + exceptions</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">Profile-Driven</div>
+          <div class="stat-label">your courses → your pathway</div>
         </div>
       </div>
     </div>
 
-    <div class="hero-visual">
-      <div class="hero-card glass">
-        <div class="hero-card-header">
-          <span class="dot dot-red"></span>
-          <span class="dot dot-yellow"></span>
-          <span class="dot dot-green"></span>
-          <span class="hero-card-title">UniBrain Assist</span>
+    <!-- Hero visual -->
+    <div class="hero-visual" aria-hidden="false">
+      <div class="neo-card" aria-label="UniBrain Knowledge Graph Preview">
+        <div class="neo-head">
+          <div class="chip">UniGraph Preview</div>
+          <div class="tiny">Ontology + Rules + Directories</div>
         </div>
-        <div class="hero-chat">
-          <div class="bubble bubble-user">
-            “What do I still need to graduate as a CS major?”
+
+        <div class="neo-stage" id="neoStage">
+          <div class="neo-canvas" aria-hidden="true">
+            <svg class="neo-edges" viewBox="0 0 520 360" preserveAspectRatio="none">
+              <path class="neo-edge" d="M90,95 C150,95 170,95 210,95"></path>
+              <path class="neo-edge" d="M245,95 C300,70 330,55 395,55"></path>
+              <path class="neo-edge" d="M245,95 C300,125 330,145 395,155"></path>
+              <path class="neo-edge" d="M245,95 C255,150 255,175 255,210"></path>
+              <path class="neo-edge" d="M255,240 C290,250 310,260 330,275"></path>
+              <!-- <path class="neo-edge faint" d="M395,55 C430,70 455,85 485,95"></path> -->
+            </svg>
+
+            <button class="neo-node n-student" data-tip="Student Profile: completed + in-progress courses, major, constraints.">
+              Student
+              <span class="neo-sub">Profile</span>
+            </button>
+
+            <button class="neo-node n-course" data-tip="Courses connect to requirements, prerequisites, and categories.">
+              Course
+              <span class="neo-sub">Catalog</span>
+            </button>
+
+            <button class="neo-node n-dir" data-tip="Directory browser: Advising, departments, contacts, resources. Click to open.">
+              Directory
+              <span class="neo-sub">Browse</span>
+            </button>
+
+            <button class="neo-node n-req" data-tip="Requirements can have multiple valid satisfaction pathways.">
+              Requirement
+              <span class="neo-sub">Ruleset</span>
+            </button>
+
+            <button class="neo-node n-rule" data-tip="Rules: substitutions, prereqs, minimum grades, exceptions, credit limits.">
+              Rule Engine
+              <span class="neo-sub">Explainable</span>
+            </button>
+
+            <button class="neo-node n-deg" data-tip="Degree: evaluates what’s satisfied and what’s missing.">
+              Degree
+              <span class="neo-sub">Pathways</span>
+            </button>
           </div>
-          <div class="bubble bubble-ai">
-            <span class="bubble-ai-label">UniBrain</span>
-            Based on your current record, you’ve completed 72 of 120 credits.
-            You still need:
-            <ul>
-              <li>CS 220 – Algorithms</li>
-              <li>CS 310 – Operating Systems</li>
-              <li>1 advanced CS elective</li>
-              <li>2 core curriculum courses</li>
-            </ul>
+
+          <div class="neo-drawer" id="neoDrawer" aria-hidden="true">
+            <div class="drawer-head">
+              <div>
+                <strong>Directory Browser</strong>
+                <div class="drawer-sub">Find offices, advisers, departments, contacts.</div>
+              </div>
+              <button class="drawer-close" id="drawerClose" type="button" aria-label="Close">✕</button>
+            </div>
+
+            <div class="drawer-body">
+              <div class="crumbs">
+                <span class="crumb active">University</span>
+                <span class="crumb">Advising</span>
+                <span class="crumb">School of Engineering</span>
+              </div>
+
+              <div class="drawer-grid">
+                <div class="dir-item">
+                  <div class="dir-title">Advising Office</div>
+                  <div class="dir-meta">Hours • Location • Appointments</div>
+                </div>
+                <div class="dir-item">
+                  <div class="dir-title">Department Contacts</div>
+                  <div class="dir-meta">Chair • Coordinators • Emails</div>
+                </div>
+                <div class="dir-item">
+                  <div class="dir-title">Program Pages</div>
+                  <div class="dir-meta">CS • IT • CE • EE</div>
+                </div>
+                <div class="dir-item">
+                  <div class="dir-title">Student Resources</div>
+                  <div class="dir-meta">Tutoring • Lab Hours • Policies</div>
+                </div>
+              </div>
+
+              <div class="drawer-note">
+                <span class="mono">Tip:</span> Later you can wire this to real directory data (departments, offices, contact cards).
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="neo-foot">
+          <div class="mini-metric">
+            <strong>Example:</strong>
+            <span class="mono">“Can CS one zero two substitute for the core requirement?”</span>
+          </div>
+          <div class="mini-metric">
+            <strong>Status:</strong>
+            <span class="ok">Graph Ready</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ✅ Tooltip portal MUST exist in the DOM (position: fixed in your SCSS) -->
+<div class="neo-tooltip neo-tooltip-portal" id="neoTooltip" role="tooltip" aria-hidden="true"></div>
+
+<script>
+  (function () {
+    const stage = document.getElementById("neoStage");
+    const tip = document.getElementById("neoTooltip");
+    const drawer = document.getElementById("neoDrawer");
+    const drawerClose = document.getElementById("drawerClose");
+
+    function showTip(text, x, y) {
+      if (!tip) return;
+      tip.textContent = text;
+      tip.style.left = (x + 14) + "px";
+      tip.style.top = (y + 14) + "px";
+      tip.classList.add("show");
+      tip.setAttribute("aria-hidden", "false");
+    }
+    function hideTip() {
+      if (!tip) return;
+      tip.classList.remove("show");
+      tip.setAttribute("aria-hidden", "true");
+    }
+
+    stage.querySelectorAll(".neo-node").forEach(node => {
+      node.addEventListener("mousemove", (e) => {
+        const text = node.getAttribute("data-tip") || "";
+        showTip(text, e.clientX, e.clientY);
+      });
+      node.addEventListener("mouseleave", hideTip);
+
+      node.addEventListener("click", () => {
+        if (node.classList.contains("n-dir")) {
+          drawer.classList.add("open");
+          drawer.setAttribute("aria-hidden", "false");
+        }
+      });
+    });
+
+    drawerClose?.addEventListener("click", () => {
+      drawer.classList.remove("open");
+      drawer.setAttribute("aria-hidden", "true");
+    });
+
+    stage.addEventListener("click", (e) => {
+      if (drawer.classList.contains("open")) {
+        const clickedInside = drawer.contains(e.target);
+        const clickedDirNode = e.target.closest(".n-dir");
+        if (!clickedInside && !clickedDirNode) {
+          drawer.classList.remove("open");
+          drawer.setAttribute("aria-hidden", "true");
+        }
+      }
+    });
+  })();
+</script>
+
+<script>
+  document.getElementById("openUniAssistHero")?.addEventListener("click", () => {
+    document.getElementById("openUniAssistTop2")?.click();
+  });
+</script>
+
+<!-- TRUST STRIP -->
+<section class="section alt">
+  <div class="container strip-grid">
+    <div class="strip-item">
+      <div class="icon">◎</div>
+      <div>
+        <h3>Ontology First</h3>
+        <p>A real model of your university — not just scraped pages.</p>
+      </div>
+    </div>
+    <div class="strip-item">
+      <div class="icon">⧉</div>
+      <div>
+        <h3>Rules Engine</h3>
+        <p>Substitutions and exceptions are explicit, testable logic.</p>
+      </div>
+    </div>
+    <div class="strip-item">
+      <div class="icon">⟡</div>
+      <div>
+        <h3>Clear Explanations</h3>
+        <p>“Here’s why this counts” with traceable reasoning.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ONTOLOGY -->
+<section class="section" id="ontology">
+  <div class="container">
+
+    <div class="section-head">
+      <h2>The UniBrain Ontology</h2>
+      <p>
+        UniBrain organizes academic life into connected entities. When you ask UniAssist a question,
+        it doesn’t just answer — it traverses relationships and applies rules.
+      </p>
+    </div>
+
+    <div class="ontology-layout">
+      <!-- ✅ Updated: Neo-styled ontology graph -->
+      <div class="ontology-graph neo-card" aria-label="UniBrain Ontology Map">
+        <div class="neo-head">
+          <div class="chip">Ontology Map</div>
+          <div class="tiny">Entities + relationships</div>
+        </div>
+
+        <div class="neo-stage ontology-stage" aria-hidden="false">
+          <div class="neo-canvas" aria-hidden="true">
+            <!-- Edges (simple + clean; matches your new ontology node positions) -->
+            <svg class="neo-edges" viewBox="0 0 520 360" preserveAspectRatio="none">
+              <!-- Student -> Completed / InProgress -->
+              <path class="neo-edge" d="M110,80 C150,90 170,105 210,115"></path>
+              <path class="neo-edge" d="M110,80 C150,110 170,130 210,170"></path>
+
+              <!-- Completed / InProgress -> Course -->
+              <path class="neo-edge" d="M240,115 C300,115 320,115 360,115"></path>
+              <path class="neo-edge" d="M240,170 C300,160 320,145 360,135"></path>
+
+              <!-- Course -> Requirement -> Rule -> Degree -->
+              <!-- <path class="neo-edge" d="M390,115 C420,140 420,165 390,185"></path> -->
+              <path class="neo-edge" d="M390,115 C380,285 330,300 260,305"></path>
+              <!-- <path class="neo-edge" d="M390,250 C380,285 330,300 260,305"></path> -->
+
+              <!-- Optional faint flourishes -->
+              <path class="neo-edge faint" d="M390,115 C455,110 480,125 500,140"></path>
+              <path class="neo-edge faint" d="M260,305 C300,330 360,335 430,330"></path>
+            </svg>
+
+            <!-- Nodes (percent-based positions from styles.scss) -->
+            <div class="neo-node primary o-student">
+              Student Profile
+              <span class="neo-sub">major • constraints • credits</span>
+            </div>
+
+            <div class="neo-node o-completed">
+              Completed Courses
+              <span class="neo-sub">history set</span>
+            </div>
+
+            <div class="neo-node o-inprogress">
+              In-Progress Courses
+              <span class="neo-sub">current term</span>
+            </div>
+
+            <div class="neo-node o-course">
+              Course
+              <span class="neo-sub">catalog • prereqs</span>
+            </div>
+
+            <div class="neo-node o-req">
+              Requirement
+              <span class="neo-sub">core • electives</span>
+            </div>
+
+            <div class="neo-node o-rule">
+              Rule
+              <span class="neo-sub">substitute • min grade</span>
+            </div>
+
+            <div class="neo-node primary o-degree">
+              Program / Degree
+              <span class="neo-sub">evaluation output</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="neo-foot">
+          <div class="tiny">
+            UniBrain stores relationships explicitly so UniAssist can explain “why” — not just answer.
           </div>
         </div>
       </div>
 
-      <div class="hero-image">
-        <img src="{{ url_for('v1.static', filename='img/campus-hero.jpg') }}"
-             alt="Abstract campus data visualization">
+      <div class="ontology-copy">
+        <div class="card">
+          <h3>Student → Courses</h3>
+          <p>
+            UniBrain separates what you’ve finished vs what you’re currently taking,
+            so recommendations are realistic (no “take a class you’re literally enrolled in” energy).
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Courses → Requirements</h3>
+          <p>
+            Requirements aren’t just “a list.” They have categories, credit constraints,
+            and sometimes multiple valid ways to satisfy them.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Requirements → Rules</h3>
+          <p>
+            Rules describe the logic: prerequisites, substitutions, exceptions, minimum grades,
+            repeated course limits, and conditional “if-then” policy behavior.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Rules → Degree Pathways</h3>
+          <p>
+            UniBrain can evaluate pathways: what’s satisfied, what’s missing, and what your
+            next best options are — with clear reasoning.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section alt" id="how">
+  <div class="container">
+
+    <div class="section-head">
+      <h2>How UniBrain Works</h2>
+      <p>
+        Think of UniBrain as your university’s “logic layer.” UniAssist is the friendly interface — UniBrain is the brain.
+      </p>
+    </div>
+
+    <div class="timeline">
+      <div class="t-step">
+        <div class="t-num">01</div>
+        <div class="t-body">
+          <h3>Build a Student Profile</h3>
+          <p>Completed courses, in-progress courses, declared program, and constraints.</p>
+          <div class="chips">
+            <span class="chip">completed_courses</span>
+            <span class="chip">in_progress_courses</span>
+            <span class="chip">major</span>
+            <span class="chip">credits</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="t-step">
+        <div class="t-num">02</div>
+        <div class="t-body">
+          <h3>Map Courses to Requirements</h3>
+          <p>Every course can satisfy one or more requirements — sometimes conditionally.</p>
+          <div class="chips">
+            <span class="chip">counts_for</span>
+            <span class="chip">category</span>
+            <span class="chip">minimum_grade</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="t-step">
+        <div class="t-num">03</div>
+        <div class="t-body">
+          <h3>Apply Rules (Substitutions / Exceptions)</h3>
+          <p>Substitutions are rules, not vibes. UniBrain can track why a replacement is valid.</p>
+          <div class="chips">
+            <span class="chip">substitution</span>
+            <span class="chip">prerequisite</span>
+            <span class="chip">restriction</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="t-step">
+        <div class="t-num">04</div>
+        <div class="t-body">
+          <h3>Generate Explainable Recommendations</h3>
+          <p>UniAssist outputs actions with “because” statements you can trust.</p>
+          <div class="chips">
+            <span class="chip">why_this_counts</span>
+            <span class="chip">what_to_take_next</span>
+            <span class="chip">what_blocks_you</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="callout-left">
+        <h3>Not just “what should I take next?”</h3>
+        <p>
+          UniBrain can also answer <span class="accent">why</span> something counts, what rule allowed it,
+          and what you’d need to change if you switch majors or fail a prerequisite.
+        </p>
+      </div>
+      <button class="btn primary" id="openUniAssistHow">Ask UniAssist</button>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  document.getElementById("openUniAssistHow")?.addEventListener("click", () => {
+    document.getElementById("openUniAssistTop2")?.click();
+  });
+</script>
+
+<!-- USE CASES -->
+<section class="section" id="usecases">
+  <div class="container">
+
+    <div class="section-head">
+      <h2>Use Cases UniBrain Nails</h2>
+      <p>These are the moments where normal advising becomes confusing — and UniBrain stays calm.</p>
+    </div>
+
+    <div class="cards-3">
+      <div class="feature">
+        <div class="feature-top">
+          <div class="badge">Substitutions</div>
+          <h3>“Can this class replace that requirement?”</h3>
+        </div>
+        <p>
+          UniBrain checks substitution rules, degree constraints, and category matches — then explains the result.
+        </p>
+        <ul class="ticks">
+          <li>Traceable rule path</li>
+          <li>Shows what breaks if invalid</li>
+          <li>Handles conditional substitutions</li>
+        </ul>
+      </div>
+
+      <div class="feature">
+        <div class="feature-top">
+          <div class="badge">Planning</div>
+          <h3>“What’s the fastest path to graduation?”</h3>
+        </div>
+        <p>
+          UniBrain evaluates remaining requirements and suggests multiple valid paths — not just one.
+        </p>
+        <ul class="ticks">
+          <li>Multiple pathway options</li>
+          <li>Highlights bottleneck prerequisites</li>
+          <li>Explains tradeoffs clearly</li>
+        </ul>
+      </div>
+
+      <div class="feature">
+        <div class="feature-top">
+          <div class="badge">Clarity</div>
+          <h3>“Why doesn’t this count?”</h3>
+        </div>
+        <p>
+          UniBrain can point to the exact constraint: minimum grade, category mismatch, duplicate credit, etc.
+        </p>
+        <ul class="ticks">
+          <li>No mystery outcomes</li>
+          <li>Shows rule or requirement that failed</li>
+          <li>Gives next best alternatives</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- DIFFERENTIATOR -->
+<section class="section alt">
+  <div class="container">
+
+    <div class="section-head">
+      <h2>What Makes UniBrain Different</h2>
+      <p>Most systems search text. UniBrain reasons over structure.</p>
+    </div>
+
+    <div class="compare">
+      <div class="compare-col">
+        <h3>Traditional Advising Tools</h3>
+        <ul class="xlist">
+          <li>Static checklists</li>
+          <li>Hard to encode substitutions</li>
+          <li>Weak explanations</li>
+          <li>Depends on “tribal knowledge”</li>
+          <li>Students leave confused</li>
+        </ul>
+      </div>
+
+      <div class="compare-mid">
+        <div class="vs">VS</div>
+      </div>
+
+      <div class="compare-col highlight">
+        <h3>UniBrain + UniAssist</h3>
+        <ul class="checklist">
+          <li>Ontology links everything together</li>
+          <li>Rules are explicit and testable</li>
+          <li>Explainable reasoning path</li>
+          <li>Works with student profile changes</li>
+          <li>Always consistent, always on</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- TESTIMONIAL STYLE (FAKE, but looks good for MVP) -->
+<section class="section" id="stories">
+  <div class="container">
+    <div class="section-head">
+      <h2>What Students Want</h2>
+      <p>This is the vibe UniBrain is built for.</p>
+    </div>
+
+    <div class="quotes">
+      <div class="quote">
+        <p>“I just want a straight answer and a reason. Not twelve links and a maybe.”</p>
+        <span>— Student</span>
+      </div>
+      <div class="quote">
+        <p>“If I switch majors, I don’t want to restart. I want to know what carries over.”</p>
+        <span>— Student</span>
+      </div>
+      <div class="quote">
+        <p>“I’m tired of hearing different things from different people.”</p>
+        <span>— Student</span>
       </div>
     </div>
   </div>
 </section>
 
-<section id="features" class="section">
-  <div class="section-header">
-    <h2>Why UniBrain?</h2>
-    <p>Start with the fundamentals that every campus needs, then grow into a full intelligence platform.</p>
-  </div>
+<!-- LIVE DEMO CHAT -->
+<section class="section alt" id="demo">
+  <div class="container">
 
-  <div class="feature-grid">
-    <div class="feature-card">
-      <div class="feature-icon">🎓</div>
-      <h3>Programs & Majors</h3>
+    <div class="section-head">
+      <h2>See UniAssist in action</h2>
       <p>
-        Model every program, major, and track in a single structured ontology, instead of scattering
-        requirements across PDFs and outdated web pages.
+        Here’s a quick example of how UniAssist answers like an adviser — but with ontology + rules behind it.
+        (This is a UI demo for now — wiring later.)
       </p>
     </div>
 
-    <div class="feature-card">
-      <div class="feature-icon">📚</div>
-      <h3>Course Requirements</h3>
-      <p>
-        Let students ask natural questions like “What do I need next semester?” and get
-        precise answers powered by UniBrain’s requirement engine.
-      </p>
-    </div>
-
-    <div class="feature-card">
-      <div class="feature-icon">📇</div>
-      <h3>Contacts & Offices</h3>
-      <p>
-        One place to discover who handles what: registrar, advising, financial aid, housing, and more –
-        with hours, emails, and locations.
-      </p>
-    </div>
-  </div>
-</section>
-
-<section id="demo" class="section section-alt">
-  <div class="section-header">
-    <h2>Demo flow for v1</h2>
-    <p>
-      For this prototype, UniBrain runs entirely on dummy data modeled after publicly available
-      LIU information, ready to plug into real systems later.
-    </p>
-  </div>
-
-  <div class="demo-grid">
-    <ol class="demo-steps">
-      <li>
-        <strong>Ingest public data.</strong>
-        Programs, majors, requirements, and key office contacts from the LIU website.
-      </li>
-      <li>
-        <strong>Build the UniBrain Graph.</strong>
-        Connect majors → requirements → courses → departments → offices.
-      </li>
-      <li>
-        <strong>Expose UniBrain Assist.</strong>
-        A simple chat UI where students can ask questions about majors and requirements.
-      </li>
-      <li>
-        <strong>Future: plug into real systems.</strong>
-        Integrate safely with SIS, LMS, and advising once IT approves.
-      </li>
-    </ol>
-
-    <div class="demo-visual glass">
-      <h3>Graph snapshot</h3>
-      <p class="demo-caption">
-        A simplified view of how UniBrain understands your university.
-      </p>
-      <div class="graph-preview">
-        <div class="node node-main">Computer Science (BS)</div>
-        <div class="graph-row">
-          <div class="node">CS 101<br><span>Intro to Programming</span></div>
-          <div class="node">CS 102<br><span>Data Structures</span></div>
-          <div class="node">CS 220<br><span>Algorithms</span></div>
+    <div class="chat-demo">
+      <div class="chat-window" id="chatWindow">
+        <div class="bubble user">
+          Can CS one zero two substitute for the programming core requirement?
         </div>
-        <div class="graph-row">
-          <div class="node">Registrar<br><span>Records & Enrollment</span></div>
-          <div class="node">Advising<br><span>Degree Planning</span></div>
-          <div class="node">Financial Aid<br><span>Funding & Aid</span></div>
+
+        <div class="bubble bot">
+          Let’s check. I’ll compare the course to the “Programming Core” requirement and any substitution rules tied to your program.
+        </div>
+
+        <div class="bubble bot">
+          If CS one zero two is approved as a substitution, I’ll show the rule that allowed it. If not, I’ll list the closest valid options.
+        </div>
+      </div>
+
+      <div class="chat-controls">
+        <div class="quick-prompts">
+          <button class="pill-btn" data-q="Can this course count for a different requirement?">Count for another requirement</button>
+          <button class="pill-btn" data-q="What do I take next semester to stay on track?">Plan next semester</button>
+          <button class="pill-btn" data-q="Why doesn’t this class count toward my degree?">Why doesn’t it count?</button>
+          <button class="pill-btn" data-q="Show me the directory for advising and department contacts.">Browse directories</button>
+        </div>
+
+        <div class="chat-input">
+          <input id="chatInput" type="text" placeholder="Ask UniAssist something..." />
+          <button class="btn primary" id="sendChat" type="button">Send</button>
+        </div>
+
+        <div class="chat-note">
+          <span class="mono">Demo mode:</span> This generates example responses. Later will connect it to Flask endpoint.
         </div>
       </div>
     </div>
+
   </div>
 </section>
 
-<section class="section section-tight">
-  <div class="cta">
-    <div>
-      <h2>Ready to make your university think?</h2>
-      <p>
-        UniBrain v1 is focused on one campus, one ontology, and one clear goal:
-        proving that an AI “brain” for universities is not just possible — it’s inevitable.
-      </p>
+<script>
+  (function() {
+    const chatWindow = document.getElementById("chatWindow");
+    const chatInput  = document.getElementById("chatInput");
+    const sendBtn    = document.getElementById("sendChat");
+
+    const canned = (q) => {
+      const lower = q.toLowerCase();
+
+      if (lower.includes("directory") || lower.includes("directories") || lower.includes("contacts")) {
+        return "Yep — I can help you browse university directories too. For example: Advising → School of Engineering → Department Contacts. Tell me what you’re looking for (advisor, office, or department) and I’ll guide you straight there.";
+      }
+
+      if (lower.includes("next semester") || lower.includes("stay on track") || lower.includes("plan")) {
+        return "To plan next semester, I’ll check: remaining requirements, prereq chains, and what you’re currently taking. Then I’ll suggest a few valid schedules and explain the tradeoffs (fastest graduation vs lighter load, etc.).";
+      }
+
+      if (lower.includes("why") && lower.includes("count")) {
+        return "If something doesn’t count, I’ll point to the exact constraint: category mismatch, minimum grade rule, duplicate credit, or missing prerequisite. Then I’ll suggest the closest valid alternative.";
+      }
+
+      return "Good question. I’ll traverse your profile → course → requirement mappings, apply relevant rules (prereqs, substitutions, credits), then answer with the reasoning path so it’s not a black box.";
+    };
+
+    const addBubble = (text, who) => {
+      const div = document.createElement("div");
+      div.className = "bubble " + who;
+      div.textContent = text;
+      chatWindow.appendChild(div);
+      chatWindow.scrollTop = chatWindow.scrollHeight;
+    };
+
+    const send = () => {
+      const q = (chatInput.value || "").trim();
+      if (!q) return;
+      addBubble(q, "user");
+      chatInput.value = "";
+
+      const typing = document.createElement("div");
+      typing.className = "bubble bot typing";
+      typing.innerHTML = "<span></span><span></span><span></span>";
+      chatWindow.appendChild(typing);
+      chatWindow.scrollTop = chatWindow.scrollHeight;
+
+      setTimeout(() => {
+        typing.remove();
+        addBubble(canned(q), "bot");
+      }, 700);
+    };
+
+    sendBtn?.addEventListener("click", send);
+    chatInput?.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") send();
+    });
+
+    document.querySelectorAll(".pill-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        chatInput.value = btn.dataset.q || "";
+        chatInput.focus();
+      });
+    });
+  })();
+</script>
+
+<!-- FAQ -->
+<section class="section" id="faq">
+  <div class="container">
+
+    <div class="section-head">
+      <h2>FAQ</h2>
+      <p>Quick answers so you can keep scrolling with confidence.</p>
     </div>
-    <div>
-      <a href="#demo" class="btn btn-primary btn-lg">Scroll to demo</a>
+
+    <div class="faq">
+      <details>
+        <summary>Is UniBrain just a chatbot?</summary>
+        <p>No — UniAssist is the interface. UniBrain is the underlying ontology + rules system that drives consistent answers.</p>
+      </details>
+
+      <details>
+        <summary>How do substitutions and exceptions work?</summary>
+        <p>They’re represented as explicit rules tied to programs and requirements, so UniBrain can validate and explain them.</p>
+      </details>
+
+      <details>
+        <summary>Can UniBrain handle multiple pathways?</summary>
+        <p>Yes. Requirements can have multiple satisfaction options, and UniBrain can evaluate alternative routes with tradeoffs.</p>
+      </details>
+
+      <details>
+        <summary>Do I need all the routes built right now?</summary>
+        <p>No. This landing page is built to look real while you wire up the backend. UniAssist can start as a UI stub and evolve.</p>
+      </details>
     </div>
+
+    <div class="cta-wide">
+      <div>
+        <h3>Ready to try UniAssist?</h3>
+        <p>Create a student profile and start exploring your degree rules like a map — not a maze.</p>
+      </div>
+      <button class="btn primary" id="openUniAssistFooter">Open UniAssist</button>
+    </div>
+
   </div>
 </section>
+
+<script>
+  document.getElementById("openUniAssistFooter")?.addEventListener("click", () => {
+    document.getElementById("openUniAssistTop2")?.click();
+  });
+</script>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <div class="brandline">
+        <img
+          class="footer-logo"
+          src="{{ url_for('v1.static', filename='img/logo.svg') }}"
+          alt="UniBrain logo"
+        />
+        <strong>UniBrain</strong>
+      </div>
+      <p>Ontology-driven academic intelligence. Explainable by design.</p>
+      <div class="fine">© {{ 2025 }} UniBrain. All rights reserved.</div>
+    </div>
+
+    <div class="footer-links">
+      <div>
+        <h4>Product</h4>
+        <a href="#ontology">Ontology</a>
+        <a href="#how">How it Works</a>
+        <a href="#usecases">Use Cases</a>
+      </div>
+      <div>
+        <h4>Support</h4>
+        <a href="#faq">FAQ</a>
+        <a href="#stories">Student Voice</a>
+        <a href="#top">Back to top</a>
+      </div>
+    </div>
+  </div>
+</footer>
 
 {% endblock %}
