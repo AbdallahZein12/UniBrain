@@ -8,11 +8,11 @@
       <div class="chip">Create Profile</div>
       <div class="tiny">Start your UniBrain journey</div>
     </div>
-    <a class="btn ghost" href="{{ url_for('auth.login') }}">Already have an account?</a>
+    <a class="btn ghost" href="{{ url_for('v1.auth.login') }}">Already have an account?</a>
   </div>
 
   <div class="neo-stage" style="height: auto; padding: 18px; border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 0;">
-    <form method="post" action="{{ url_for('auth.signup') }}" style="display: grid; gap: 12px;">
+    <form method="post" action="{{ url_for('v1.auth.signup') }}" style="display: grid; gap: 12px;">
       <div class="grid-2">
         <label class="field">
           <span>Full Name</span>
@@ -55,7 +55,7 @@
 
       <div class="hint-row">
         <span class="hint">Already with us?</span>
-        <a class="linklike" href="{{ url_for('auth.login') }}">Log in</a>
+        <a class="linklike" href="{{ url_for('v1.auth.login') }}">Log in</a>
       </div>
     </form>
   </div>

@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="icon" href="{{ url_for('v1.static', filename='img/logo.svg') }}" type="image/svg+xml">
 
-  <link rel="stylesheet" href="{{ url_for('v1.static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('v1.auth.static', filename='css/auth.css') }}">
 </head>
 <body>
 
@@ -26,7 +26,7 @@
       <a class="brand" href="{{ url_for('v1.home') }}" aria-label="UniBrain Home">
         <img
           class="brand-logo"
-          src="{{ url_for('v1.static', filename='img/logo.svg') }}"
+          src="{{ url_for('v1.auth.static', filename='img/logo.svg') }}"
           alt="UniBrain"
         />
         <span class="brand-name">UniBrain</span>
