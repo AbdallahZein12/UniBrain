@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{% block title %}UniBrain | Auth{% endblock %}</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="{{ url_for('v1.static', filename='img/logo.svg') }}" type="image/svg+xml">
+
+  <link rel="stylesheet" href="{{ url_for('v1.static', filename='css/style.css') }}">
+</head>
+<body>
+
+  <div class="bg-decor">
+    <div class="glow g1"></div>
+    <div class="glow g2"></div>
+    <div class="glow g3"></div>
+    <div class="noise"></div>
+  </div>
+
+  <header class="nav-wrap">
+    <nav class="navbar" style="grid-template-columns: 1fr auto;">
+      <a class="brand" href="{{ url_for('v1.home') }}" aria-label="UniBrain Home">
+        <img
+          class="brand-logo"
+          src="{{ url_for('v1.static', filename='img/logo.svg') }}"
+          alt="UniBrain"
+        />
+        <span class="brand-name">UniBrain</span>
+        <span class="brand-tag">Ontology-Driven Advising</span>
+      </a>
+
+      <div class="nav-actions">
+        <a class="btn ghost" href="{{ url_for('v1.home') }}">Back to Home</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="section" style="padding-top: 48px;">
+    <div class="container" style="max-width: 720px;">
+
+      {% with messages = get_flashed_messages(with_categories=True) %}
+        {% if messages %}
+          <div class="card" style="margin-bottom: 14px; border-color: rgba(125,240,255,0.22); background: rgba(125,240,255,0.06);">
+            <div style="display: grid; gap: 8px;">
+              {% for category, message in messages %}
+                <div style="font-weight: 700; color: rgba(255,255,255,0.90);">
+                  <span class="badge" style="margin-right: 8px;">{{ category|title }}</span>
+                  {{ message }}
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        {% endif %}
+      {% endwith %}
+
+      {% block content %}{% endblock %}
+    </div>
+  </main>
+
+</body>
+</html>

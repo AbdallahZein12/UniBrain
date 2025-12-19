@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}UniBrain | Login{% endblock %}
+
+{% block content %}
+<div class="neo-card" style="overflow: visible;">
+  <div class="neo-head">
+    <div>
+      <div class="chip">Sign In</div>
+      <div class="tiny">Access your UniBrain profile</div>
+    </div>
+    <a class="btn ghost" href="{{ url_for('auth.signup') }}">Create account</a>
+  </div>
+
+  <div class="neo-stage" style="height: auto; padding: 18px; border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 0;">
+    <form method="post" action="{{ url_for('auth.login') }}" style="display: grid; gap: 12px;">
+      <label class="field">
+        <span>Email</span>
+        <input name="email" type="email" placeholder="you@liu.edu" required autocomplete="email">
+      </label>
+
+      <label class="field">
+        <span>Password</span>
+        <input name="password" type="password" placeholder="••••••••" required autocomplete="current-password">
+      </label>
+
+      <button class="btn primary w100" type="submit">Login</button>
+
+      <div class="hint-row">
+        <span class="hint">New to UniBrain?</span>
+        <a class="linklike" href="{{ url_for('auth.signup') }}">Create an account</a>
+      </div>
+    </form>
+  </div>
+
+  <div class="neo-foot">
+    <div class="tiny">Secure, ontology-driven advising. Explainable by design.</div>
+  </div>
+</div>
+{% endblock %}
