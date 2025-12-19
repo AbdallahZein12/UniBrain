@@ -1,0 +1,73 @@
+{% extends "auth_base.html" %} {# use auth layout to avoid main navbar #}
+{% block title %}UniBrain | Sign Up{% endblock %}
+
+{% block content %}
+  <section class="hero-copy">
+    <span class="pill">Create profile</span>
+    <h1>Join UniBrain and keep your pathway clear</h1>
+    <p>Set up a profile so UniAssist can map your courses to requirements, check substitutions, and explain every recommendation.</p>
+  </section>
+
+  <div class="auth-card">
+    <div class="head">
+      <div>
+        <div class="pill">Create Profile</div>
+        <div class="tiny">Start your UniBrain journey</div>
+      </div>
+      <a class="btn ghost" href="{{ url_for('auth.login') }}">Already have an account?</a>
+    </div>
+
+    <div class="body">
+      <form method="post" action="{{ url_for('auth.signup') }}" class="auth-form" novalidate>
+        <div class="grid-2">
+          <label class="field">
+            <span>Full Name</span>
+            <input name="full_name" type="text" placeholder="Jane Doe" required autocomplete="name">
+          </label>
+          <label class="field">
+            <span>Major</span>
+            <input name="major" type="text" placeholder="Computer Science" required>
+          </label>
+        </div>
+
+        <label class="field">
+          <span>Email</span>
+          <input name="email" type="email" placeholder="you@liu.edu" required autocomplete="email">
+        </label>
+
+        <div class="grid-2">
+          <label class="field">
+            <span>Password</span>
+            <input name="password" type="password" placeholder="Create a password" required autocomplete="new-password">
+          </label>
+          <label class="field">
+            <span>Confirm Password</span>
+            <input name="confirm_password" type="password" placeholder="Re-enter password" required autocomplete="new-password">
+          </label>
+        </div>
+
+        <div class="mini">
+          <div class="mini-card">
+            <strong>What we store</strong>
+            <p>Completed + in-progress courses, declared program, and rule results.</p>
+          </div>
+          <div class="mini-card">
+            <strong>What you get</strong>
+            <p>Clear requirements, substitutions, and a plan that adapts when you switch majors.</p>
+          </div>
+        </div>
+
+        <button class="btn primary w100" type="submit">Create Profile</button>
+
+        <div class="hint-row">
+          <span class="hint">Already with us?</span>
+          <a class="linklike" href="{{ url_for('auth.login') }}">Log in</a>
+        </div>
+      </form>
+    </div>
+
+    <div class="foot">
+      <div class="tiny">Explainable, rule-aware advising. Built for real academic decisions.</div>
+    </div>
+  </div>
+{% endblock %}
