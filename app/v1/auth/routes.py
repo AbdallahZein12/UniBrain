@@ -12,6 +12,6 @@ auth_bp = Blueprint("auth",
 def login():
     return render_template("login.html")
 
-@auth_bp.get("/sign-up")
+@auth_bp.get("/signup")
 def signup():
     return render_template("signup.html")
