@@ -150,6 +150,8 @@
         </section>
       </div>
 
+      <a class="btn primary w100" id="authActionBtn" href="{{ url_for('v1.auth.login') }}">Go to Login</a>
+
       <div class="modal-foot">
         <span class="fineprint">UniBrain is an ontology-driven MVP — designed to be explainable, not vague.</span>
       </div>
@@ -185,6 +187,7 @@
     const modal = document.getElementById("uniAssistModal");
     const modalBackdrop = document.getElementById("modalBackdrop");
     const closeModalBtn = document.getElementById("closeModal");
+    const authActionBtn = document.getElementById("authActionBtn");
 
     function openModal() {
       modal.classList.add("open");
@@ -212,10 +215,26 @@
     // Tabs
     const tabs = document.querySelectorAll(".tab");
     const panels = document.querySelectorAll(".tab-panel");
+    const tabActionMap = {
+      loginPanel: {
+        href: "{{ url_for('v1.auth.login') }}",
+        label: "Go to Login"
+      },
+      signupPanel: {
+        href: "{{ url_for('v1.auth.signup') }}",
+        label: "Go to Sign Up"
+      }
+    };
 
     function activate(panelId) {
       tabs.forEach(t => t.classList.toggle("active", t.dataset.tab === panelId));
       panels.forEach(p => p.classList.toggle("active", p.id === panelId));
+
+      const action = tabActionMap[panelId];
+      if (action && authActionBtn) {
+        authActionBtn.href = action.href;
+        authActionBtn.textContent = action.label;
+      }
     }
 
     tabs.forEach(tab => tab.addEventListener("click", () => activate(tab.dataset.tab)));
@@ -223,6 +242,10 @@
     document.querySelectorAll("[data-switch]").forEach(btn => {
       btn.addEventListener("click", () => activate(btn.dataset.switch));
     });
+
+    // Initialize button state for default tab
+    const defaultTab = document.querySelector(".tab.active")?.dataset.tab || "loginPanel";
+    activate(defaultTab);
   </script>
 
 </body>
