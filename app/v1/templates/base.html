@@ -157,6 +157,8 @@
         </section>
       </div>
 
+      <a class="btn primary w100" id="authActionBtn" href="{{ url_for('v1.auth.login') }}">Go to Login</a>
+
       <div class="modal-foot">
         <span class="fineprint">UniBrain is an ontology-driven MVP — designed to be explainable, not vague.</span>
       </div>
@@ -238,8 +240,7 @@
       const action = tabActionMap[panelId];
       if (action && authActionBtn) {
         authActionBtn.href = action.href;
-        authActionBtn.setAttribute("aria-label", action.label);
-        authActionBtn.setAttribute("title", action.label);
+        authActionBtn.textContent = action.label;
       }
     }
 
