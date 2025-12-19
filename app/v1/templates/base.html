@@ -16,7 +16,7 @@
   <!-- Defer so DOM is ready before the script runs -->
   <script defer src="{{ url_for('v1.static', filename='js/unigraph.js') }}"></script>
 </head>
-<body>
+<body class="page-fade">
 
   <!-- Top glow / background decor -->
   <div class="bg-decor">
@@ -79,6 +79,15 @@
 
     <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="uaTitle">
       <button class="modal-close" id="closeModal" aria-label="Close">✕</button>
+      <a
+        class="btn ghost auth-action-fab"
+        id="authActionBtn"
+        href="{{ url_for('v1.auth.login') }}"
+        aria-label="Open auth page"
+      >
+        <span class="sr-only">Open auth page</span>
+        <span class="auth-action-icon" aria-hidden="true">⛶</span>
+      </a>
 
       <div class="modal-head">
         <div class="pill">UniAssist</div>
@@ -185,6 +194,7 @@
     const modal = document.getElementById("uniAssistModal");
     const modalBackdrop = document.getElementById("modalBackdrop");
     const closeModalBtn = document.getElementById("closeModal");
+    const authActionBtn = document.getElementById("authActionBtn");
 
     function openModal() {
       modal.classList.add("open");
@@ -212,10 +222,23 @@
     // Tabs
     const tabs = document.querySelectorAll(".tab");
     const panels = document.querySelectorAll(".tab-panel");
+    const tabActionMap = {
+      loginPanel: {
+        href: "{{ url_for('v1.auth.login') }}"
+      },
+      signupPanel: {
+        href: "{{ url_for('v1.auth.signup') }}"
+      }
+    };
 
     function activate(panelId) {
       tabs.forEach(t => t.classList.toggle("active", t.dataset.tab === panelId));
       panels.forEach(p => p.classList.toggle("active", p.id === panelId));
+
+      const action = tabActionMap[panelId];
+      if (action && authActionBtn) {
+        authActionBtn.href = action.href;
+      }
     }
 
     tabs.forEach(tab => tab.addEventListener("click", () => activate(tab.dataset.tab)));
@@ -223,6 +246,10 @@
     document.querySelectorAll("[data-switch]").forEach(btn => {
       btn.addEventListener("click", () => activate(btn.dataset.switch));
     });
+
+    // Initialize button state for default tab
+    const defaultTab = document.querySelector(".tab.active")?.dataset.tab || "loginPanel";
+    activate(defaultTab);
   </script>
 
 </body>
