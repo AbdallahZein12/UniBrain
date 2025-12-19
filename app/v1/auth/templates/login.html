@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}UniBrain | Login{% endblock %}
+
+{% block content %}
+  <section class="hero-copy">
+    <span class="pill">UniBrain Auth</span>
+    <h1>Sign in to your academic copilot</h1>
+    <p>Access your profile so UniAssist can reason over your courses, requirements, and rules. Your credentials stay private; we never scrape or guess.</p>
+  </section>
+
+  <div class="auth-card">
+    <div class="head">
+      <div>
+        <div class="pill">Sign In</div>
+        <div class="tiny">Access your UniBrain profile</div>
+      </div>
+      <a class="btn ghost" href="{{ url_for('auth.signup') }}">Create account</a>
+    </div>
+
+    <div class="body">
+      <form method="post" action="{{ url_for('auth.login') }}" class="auth-form" novalidate>
+        <label class="field">
+          <span>Email</span>
+          <input name="email" type="email" placeholder="you@liu.edu" required autocomplete="email">
+        </label>
+
+        <label class="field">
+          <span>Password</span>
+          <input name="password" type="password" placeholder="••••••••" required autocomplete="current-password">
+        </label>
+
+        <button class="btn primary w100" type="submit">Login</button>
+
+        <div class="hint-row">
+          <span class="hint">New to UniBrain?</span>
+          <a class="linklike" href="{{ url_for('auth.signup') }}">Create an account</a>
+        </div>
+      </form>
+    </div>
+
+    <div class="foot">
+      <div class="tiny">Secure, ontology-driven advising. Explainable by design.</div>
+    </div>
+  </div>
+{% endblock %}
