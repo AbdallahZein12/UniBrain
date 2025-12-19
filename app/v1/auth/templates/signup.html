@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block title %}UniBrain | Sign Up{% endblock %}
+
+{% block content %}
+<div class="neo-card" style="overflow: visible;">
+  <div class="neo-head">
+    <div>
+      <div class="chip">Create Profile</div>
+      <div class="tiny">Start your UniBrain journey</div>
+    </div>
+    <a class="btn ghost" href="{{ url_for('auth.login') }}">Already have an account?</a>
+  </div>
+
+  <div class="neo-stage" style="height: auto; padding: 18px; border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 0;">
+    <form method="post" action="{{ url_for('auth.signup') }}" style="display: grid; gap: 12px;">
+      <div class="grid-2">
+        <label class="field">
+          <span>Full Name</span>
+          <input name="full_name" type="text" placeholder="Jane Doe" required autocomplete="name">
+        </label>
+        <label class="field">
+          <span>Major</span>
+          <input name="major" type="text" placeholder="Computer Science" required>
+        </label>
+      </div>
+
+      <label class="field">
+        <span>Email</span>
+        <input name="email" type="email" placeholder="you@liu.edu" required autocomplete="email">
+      </label>
+
+      <div class="grid-2">
+        <label class="field">
+          <span>Password</span>
+          <input name="password" type="password" placeholder="Create a password" required autocomplete="new-password">
+        </label>
+        <label class="field">
+          <span>Confirm Password</span>
+          <input name="confirm_password" type="password" placeholder="Re-enter password" required autocomplete="new-password">
+        </label>
+      </div>
+
+      <div class="mini">
+        <div class="mini-card">
+          <strong>What we store</strong>
+          <p>Completed + in-progress courses, declared program, and rule results.</p>
+        </div>
+        <div class="mini-card">
+          <strong>What you get</strong>
+          <p>Clear requirements, substitutions, and a plan that adapts when you switch majors.</p>
+        </div>
+      </div>
+
+      <button class="btn primary w100" type="submit">Create Profile</button>
+
+      <div class="hint-row">
+        <span class="hint">Already with us?</span>
+        <a class="linklike" href="{{ url_for('auth.login') }}">Log in</a>
+      </div>
+    </form>
+  </div>
+
+  <div class="neo-foot">
+    <div class="tiny">Explainable, rule-aware advising. Built for real academic decisions.</div>
+  </div>
+</div>
+{% endblock %}
