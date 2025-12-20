@@ -16,7 +16,7 @@
   <!-- Defer so DOM is ready before the script runs -->
   <script defer src="{{ url_for('v1.static', filename='js/unigraph.js') }}"></script>
 </head>
-<body>
+<body class="page-fade">
 
   <!-- Top glow / background decor -->
   <div class="bg-decor">
@@ -223,6 +223,10 @@
     document.querySelectorAll("[data-switch]").forEach(btn => {
       btn.addEventListener("click", () => activate(btn.dataset.switch));
     });
+
+    // Initialize button state for default tab
+    const defaultTab = document.querySelector(".tab.active")?.dataset.tab || "loginPanel";
+    activate(defaultTab);
   </script>
 
 </body>
