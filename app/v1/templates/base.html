@@ -126,9 +126,12 @@
               <span>Full Name</span>
               <input type="text" placeholder="Jane Doe" autocomplete="name">
             </label>
-            <label class="field">
-              <span>Major</span>
-              <input type="text" placeholder="Computer Science">
+            <label class="field password-input">
+              <span>DEMO PASSWORD</span>
+              <div class="password-field">
+                <input type="password" placeholder="Demo password" autocomplete="new-password">
+                <button class="password-toggle" type="button" data-password-toggle aria-label="Show password" aria-pressed="false">Show</button>
+              </div>
             </label>
           </div>
 
@@ -137,13 +140,22 @@
             <input type="email" placeholder="you@liu.edu" autocomplete="email">
           </label>
 
-          <label class="field password-input">
-            <span>Password</span>
-            <div class="password-field">
-              <input type="password" placeholder="Create a password" autocomplete="new-password">
-              <button class="password-toggle" type="button" data-password-toggle aria-label="Show password" aria-pressed="false">Show</button>
-            </div>
-          </label>
+          <div class="grid-2">
+            <label class="field password-input">
+              <span>Password</span>
+              <div class="password-field">
+                <input type="password" placeholder="Create a password" autocomplete="new-password">
+                <button class="password-toggle" type="button" data-password-toggle aria-label="Show password" aria-pressed="false">Show</button>
+              </div>
+            </label>
+            <label class="field password-input">
+              <span>Confirm Password</span>
+              <div class="password-field">
+                <input type="password" placeholder="Re-enter password" autocomplete="new-password">
+                <button class="password-toggle" type="button" data-password-toggle aria-label="Show password" aria-pressed="false">Show</button>
+              </div>
+            </label>
+          </div>
 
           <div class="mini">
             <div class="mini-card">
