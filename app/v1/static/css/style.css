@@ -1576,12 +1576,14 @@ details p {
 /* ✅ Better behavior on small screens */
 @media (max-width: 560px) {
   .modal {
-    align-items: flex-start; /* don't center vertically (causes top/bottom clipping) */
+    align-items: center; /* center the card even if the page is scrolled */
+    justify-content: center;
     padding: 14px;
   }
   .modal-card {
     margin: 14px auto; /* gives breathing room so it can scroll */
     border-radius: 20px;
+    max-height: calc(100vh - 28px);
   }
 }
 .modal {
