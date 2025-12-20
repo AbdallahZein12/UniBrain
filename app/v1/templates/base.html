@@ -198,6 +198,7 @@
     const authActionPrimary = document.getElementById("authActionPrimary");
 
     function openModal() {
+      window.scrollTo({ top: 0, behavior: "auto" });
       modal.classList.add("open");
       modal.setAttribute("aria-hidden", "false");
       document.body.classList.add("no-scroll");
