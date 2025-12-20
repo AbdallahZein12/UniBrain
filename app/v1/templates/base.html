@@ -83,11 +83,9 @@
         class="btn ghost auth-action-fab"
         id="authActionBtn"
         href="{{ url_for('v1.auth.login') }}"
-        aria-label="Open auth page"
-      >
-        <span class="sr-only">Open auth page</span>
-        <span class="auth-action-icon" aria-hidden="true">⛶</span>
-      </a>
+        aria-label="Go to Login"
+        title="Go to Login"
+      >⤢</a>
 
       <div class="modal-head">
         <div class="pill">UniAssist</div>
@@ -159,6 +157,8 @@
         </section>
       </div>
 
+      <a class="btn primary w100" id="authActionBtn" href="{{ url_for('v1.auth.login') }}">Go to Login</a>
+
       <div class="modal-foot">
         <span class="fineprint">UniBrain is an ontology-driven MVP — designed to be explainable, not vague.</span>
       </div>
@@ -224,10 +224,12 @@
     const panels = document.querySelectorAll(".tab-panel");
     const tabActionMap = {
       loginPanel: {
-        href: "{{ url_for('v1.auth.login') }}"
+        href: "{{ url_for('v1.auth.login') }}",
+        label: "Go to Login"
       },
       signupPanel: {
-        href: "{{ url_for('v1.auth.signup') }}"
+        href: "{{ url_for('v1.auth.signup') }}",
+        label: "Go to Sign Up"
       }
     };
 
@@ -238,6 +240,7 @@
       const action = tabActionMap[panelId];
       if (action && authActionBtn) {
         authActionBtn.href = action.href;
+        authActionBtn.textContent = action.label;
       }
     }
 

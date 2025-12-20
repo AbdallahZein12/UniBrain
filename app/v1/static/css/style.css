@@ -25,7 +25,7 @@ body {
 
 .page-fade {
   opacity: 0;
-  animation: pageFadeIn 720ms ease-out forwards;
+  animation: pageFadeIn 360ms ease-out forwards;
 }
 
 @keyframes pageFadeIn {
@@ -1631,10 +1631,6 @@ details p {
   font-size: 16px;
   line-height: 1;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
-}
-
-.auth-action-icon {
-  font-size: 16px;
 }
 
 @keyframes pop {
