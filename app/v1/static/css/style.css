@@ -1736,6 +1736,42 @@ details p {
   outline: none;
 }
 
+.password-field {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-field input {
+  padding-right: 86px;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 6px 10px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.password-toggle:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.password-toggle:active {
+  transform: translateY(1px);
+}
+
+.password-toggle:focus {
+  outline: 2px solid rgba(125, 240, 255, 0.35);
+  outline-offset: 2px;
+}
+
 .field input:focus {
   border-color: rgba(125, 240, 255, 0.25);
   box-shadow: 0 0 0 6px rgba(125, 240, 255, 0.08);

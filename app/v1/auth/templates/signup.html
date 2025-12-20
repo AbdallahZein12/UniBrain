@@ -30,13 +30,19 @@
       </label>
 
       <div class="grid-2">
-        <label class="field">
+        <label class="field password-input">
           <span>Password</span>
-          <input name="password" type="password" placeholder="Create a password" required autocomplete="new-password">
+          <div class="password-field">
+            <input name="password" type="password" placeholder="Create a password" required autocomplete="new-password">
+            <button class="password-toggle" type="button" data-password-toggle aria-label="Show password" aria-pressed="false">Show</button>
+          </div>
         </label>
-        <label class="field">
+        <label class="field password-input">
           <span>Confirm Password</span>
-          <input name="confirm_password" type="password" placeholder="Re-enter password" required autocomplete="new-password">
+          <div class="password-field">
+            <input name="confirm_password" type="password" placeholder="Re-enter password" required autocomplete="new-password">
+            <button class="password-toggle" type="button" data-password-toggle aria-label="Show password" aria-pressed="false">Show</button>
+          </div>
         </label>
       </div>
 

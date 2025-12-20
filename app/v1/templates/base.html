@@ -15,6 +15,7 @@
 
   <!-- Defer so DOM is ready before the script runs -->
   <script defer src="{{ url_for('v1.static', filename='js/unigraph.js') }}"></script>
+  <script defer src="{{ url_for('v1.static', filename='js/password-toggle.js') }}"></script>
 </head>
 <body class="page-fade">
 
@@ -104,9 +105,12 @@
             <span>Email</span>
             <input type="email" placeholder="you@liu.edu" autocomplete="email">
           </label>
-          <label class="field">
+          <label class="field password-input">
             <span>Password</span>
-            <input type="password" placeholder="••••••••" autocomplete="current-password">
+            <div class="password-field">
+              <input type="password" placeholder="••••••••" autocomplete="current-password">
+              <button class="password-toggle" type="button" data-password-toggle aria-label="Show password" aria-pressed="false">Show</button>
+            </div>
           </label>
 
           <button class="btn primary w100" type="button">Login</button>
@@ -133,9 +137,12 @@
             <input type="email" placeholder="you@liu.edu" autocomplete="email">
           </label>
 
-          <label class="field">
+          <label class="field password-input">
             <span>Password</span>
-            <input type="password" placeholder="Create a password" autocomplete="new-password">
+            <div class="password-field">
+              <input type="password" placeholder="Create a password" autocomplete="new-password">
+              <button class="password-toggle" type="button" data-password-toggle aria-label="Show password" aria-pressed="false">Show</button>
+            </div>
           </label>
 
           <div class="mini">
