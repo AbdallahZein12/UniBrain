@@ -18,9 +18,12 @@
         <input name="email" type="email" placeholder="you@liu.edu" required autocomplete="email">
       </label>
 
-      <label class="field">
+      <label class="field password-input">
         <span>Password</span>
-        <input name="password" type="password" placeholder="••••••••" required autocomplete="current-password">
+        <div class="password-field">
+          <input name="password" type="password" placeholder="••••••••" required autocomplete="current-password">
+          <button class="password-toggle" type="button" data-password-toggle aria-label="Show password" aria-pressed="false">Show</button>
+        </div>
       </label>
 
       <button class="btn primary w100" type="submit">Login</button>
