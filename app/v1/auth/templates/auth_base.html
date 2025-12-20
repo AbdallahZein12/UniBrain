@@ -62,5 +62,35 @@
     </div>
   </main>
 
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <div class="brandline">
+          <img
+            class="footer-logo"
+            src="{{ url_for('v1.static', filename='img/logo.svg') }}"
+            alt="UniBrain logo"
+          />
+          <strong>UniBrain</strong>
+        </div>
+        <p>Ontology-driven academic intelligence. Explainable by design.</p>
+        <div class="fine">© {{ 2025 }} UniBrain. All rights reserved.</div>
+      </div>
+
+      <div class="footer-links">
+        <div>
+          <h4>Account</h4>
+          <a href="{{ url_for('v1.auth.login') }}">Login</a>
+          <a href="{{ url_for('v1.auth.signup') }}">Sign Up</a>
+        </div>
+        <div>
+          <h4>Support</h4>
+          <a href="mailto:support@unibrain.ai">Email Support</a>
+          <a href="{{ url_for('v1.home') }}">Back to Home</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
 </body>
 </html>
