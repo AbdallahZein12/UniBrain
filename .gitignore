@@ -71,3 +71,12 @@ build/
 pip-wheel-metadata/
 poetry.lock
 __pypackages__/
+
+
+migrations/__pycache__/
+
+.pytest_cache/
+.coverage
+htmlcov/
+
+uploads/

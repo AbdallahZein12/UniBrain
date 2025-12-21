@@ -83,7 +83,7 @@
       <a
         class="btn ghost auth-action-fab"
         id="authActionFab"
-        href="{{ url_for('v1.auth.login') }}"
+        href="{{ url_for('v1.auth.login_page') }}"
         aria-label="Open Login"
         title="Open Login"
       >⤢</a>
@@ -100,58 +100,111 @@
       </div>
 
       <div class="tab-panels">
-        <section class="tab-panel active" id="loginPanel">
+
+        <!-- ✅ LOGIN FORM -->
+        <form class="tab-panel active" id="loginPanel"
+              method="POST"
+              action="{{ url_for('v1.auth.login_page') }}"
+              novalidate>
           <label class="field">
             <span>Email</span>
-            <input type="email" placeholder="you@liu.edu" autocomplete="email">
+            <input
+              type="email"
+              name="email"
+              placeholder="you@liu.edu"
+              autocomplete="email"
+              required
+            >
           </label>
+
           <label class="field password-input">
             <span>Password</span>
             <div class="password-field">
-              <input type="password" placeholder="••••••••" autocomplete="current-password">
+              <input
+                type="password"
+                name="password"
+                placeholder="••••••••"
+                autocomplete="current-password"
+                required
+              >
               <button class="password-toggle" type="button" data-password-toggle aria-label="Show password" aria-pressed="false">Show</button>
             </div>
           </label>
 
-          <button class="btn primary w100" type="button">Login</button>
+          <button class="btn primary w100" type="submit">Login</button>
+
           <div class="hint-row">
             <span class="hint">No account?</span>
             <button class="linklike" data-switch="signupPanel" type="button">Create one</button>
           </div>
-        </section>
+        </form>
 
-        <section class="tab-panel" id="signupPanel">
+        <!-- ✅ SIGNUP FORM -->
+        <form class="tab-panel" id="signupPanel"
+              method="POST"
+              action="{{ url_for('v1.auth.signup_page') }}"
+              novalidate>
+
           <div class="grid-2">
-            <label class="field">
+            <!-- <label class="field">
               <span>Full Name</span>
-              <input type="text" placeholder="Jane Doe" autocomplete="name">
-            </label>
-            <label class="field password-input">
-              <span>DEMO PASSWORD</span>
-              <div class="password-field">
-                <input type="password" placeholder="Demo password" autocomplete="new-password">
-                <button class="password-toggle" type="button" data-password-toggle aria-label="Show password" aria-pressed="false">Show</button>
-              </div>
+              <input type="text" name="name" placeholder="Jane Doe" autocomplete="name">
+            </label> -->
+
+            <!-- Keeping your demo password block (now with a name so it can submit if you use it) -->
+            <label class="field">
+              <span>Invite Code</span>
+              <!-- <div class="password-field"> -->
+                <input
+                  type="text"
+                  name="invite_code"
+                  placeholder="e.g. LIU-FALL-2025"
+                  required
+                  autocomplete="off"
+                >
+                <!-- <button class="password-toggle" type="button" data-password-toggle aria-label="Show password" aria-pressed="false">Show</button> -->
+              <!-- </div> -->
             </label>
           </div>
 
           <label class="field">
             <span>Email</span>
-            <input type="email" placeholder="you@liu.edu" autocomplete="email">
+            <input
+              type="email"
+              name="email"
+              placeholder="you@my.liu.edu"
+              autocomplete="email"
+              required
+            >
           </label>
 
           <div class="grid-2">
             <label class="field password-input">
               <span>Password</span>
               <div class="password-field">
-                <input type="password" placeholder="Create a password" autocomplete="new-password">
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="Create a password"
+                  autocomplete="new-password"
+                  required
+                >
                 <button class="password-toggle" type="button" data-password-toggle aria-label="Show password" aria-pressed="false">Show</button>
               </div>
             </label>
+
+            <input type="hidden" name="source" value="modal">
+
             <label class="field password-input">
               <span>Confirm Password</span>
               <div class="password-field">
-                <input type="password" placeholder="Re-enter password" autocomplete="new-password">
+                <input
+                  type="password"
+                  name="confirm_password"
+                  placeholder="Re-enter password"
+                  autocomplete="new-password"
+                  required
+                >
                 <button class="password-toggle" type="button" data-password-toggle aria-label="Show password" aria-pressed="false">Show</button>
               </div>
             </label>
@@ -168,15 +221,17 @@
             </div>
           </div>
 
-          <button class="btn primary w100" type="button">Create Profile</button>
+          <button class="btn primary w100" type="submit">Create Profile</button>
+
           <div class="hint-row">
             <span class="hint">Already have an account?</span>
             <button class="linklike" data-switch="loginPanel" type="button">Login</button>
           </div>
-        </section>
+        </form>
+
       </div>
 
-      <!-- <a class="btn primary w100" id="authActionPrimary" href="{{ url_for('v1.auth.login') }}">Go to Login</a> -->
+      <!-- <a class="btn primary w100" id="authActionPrimary" href="{{ url_for('v1.auth.login_page') }}">Go to Login</a> -->
 
       <div class="modal-foot">
         <span class="fineprint">UniBrain is an ontology-driven MVP — designed to be explainable, not vague.</span>
@@ -245,12 +300,12 @@
     const panels = document.querySelectorAll(".tab-panel");
     const tabActionMap = {
       loginPanel: {
-        href: "{{ url_for('v1.auth.login') }}",
+        href: "{{ url_for('v1.auth.login_page') }}",
         label: "Go to Login",
         fabLabel: "Open Login"
       },
       signupPanel: {
-        href: "{{ url_for('v1.auth.signup') }}",
+        href: "{{ url_for('v1.auth.signup_page') }}",
         label: "Go to Sign Up",
         fabLabel: "Open Sign Up"
       }

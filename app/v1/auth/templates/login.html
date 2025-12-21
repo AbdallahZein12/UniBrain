@@ -8,15 +8,17 @@
       <div class="chip">Sign In</div>
       <div class="tiny">Access your UniBrain profile</div>
     </div>
-    <a class="btn ghost" href="{{ url_for('v1.auth.signup') }}">Create account</a>
+    <a class="btn ghost" href="{{ url_for('v1.auth.signup_page') }}">Create account</a>
   </div>
 
   <div class="neo-stage" style="height: auto; padding: 18px; border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 0;">
-    <form method="post" action="{{ url_for('v1.auth.login') }}" style="display: grid; gap: 12px;">
+    <form method="post" action="{{ url_for('v1.auth.login_page') }}" style="display: grid; gap: 12px;">
       <label class="field">
         <span>Email</span>
         <input name="email" type="email" placeholder="you@liu.edu" required autocomplete="email">
       </label>
+
+      <input type="hidden" name="source" value="page">
 
       <label class="field password-input">
         <span>Password</span>
@@ -30,7 +32,7 @@
 
       <div class="hint-row">
         <span class="hint">New to UniBrain?</span>
-        <a class="linklike" href="{{ url_for('v1.auth.signup') }}">Create an account</a>
+        <a class="linklike" href="{{ url_for('v1.auth.signup_page') }}">Create an account</a>
       </div>
     </form>
   </div>

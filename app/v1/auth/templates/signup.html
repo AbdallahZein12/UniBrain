@@ -8,28 +8,30 @@
       <div class="chip">Create Profile</div>
       <div class="tiny">Start your UniBrain journey</div>
     </div>
-    <a class="btn ghost" href="{{ url_for('v1.auth.login') }}">Already have an account?</a>
+    <a class="btn ghost" href="{{ url_for('v1.auth.login_page') }}">Already have an account?</a>
   </div>
 
   <div class="neo-stage" style="height: auto; padding: 18px; border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 0;">
-    <form method="post" action="{{ url_for('v1.auth.signup') }}" style="display: grid; gap: 12px;">
+    <form method="post" action="{{ url_for('v1.auth.signup_page') }}" style="display: grid; gap: 12px;">
       <div class="grid-2">
-        <label class="field">
+        <!-- <label class="field">
           <span>Full Name</span>
           <input name="full_name" type="text" placeholder="Jane Doe" required autocomplete="name">
-        </label>
-        <label class="field password-input">
-          <span>DEMO PASSWORD</span>
-          <div class="password-field">
-            <input name="demo_password" type="password" placeholder="Demo password" required autocomplete="new-password">
-            <button class="password-toggle" type="button" data-password-toggle aria-label="Show password" aria-pressed="false">Show</button>
-          </div>
+        </label> -->
+        <label class="field">
+          <span>Invite Code</span>
+          <!-- <div class="password-field"> -->
+            <input name="invite_code" type="text" placeholder="e.g. LIU-FALL-2025" required autocomplete="off">
+            <!-- <button class="password-toggle" type="button" data-password-toggle aria-label="Show password" aria-pressed="false">Show</button> -->
+          <!-- </div> -->
         </label>
       </div>
 
+      <input type="hidden" name="source" value="page">
+
       <label class="field">
         <span>Email</span>
-        <input name="email" type="email" placeholder="you@liu.edu" required autocomplete="email">
+        <input name="email" type="email" placeholder="you@my.liu.edu" required autocomplete="email">
       </label>
 
       <div class="grid-2">
@@ -64,7 +66,7 @@
 
       <div class="hint-row">
         <span class="hint">Already with us?</span>
-        <a class="linklike" href="{{ url_for('v1.auth.login') }}">Log in</a>
+        <a class="linklike" href="{{ url_for('v1.auth.login_page') }}">Log in</a>
       </div>
     </form>
   </div>
