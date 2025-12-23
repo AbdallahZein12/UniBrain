@@ -1,8 +1,10 @@
-from flask import Blueprint, render_template, request, flash, redirect, url_for
+from flask import render_template, request, flash, redirect, url_for
 from flask_login import login_user, logout_user, login_required
 from sqlalchemy.exc import IntegrityError
 
+from . import auth_bp
 from app.core.extensions import db
+from sqlalchemy.sql import func
 from app.models import User, InviteCode 
 
 
@@ -12,14 +14,6 @@ def auth_fail_redirect(source: str, default_endpoint: str):
         if source == "modal"
         else url_for(default_endpoint)
 )
-
-
-auth_bp = Blueprint("auth",
-    __name__,
-    template_folder="templates",
-    static_folder="static"
-)
-
 
 @auth_bp.get("/login")
 def login_page():
@@ -47,7 +41,7 @@ def login_post():
     
     login_user(user, remember=True)
     flash("Welcome back!", "success")
-    return redirect(url_for("v1.home"))
+    return redirect(url_for("v1.onboarding"))
 
 @auth_bp.get("/signup")
 def signup_page():
@@ -77,8 +71,8 @@ def signup_post():
         flash("Passwords do not match!", "error")
         return redirect(auth_fail_redirect(source, "v1.auth.signup_page"))
     
-    if len(password) < 7:
-        flash("Password must be at least 7 characters!", category="error") 
+    if len(password) < 8:
+        flash("Password must be at least 8 characters!", category="error") 
         return redirect(auth_fail_redirect(source, "v1.auth.signup_page"))
     
     if User.query.filter_by(email=email).first(): 
@@ -86,21 +80,20 @@ def signup_post():
         return redirect(auth_fail_redirect(source, "v1.auth.login_page"))
     
     try: 
-        with db.session.begin():
+        with db.session.begin_nested():
             code = (
                 InviteCode.query
                 .filter_by(code=invite_code_str)
-                .with_for_update()
+                # .with_for_update()
                 .first() 
             )
             
             if not code or not code.is_valid_now():
-                flash("Invite code is invalid or expired!", "error")
-                return redirect(auth_fail_redirect(source, "v1.auth.signup_page"))
+                raise ValueError("Invalid invite code")
             
             # consume one use 
             code.used_count += 1 
-            code.last_used_at = db.func.now()  
+            code.last_used_at = func.now()  
             
             # if it's exhausted, disable it 
             if code.used_count >= code.max_uses:
@@ -114,10 +107,19 @@ def signup_post():
     
         login_user(user, remember=True)
         flash("Account created!", "success")
-        return redirect(url_for("v1.home"))
+        return redirect(url_for("v1.onboarding"))
     
-    except Exception: 
+    except ValueError:
+        flash("Invite code is invalid or expired!", "error")
+        return redirect(auth_fail_redirect(source, "v1.auth.signup_page"))
+    
+    except IntegrityError: 
         db.session.rollback() 
+        flash("Email already registered. Try logging in!", "error")
+        return redirect(auth_fail_redirect(source, "v1.auth.login_page"))
+    
+    except Exception:
+        db.session.rollback()
         flash("Something went wrong. Please try again.", "error")
         return redirect(auth_fail_redirect(source, "v1.auth.signup_page"))
     

@@ -104,7 +104,7 @@
         <!-- ✅ LOGIN FORM -->
         <form class="tab-panel active" id="loginPanel"
               method="POST"
-              action="{{ url_for('v1.auth.login_page') }}"
+              action="{{ url_for('v1.auth.login_post') }}"
               novalidate>
           <label class="field">
             <span>Email</span>
@@ -116,6 +116,8 @@
               required
             >
           </label>
+
+          <input type="hidden" name="source" value="modal">
 
           <label class="field password-input">
             <span>Password</span>
@@ -142,7 +144,7 @@
         <!-- ✅ SIGNUP FORM -->
         <form class="tab-panel" id="signupPanel"
               method="POST"
-              action="{{ url_for('v1.auth.signup_page') }}"
+              action="{{ url_for('v1.auth.signup_post') }}"
               novalidate>
 
           <div class="grid-2">
@@ -341,4 +343,28 @@
   </script>
 
 </body>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="flash-container">
+      {% for category, message in messages %}
+        <div class="flash {{ category }}">
+          {{ message }}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+<script>
+  setTimeout(() => {
+    document.querySelectorAll(".flash").forEach(flash => {
+      flash.style.opacity = "0";
+      flash.style.transform = "translateY(-6px)";
+      setTimeout(() => flash.remove(), 250);
+    });
+  }, 4000);
+</script>
+
+
 </html>

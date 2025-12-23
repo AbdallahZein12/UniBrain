@@ -1,2 +1,2 @@
 from .user import User
-from .invide_code import InviteCode
+from .invite_code import InviteCode

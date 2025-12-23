@@ -22,6 +22,8 @@ class User(UserMixin ,db.Model):
     is_active = db.Column(db.Boolean, nullable=False, default=True)
     created_at = db.Column(db.DateTime(timezone=True), server_default=func.now(), nullable=False)
     
+    is_admin = db.Column(db.Boolean, nullable=False, default=False)
+    
     def get_id(self) -> str: 
         return self.id 
     

@@ -1,6 +1,7 @@
 from flask import Blueprint
 
-v1_bp = Blueprint("v1",
+admin_bp = Blueprint(
+    "admin",
     __name__,
     template_folder="templates",
     static_folder="static"

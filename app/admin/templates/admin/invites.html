@@ -1,0 +1,88 @@
+{% extends "admin/admin_base.html" %}
+
+{% block title %}Admin · Invite Codes{% endblock %}
+
+{% block content %}
+  <h1>Invite Codes</h1>
+  <p>Manage beta access to UniBrain.</p>
+
+  <div class="card">
+    <h2>Create Invite</h2>
+
+    <form method="POST" action="{{ url_for('admin.create_invite') }}">
+      <p>
+        <label>Code (optional)</label><br />
+        <input type="text" name="code" placeholder="AUTO-GENERATED IF EMPTY" />
+      </p>
+
+      <p>
+        <label>Max Uses</label><br />
+        <input type="number" name="uses" value="3" min="1" required />
+      </p>
+
+      <p>
+        <label>Expires in days</label><br />
+        <input type="number" name="days" value="14" min="0" />
+      </p>
+
+      <button type="submit" class="primary">Create Invite</button>
+    </form>
+  </div>
+
+  <div class="card">
+    <h2>Existing Invites</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Code</th>
+          <th>Status</th>
+          <th>Used</th>
+          <th>Expires</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for invite in invites %}
+        <tr>
+          <td class="mono">{{ invite.code }}</td>
+
+          <td>
+            <span class="badge {{ invite.status }}">
+              {{ invite.status }}
+            </span>
+          </td>
+
+          <td>{{ invite.used_count }} / {{ invite.max_uses }}</td>
+
+          <td>
+            {% if invite.expires_at %}
+              {{ invite.expires_at.strftime("%Y-%m-%d") }}
+            {% else %}
+              —
+            {% endif %}
+          </td>
+
+          <td>
+            <form
+              method="POST"
+              action="{{ url_for('admin.toggle_invite', invite_id=invite.id) }}"
+              class="inline"
+            >
+              {% if invite.is_active %}
+                <button class="danger">Disable</button>
+              {% else %}
+                <button>Enable</button>
+              {% endif %}
+            </form>
+          </td>
+        </tr>
+        {% else %}
+        <tr>
+          <td colspan="5">No invite codes yet.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}
