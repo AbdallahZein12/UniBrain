@@ -23,7 +23,7 @@ def create_app() -> Flask:
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_object(Config)
     
-    if os.getenv("ENV") != "dev":
+    if os.getenv("FLASK_ENV") != "dev":
         app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1)
     
     # init extensions 
