@@ -3,9 +3,9 @@ from flask_login import login_user, logout_user, login_required
 from sqlalchemy.exc import IntegrityError
 
 from . import auth_bp
-from app.core.extensions import db
+from app.core.extensions import db, limiter
 from sqlalchemy.sql import func
-from app.models import User, InviteCode 
+from app.models import User, InviteCode, StudentProfile
 
 
 def auth_fail_redirect(source: str, default_endpoint: str):
@@ -26,6 +26,8 @@ def login_post():
     source = request.form.get("source", "page")
     if source not in ("modal", "page"):
         source = "page"
+        
+    remember = request.form.get("remember") == "1"
     
     email = request.form.get("email","").strip().lower()
     password = request.form.get("password", "")
@@ -39,7 +41,7 @@ def login_post():
         flash("Account is disabled!", "error")
         return redirect(auth_fail_redirect(source, "v1.auth.login_page"))
     
-    login_user(user, remember=True)
+    login_user(user, remember=remember)
     flash("Welcome back!", "success")
     return redirect(url_for("v1.onboarding"))
 
@@ -48,6 +50,8 @@ def signup_page():
     return render_template("signup.html")
 
 @auth_bp.post("/signup")
+@limiter.limit("5 per 10 minutes")
+@limiter.limit("20 per day")
 def signup_post(): 
     
     source = request.form.get("source", "page")
@@ -58,6 +62,7 @@ def signup_post():
     password = request.form.get("password", "")
     confirm = request.form.get("confirm_password", "") 
     invite_code_str = request.form.get("invite_code", "").strip().upper()
+    remember = request.form.get("remember") == "1"
     
     if not invite_code_str:
         flash("Invite code is required for the beta!", "error")
@@ -79,12 +84,17 @@ def signup_post():
         flash("Email already registered. Try logging in!", "error")
         return redirect(auth_fail_redirect(source, "v1.auth.login_page"))
     
+    code = InviteCode.query.filter_by(code=invite_code_str).first()
+    if code: 
+        code.disable_if_expired() 
+        db.session.commit()
+    
     try: 
         with db.session.begin_nested():
             code = (
                 InviteCode.query
                 .filter_by(code=invite_code_str)
-                # .with_for_update()
+                .with_for_update()
                 .first() 
             )
             
@@ -99,13 +109,12 @@ def signup_post():
             if code.used_count >= code.max_uses:
                 code.is_active = False 
                 
-        
             user = User(email=email)
             user.set_password(password)
-        
+            user.student_profile = StudentProfile()
             db.session.add(user)
     
-        login_user(user, remember=True)
+        login_user(user, remember=remember)
         flash("Account created!", "success")
         return redirect(url_for("v1.onboarding"))
     

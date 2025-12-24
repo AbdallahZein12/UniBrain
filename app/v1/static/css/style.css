@@ -1902,6 +1902,25 @@ details p {
 }
 
 
+.remember-row {
+  margin: 16px 0 20px;
+  display: flex;
+  align-items: center;
+}
+
+.remember {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.75);
+  cursor: pointer;
+}
+
+.remember input[type="checkbox"] {
+  accent-color: #5b7cff;
+  cursor: pointer;
+}
 
 /* Responsive */
 @media (max-width: 980px) {

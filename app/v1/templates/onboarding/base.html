@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{% block title %}UniBrain | Onboarding{% endblock %}</title>
+
+  <!-- Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="{{ url_for('v1.static', filename='onboarding/css/style.css') }}">
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <header class="nav">
+    <div class="nav-inner">
+      <a href="{{ url_for('v1.home') }}" class="logo">
+        <img src="{{ url_for('v1.static', filename='onboarding/img/logo.svg') }}" alt="UniBrain logo">
+      </a>
+
+      <form method="POST" action="{{ url_for('v1.auth.logout_post') }}">
+        <button class="logout-btn" type="submit">Logout</button>
+      </form>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="page">
+    {% block content %}{% endblock %}
+  </main>
+  <footer class="onboarding-footer">
+    <div class="footer-inner">
+      <div class="footer-left">
+        <img
+          src="{{ url_for('v1.static', filename='onboarding/img/logo.svg') }}"
+          alt="UniBrain logo"
+          class="footer-logo"
+        />
+        <span>UniBrain</span>
+      </div>
+
+      <div class="footer-right">
+        <span>Ontology-driven academic intelligence</span>
+        <span class="dot">•</span>
+        <span>© {{ 2025 }}</span>
+      </div>
+    </div>
+  </footer>
+
+
+</body>
+</html>

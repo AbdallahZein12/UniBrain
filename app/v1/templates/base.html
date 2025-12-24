@@ -28,9 +28,9 @@
   </div>
 
   <!-- NAVBAR -->
-  <header class="nav-wrap">
+  <header class="nav-wrap" id="top">
     <nav class="navbar">
-      <a class="brand" href="#" aria-label="UniBrain Home">
+      <a class="brand" href="{{ url_for('v1.home') }}" aria-label="UniBrain Home">
         <img
           class="brand-logo"
           src="{{ url_for('v1.static', filename='img/logo.svg') }}"
@@ -48,8 +48,16 @@
       </div>
 
       <div class="nav-actions">
-        <!-- <button class="btn ghost" id="openUniAssistTop">UniAssist</button> -->
-        <button class="btn primary" id="openUniAssistTop2">Get Started</button>
+        {% if current_user.is_authenticated %}
+          <a class="btn primary" href="{{ url_for('v1.onboarding') }}">Continue</a>
+
+          <form method="POST" action="{{ url_for('v1.auth.logout_post') }}" style="display:inline;">
+            <button class="btn ghost" type="submit">Logout</button>
+          </form>
+        {% else %}
+          <!-- <button class="btn ghost" id="openUniAssistTop">UniAssist</button> -->
+          <button class="btn primary" id="openUniAssistTop2">Get Started</button>
+        {% endif %}
       </div>
 
       <button class="burger" id="burgerBtn"
@@ -67,10 +75,34 @@
       <a href="#how">How it Works</a>
       <a href="#usecases">Use Cases</a>
       <a href="#faq">FAQ</a>
-      <!-- <button class="btn ghost w100" id="openUniAssistMobile">UniAssist</button> -->
-      <button class="btn primary w100" id="openUniAssistMobile2">Get Started</button>
+
+      {% if current_user.is_authenticated %}
+        <a class="btn primary w100" href="{{ url_for('v1.onboarding') }}">Continue</a>
+
+        <form method="POST" action="{{ url_for('v1.auth.logout_post') }}" class="w100">
+          <button class="btn ghost w100" type="submit">Logout</button>
+        </form>
+      {% else %}
+        <!-- <button class="btn ghost w100" id="openUniAssistMobile">UniAssist</button> -->
+        <button class="btn primary w100" id="openUniAssistMobile2">Get Started</button>
+      {% endif %}
     </div>
   </header>
+
+  <script>
+    function openUniAssistOrContinue() {
+      const modalTrigger = document.getElementById("openUniAssistTop2");
+
+      if (modalTrigger) {
+        // Logged out → open modal
+        modalTrigger.click();
+      } else {
+        // Logged in → go to onboarding
+        window.location.href = "{{ url_for('v1.onboarding') }}";
+      }
+    }
+  </script>
+
 
   {% block content %}{% endblock %}
 
@@ -133,6 +165,13 @@
             </div>
           </label>
 
+          <div class="remember-row">
+            <label class="remember">
+              <input type="checkbox" name="remember" value="1">
+              <span>Remember me</span>
+            </label>
+          </div>
+
           <button class="btn primary w100" type="submit">Login</button>
 
           <div class="hint-row">
@@ -148,24 +187,15 @@
               novalidate>
 
           <div class="grid-2">
-            <!-- <label class="field">
-              <span>Full Name</span>
-              <input type="text" name="name" placeholder="Jane Doe" autocomplete="name">
-            </label> -->
-
-            <!-- Keeping your demo password block (now with a name so it can submit if you use it) -->
             <label class="field">
               <span>Invite Code</span>
-              <!-- <div class="password-field"> -->
-                <input
-                  type="text"
-                  name="invite_code"
-                  placeholder="e.g. LIU-FALL-2025"
-                  required
-                  autocomplete="off"
-                >
-                <!-- <button class="password-toggle" type="button" data-password-toggle aria-label="Show password" aria-pressed="false">Show</button> -->
-              <!-- </div> -->
+              <input
+                type="text"
+                name="invite_code"
+                placeholder="e.g. LIU-FALL-2025"
+                required
+                autocomplete="off"
+              >
             </label>
           </div>
 
@@ -223,6 +253,13 @@
             </div>
           </div>
 
+          <div class="remember-row">
+            <label class="remember">
+              <input type="checkbox" name="remember" value="1">
+              <span>Remember me</span>
+            </label>
+          </div>
+
           <button class="btn primary w100" type="submit">Create Profile</button>
 
           <div class="hint-row">
@@ -232,8 +269,6 @@
         </form>
 
       </div>
-
-      <!-- <a class="btn primary w100" id="authActionPrimary" href="{{ url_for('v1.auth.login_page') }}">Go to Login</a> -->
 
       <div class="modal-foot">
         <span class="fineprint">UniBrain is an ontology-driven MVP — designed to be explainable, not vague.</span>
@@ -245,7 +280,6 @@
   <div class="neo-tooltip neo-tooltip-portal" id="neoTooltip" role="tooltip" aria-hidden="true"></div>
 
   <script>
-
     // Mobile menu
     const burgerBtn = document.getElementById("burgerBtn");
     const mobileMenu = document.getElementById("mobileMenu");
@@ -342,29 +376,27 @@
     activate(defaultTab);
   </script>
 
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <div class="flash-container">
+        {% for category, message in messages %}
+          <div class="flash {{ category }}">
+            {{ message }}
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  <script>
+    setTimeout(() => {
+      document.querySelectorAll(".flash").forEach(flash => {
+        flash.style.opacity = "0";
+        flash.style.transform = "translateY(-6px)";
+        setTimeout(() => flash.remove(), 250);
+      });
+    }, 4000);
+  </script>
+
 </body>
-
-{% with messages = get_flashed_messages(with_categories=true) %}
-  {% if messages %}
-    <div class="flash-container">
-      {% for category, message in messages %}
-        <div class="flash {{ category }}">
-          {{ message }}
-        </div>
-      {% endfor %}
-    </div>
-  {% endif %}
-{% endwith %}
-
-<script>
-  setTimeout(() => {
-    document.querySelectorAll(".flash").forEach(flash => {
-      flash.style.opacity = "0";
-      flash.style.transform = "translateY(-6px)";
-      setTimeout(() => flash.remove(), 250);
-    });
-  }, 4000);
-</script>
-
-
 </html>

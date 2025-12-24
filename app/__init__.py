@@ -1,12 +1,12 @@
 from flask import Flask 
 from .core import Config
-from .core import db, migrate
+from .core import db, migrate, limiter
 from dotenv import load_dotenv
 from flask_login import LoginManager
 from datetime import datetime, timedelta, timezone
 import secrets
 from sqlalchemy.exc import IntegrityError
-
+from werkzeug.middleware.proxy_fix import ProxyFix
 
 from app.models import InviteCode
 
@@ -23,9 +23,13 @@ def create_app() -> Flask:
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_object(Config)
     
+    if os.getenv("ENV") != "dev":
+        app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1)
+    
     # init extensions 
     db.init_app(app)
     migrate.init_app(app,db)
+    limiter.init_app(app)
     
     # import models so Alembic sees them 
     from . import models 

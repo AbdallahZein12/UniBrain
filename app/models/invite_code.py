@@ -28,6 +28,14 @@ class InviteCode(db.Model):
     
     created_at = db.Column(db.DateTime(timezone=True), server_default=func.now(), nullable=False)
     
+    
+    def disable_if_expired(self):
+        """Disable this code if it's expired. Returns True if changed"""
+        if self.is_expired and self.is_active:
+            self.is_active = False 
+            return True 
+        return False 
+    
     @property
     def is_expired(self) -> bool:
         if not self.expires_at:

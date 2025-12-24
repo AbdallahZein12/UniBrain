@@ -1,0 +1,79 @@
+{% extends "onboarding/base.html" %}
+{% block title %}UniBrain | Student Onboarding{% endblock %}
+
+{% block content %}
+<div class="card">
+
+  <div class="welcome">
+    <span class="wave">👋</span>
+    <div>
+      <strong>
+        Welcome{{ " " ~ current_user.email  }}!
+      </strong>
+      <p class="welcome-sub">
+        We’re happy to have you — let’s finish setting up your academic profile.
+      </p>
+    </div>
+  </div>
+
+
+  <h1>Student Profile</h1>
+  <p class="subtitle">Let’s set up your academic profile.</p>
+
+  <form method="POST" class="onboarding-form">
+
+    <!-- BASIC INFO -->
+    <div class="section">
+      <label>Full Name</label>
+      <input type="text" name="full_name" placeholder="Jane Doe" required>
+    </div>
+
+    <div class="section grid">
+      <div>
+        <label>Campus</label>
+        <select name="campus_id" required>
+          <option value="liu_brooklyn">LIU Brooklyn</option>
+        </select>
+      </div>
+
+      <div>
+        <label>Major</label>
+        <select name="major_id" required>
+          <option value="cs_bs">Computer Science (BS)</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="section">
+      <label>Expected Graduation Year</label>
+      <input type="number" name="expected_grad_year" min="2026" max="2035" required>
+    </div>
+
+    <!-- COURSES -->
+    <div class="section">
+      <h2>Completed Courses</h2>
+      <div id="completed-terms"></div>
+      <button type="button" class="secondary" onclick="addTerm('completed')">
+        + Add Completed Term
+      </button>
+    </div>
+
+    <div class="section">
+      <h2>Courses In Progress</h2>
+      <div id="in-progress-terms"></div>
+      <button type="button" class="secondary" onclick="addTerm('in_progress')">
+        + Add In-Progress Term
+      </button>
+    </div>
+
+    <input type="hidden" name="courses_by_term_json" id="courses-json">
+
+    <button type="submit" class="primary" onclick="buildCoursesJson()">
+      Save Profile
+    </button>
+
+  </form>
+</div>
+
+<script src="{{ url_for('v1.static', filename='onboarding/js/onboarding.js') }}"></script>
+{% endblock %}
