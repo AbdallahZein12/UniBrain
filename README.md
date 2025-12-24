@@ -5,8 +5,8 @@ UniBrain is an early-stage prototype exploring how universities can unify fragme
 At its core, UniBrain models university knowledge—programs, majors, courses, requirements, rules, and directories—using a formal ontology.
 On top of this structure, UniBrain exposes UniAssist, an AI-powered interface that can answer academic questions with clarity, traceability, and context.
 
-LONG-TERM VISION:
-UniBrain aims to become the Palantir of higher education — a centralized, explainable intelligence layer that brings consistency, automation, and reasoning to university operations.
+>LONG-TERM VISION:
+UniBrain aims to become the _Palantir of higher education_ — a centralized, explainable intelligence layer that brings consistency, automation, and reasoning to university operations.
 
 This repository contains v1, a closed-beta demo designed for early discussions with LIU Brooklyn IT and Engineering leadership.
 
