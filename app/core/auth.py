@@ -10,3 +10,4 @@ def admin_required(view):
             abort(403)
         return view(*args, **kwargs)
     return wrapped
+

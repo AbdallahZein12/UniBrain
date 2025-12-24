@@ -24,6 +24,14 @@ class User(UserMixin ,db.Model):
     
     is_admin = db.Column(db.Boolean, nullable=False, default=False)
     
+    student_profile = db.relationship(
+        "StudentProfile",
+        back_populates="user",
+        uselist=False, 
+        cascade="all, delete-orphan",
+        passive_deletes=True
+    )
+    
     def get_id(self) -> str: 
         return self.id 
     
