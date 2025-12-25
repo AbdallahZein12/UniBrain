@@ -6,6 +6,9 @@ import re
 
 LIU_KNOWN_COURSES: set[str] = set() # TODO: replace with LIU catalog set
 
+def default_courses_by_term():
+    return {"completed": [], "in_progress": []}
+
 
 
 class StudentProfile(db.Model):
@@ -28,7 +31,14 @@ class StudentProfile(db.Model):
     full_name = db.Column(db.String(120), nullable=True)
     
     # ontology keys (strings)
-    campus_id = db.Column(db.String(64), nullable=True, index=True)
+    campus_id = db.Column(
+        db.String(64),
+        db.ForeignKey("campuses.id", ondelete="SET NULL"),
+        unique=False, 
+        nullable=True, 
+        index=True 
+    )
+    
     major_id = db.Column(db.String(64), nullable=True, index=True)
     
     expected_grad_year = db.Column(db.Integer, nullable=True)
@@ -47,7 +57,9 @@ class StudentProfile(db.Model):
     }
     """
     
-    courses_by_term = db.Column(db.JSON, nullable=False, default=dict)
+    
+    
+    courses_by_term = db.Column(db.JSON, nullable=False, default=default_courses_by_term)
     unknown_courses = db.Column(db.JSON, nullable=False, default=list)
     
     # completed_course_ids = db.Column(db.JSON, nullable=False, default=list)
@@ -57,11 +69,11 @@ class StudentProfile(db.Model):
     updated_at = db.Column(db.DateTime(timezone=True), onupdate=func.now(),nullable=True)
     
     user = db.relationship("User", back_populates="student_profile", uselist=False)
-    
+    campus = db.relationship("Campus", back_populates="students")
 
-    # --------
+   
     # HELPERS
-    # --------
+   
     
     @staticmethod
     def _norm_course(course: str) -> str | None: 

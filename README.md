@@ -234,7 +234,7 @@ http://localhost:5000
 
 **12/12/2025** – Added ontology / models diagram  
 
-![Models Diagram](./docs/design/models.png)
+![Models Diagram](./docs/design/models_v1.png)
 
 **12/15/2025** – Added landing page desgin, logo and login portal (dev_login_feature)
 
@@ -258,6 +258,15 @@ http://localhost:5000
 - Designed invite abuse prevention strategy
 - Hardened session behavior
 - Prepared deployment considerations for Caddy
+
+**12/24/2025**: 
+- Added models for: 
+- Departments 
+- Campuses
+- Majors (blueprint)
+- Added flashed messages design for onboarding page 
+- Continuing to tweak backend catalog  
+- Updated models UML diagram 
 
 ---
 
