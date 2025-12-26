@@ -234,7 +234,7 @@ http://localhost:5000
 
 **12/12/2025** – Added ontology / models diagram  
 
-![Models Diagram](./docs/design/models_v1.png)
+![Models Diagram](./docs/design/models.png)
 
 **12/15/2025** – Added landing page desgin, logo and login portal (dev_login_feature)
 
@@ -267,6 +267,23 @@ http://localhost:5000
 - Added flashed messages design for onboarding page 
 - Continuing to tweak backend catalog  
 - Updated models UML diagram 
+
+![Models Diagram](./docs/design/models_v1.png)
+
+**12/25/2025**: 
+- Added models for: 
+- Majors 
+- Courses
+- CourseOfferings 
+- Finalized all relationships 
+- Added PRAGMA foregin key enforcement for every db conn
+- Remember me = 30 days
+- Continuing to tweak backend catalog  
+- Updated models UML diagram 
+- Next stop --> JSON loads for public data 
+- > Happy holidays!
+
+![Models Diagram](./docs/design/models_v1.1.jpg)
 
 ---
 
