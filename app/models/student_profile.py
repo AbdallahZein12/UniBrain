@@ -34,12 +34,19 @@ class StudentProfile(db.Model):
     campus_id = db.Column(
         db.String(64),
         db.ForeignKey("campuses.id", ondelete="SET NULL"),
-        unique=False, 
+        # unique=False, 
         nullable=True, 
         index=True 
     )
     
-    major_id = db.Column(db.String(64), nullable=True, index=True)
+    major_id = db.Column(
+        db.String(64),
+        db.ForeignKey("majors.id", ondelete="SET NULL"),
+        # unique=False,
+        nullable=True, 
+        index=True 
+                         
+    )
     
     expected_grad_year = db.Column(db.Integer, nullable=True)
     
@@ -70,6 +77,7 @@ class StudentProfile(db.Model):
     
     user = db.relationship("User", back_populates="student_profile", uselist=False)
     campus = db.relationship("Campus", back_populates="students")
+    major = db.relationship("Major", back_populates="students")
 
    
     # HELPERS
@@ -170,7 +178,7 @@ class StudentProfile(db.Model):
                     if not nc: 
                         continue 
                     
-                    if nc not in known_courses:
+                    if known_courses and nc not in known_courses:
                         unknown.add(nc)
                         
                     normed.append(nc)

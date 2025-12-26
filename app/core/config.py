@@ -13,7 +13,7 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False 
     
     # Flask-Login remember-me config
-    REMEMBER_COOKIE_DURATION = timedelta(days=45)
+    REMEMBER_COOKIE_DURATION = timedelta(days=30)
     REMEMBER_COOKIE_SECURE = True if os.getenv("FLASK_ENV") != "dev" else False       # only over HTTPS
     REMEMBER_COOKIE_HTTPONLY = True
     REMEMBER_COOKIE_SAMESITE = "Lax"

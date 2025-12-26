@@ -5,6 +5,9 @@ from dotenv import load_dotenv
 from flask_login import LoginManager
 from datetime import datetime, timedelta, timezone
 import secrets
+from sqlalchemy import event
+from sqlalchemy.engine import Engine 
+import sqlite3
 from sqlalchemy.exc import IntegrityError
 from werkzeug.middleware.proxy_fix import ProxyFix
 import os 
@@ -34,6 +37,7 @@ def create_app() -> Flask:
     
     # import models so Alembic sees them 
     from . import models 
+    from app.models import catalog
     from .models import User
     
     #register blueprints 
@@ -58,6 +62,15 @@ def create_app() -> Flask:
         return User.query.get(user_id)
     
     return app
+
+
+@event.listens_for(Engine, "connect")
+def set_sqlite_pragma(dbapi_connection, connection_record): 
+    if isinstance(dbapi_connection, sqlite3.Connection):
+        cursor = dbapi_connection.cursor()
+        cursor.execute("PRAGMA foreign_keys=ON;")
+        cursor.close() 
+        
 
 def register_cli(app: Flask): 
     from .core.extensions import db 

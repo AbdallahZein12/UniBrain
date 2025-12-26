@@ -23,5 +23,7 @@ class Department(db.Model):
     updated_at = db.Column(db.DateTime(timezone=True), onupdate=func.now(), nullable=True)
     
     campus = db.relationship("Campus", back_populates="departments")
+    majors = db.relationship("Major", back_populates="department")
+    courses = db.relationship("Course", back_populates="department")
     
     

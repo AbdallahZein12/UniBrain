@@ -8,7 +8,7 @@ class Campus(db.Model):
     
     id = db.Column(db.String(64), primary_key=True)
     
-    name = db.Column(db.String(250), nullable=False)
+    name = db.Column(db.String(250), nullable=False, index=True)
     address = db.Column(db.String(500), nullable=True)
     
     created_at = db.Column(db.DateTime(timezone=True), nullable=False, server_default=func.now())
@@ -16,5 +16,9 @@ class Campus(db.Model):
     
     students = db.relationship("StudentProfile", back_populates="campus")
     departments = db.relationship("Department", back_populates="campus")
+    majors = db.relationship("Major", back_populates="campus")
+    # courses = db.relationship("Course", back_populates="campus")
+    course_offerings = db.relationship("CourseOffering", back_populates="campus")
+     
     
     
