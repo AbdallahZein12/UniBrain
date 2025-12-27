@@ -146,6 +146,21 @@ class StudentProfile(db.Model):
         
         return completed & inprog 
     
+    def find_term_conflicts(self) -> set[str]: 
+        data = self.courses_by_term or {}
+        
+        completed = {
+            self._norm_term(row.get("term"))
+            for row in (data.get("completed") or [])
+        }
+        
+        inprog = {
+            self._norm_term(row.get("term"))
+            for row in (data.get("in_progress") or [])
+        }
+        
+        return completed & inprog 
+    
     def validate_courses_by_term(self, known_courses: set[str]) -> list[str]: 
         """
         Hard Validations:
@@ -219,6 +234,10 @@ class CourseConflictError(ValueError):
     """Raised when a course appears in both completed and in_progress."""
     pass 
 
+class TermConflictError(ValueError):
+    """Raised when a term appears in both completed and in_progress"""
+    pass
+
 # @event.listens_for(StudentProfile, "before_insert")
 # def _student_profile_before_insert(mapper, connection, target: StudentProfile): 
 #     target.normalize_courses_by_term()
@@ -248,9 +267,17 @@ def _student_profile_validate(mapper, connection, target: StudentProfile):
     target.validate_courses_by_term(LIU_KNOWN_COURSES)
     
     # hard validation
-    conflicts = target.find_course_conflicts()
+    course_conflicts = target.find_course_conflicts()
     
-    if conflicts: 
+    # hard validation 
+    term_conflicts = target.find_term_conflicts()
+    
+    if course_conflicts: 
         raise CourseConflictError(
-            f"Courses cannot be both completed and in progress: {sorted(conflicts)}"
+            f"Courses cannot be both completed and in progress: {sorted(course_conflicts)}"
+        )
+    
+    if term_conflicts:
+        raise TermConflictError(
+            f"Terms cannot be both completed and in progress: {sorted(term_conflicts)}"   
         )
