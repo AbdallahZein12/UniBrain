@@ -211,7 +211,7 @@ class StudentProfile(db.Model):
         
     @property
     def onboarding_complete(self) -> bool: 
-        return bool(self.campus_id and self.major_id and self.expected_grad_year)
+        return bool(self.full_name and self.campus_id and self.major_id)
         
 
 
@@ -247,6 +247,7 @@ def _student_profile_validate(mapper, connection, target: StudentProfile):
     # hard validation 
     target.validate_courses_by_term(LIU_KNOWN_COURSES)
     
+    # hard validation
     conflicts = target.find_course_conflicts()
     
     if conflicts: 

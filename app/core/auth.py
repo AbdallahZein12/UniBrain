@@ -1,5 +1,5 @@
 from functools import wraps 
-from flask import abort, redirect, url_for, request
+from flask import abort, redirect, url_for, request, flash
 from flask_login import login_required, current_user 
 
 def admin_required(view): 
@@ -19,11 +19,13 @@ def onboarding_required(view):
         
         # Onboarding not done 
         if profile is None:
-            return redirect(url_for("v1.onboarding"))
+            flash("You must create a student profile to continue!", "error")
+            return redirect(url_for("v1.onboarding", next=request.full_path))
         
-        # Onboarding not full complete
+        # Onboarding not fully complete
         if not profile.onboarding_complete: 
-            return redirect(url_for("v1.onboarding"))
+            flash("Complete your profile to continue!", "info")
+            return redirect(url_for("v1.onboarding", next=request.full_path))
         
         return view(*args, **kwargs)
     

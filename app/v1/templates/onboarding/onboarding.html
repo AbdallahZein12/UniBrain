@@ -20,7 +20,8 @@
   <h1>Student Profile</h1>
   <p class="subtitle">Let’s set up your academic profile.</p>
 
-  <form method="POST" class="onboarding-form">
+  <form method="POST" class="onboarding-form" onsubmit="buildCoursesJson()", action="{{ url_for('v1.onboarding_post') }}">
+    <input type="hidden" name="next" value="{{ request.args.get('next','') }}">
 
     <!-- BASIC INFO -->
     <div class="section">
@@ -32,14 +33,14 @@
       <div>
         <label>Campus</label>
         <select name="campus_id" required>
-          <option value="liu_brooklyn">LIU Brooklyn</option>
+          <option value="LIU_BKLN">LIU Brooklyn</option>
         </select>
       </div>
 
       <div>
         <label>Major</label>
         <select name="major_id" required>
-          <option value="cs_bs">Computer Science (BS)</option>
+          <option value="CS_BS">Computer Science (BS)</option>
         </select>
       </div>
     </div>
@@ -68,7 +69,7 @@
 
     <input type="hidden" name="courses_by_term_json" id="courses-json">
 
-    <button type="submit" class="primary" onclick="buildCoursesJson()">
+    <button type="submit" class="primary">
       Save Profile
     </button>
 
