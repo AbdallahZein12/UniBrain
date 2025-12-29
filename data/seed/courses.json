@@ -1,0 +1,580 @@
+[
+  {
+    "id": "CS 201",
+    "title": "Fundamentals of Computer Science and Information Sciences",
+    "credits": 3,
+    "department_id": "CS",
+    "prereq_rules": [],
+    "prereq_notes": ""
+  },
+  {
+    "id": "CS 202",
+    "title": "Object Oriented Programming I",
+    "credits": 4,
+    "department_id": "CS",
+    "prereq_rules": [["CS 201"]],
+    "prereq_notes": ""
+  },
+  {
+    "id": "CS 217",
+    "title": "Object Oriented Programming II",
+    "credits": 4,
+    "department_id": "CS",
+    "prereq_rules": [["CS 202"]],
+    "prereq_notes": ""
+  },
+  {
+    "id": "CS 218",
+    "title": "Computer Architecture",
+    "credits": 3,
+    "department_id": "CS",
+    "prereq_rules": [["CS 202"]],
+    "prereq_notes": ""
+  },
+  {
+    "id": "CS 230",
+    "title": "Algorithms and Data Structure",
+    "credits": 3,
+    "department_id": "CS",
+    "prereq_rules": [["CS 217"]],
+    "prereq_notes": ""
+  },
+  {
+    "id": "CS 232",
+    "title": "Discrete Structures in Computer Science",
+    "credits": 3,
+    "department_id": "CS",
+    "prereq_rules": [["CS 230"]],
+    "prereq_notes": ""
+  },
+  {
+    "id": "CS 248",
+    "title": "Database Systems I",
+    "credits": 4,
+    "department_id": "CS",
+    "prereq_rules": [["CS 201"]],
+    "prereq_notes": ""
+  },
+  {
+    "id": "CS 250",
+    "title": "Operating Systems",
+    "credits": 4,
+    "department_id": "CS",
+    "prereq_rules": [["CS 217"]],
+    "prereq_notes": ""
+  },
+  {
+    "id": "CS 254",
+    "title": "Computer Networks",
+    "credits": 3,
+    "department_id": "CS",
+    "prereq_rules": [["CS 202"]],
+    "prereq_notes": ""
+  },
+
+  {
+    "id": "CS 264",
+    "title": "Software Engineering",
+    "credits": 3,
+    "department_id": "CS",
+    "prereq_rules": [["CS 230"]],
+    "prereq_notes": "Digital Engineering Majors are allowed"
+  },
+
+  {
+    "id": "SPE 100",
+    "title": "Oral Communication",
+    "credits": 3,
+    "department_id": "COM",
+    "prereq_rules": [],
+    "prereq_notes": ""
+  },
+
+  {
+    "id": "ENG 110",
+    "title": "Writing I",
+    "credits": 3,
+    "department_id": "LIB",
+    "prereq_rules": [],
+    "prereq_notes": "One of the following prerequisites is required: ENG 14, Placement Exam, or High School GPA and English grade review."
+  },
+
+  {
+    "id": "MAN 231",
+    "title": "Managerial Communications",
+    "credits": 3,
+    "department_id": "BUS",
+    "prereq_rules": [["SPE 100"],["ENG 110"]],
+    "prereq_notes": ""
+  },
+
+  {
+    "id": "MTH 106",
+    "title": "Finite Mathematics",
+    "credits": 3,
+    "department_id": "LIB",
+    "prereq_rules": [],
+    "prereq_notes": "One of the following prerequisites is required: DSM 09 MW 9 Placement Exam,  500 or higher on MATH SAT , 22 or higher on ACT Assessment"
+  },
+
+  {
+    "id": "MTH 130",
+    "title": "Pre-Calculus Mathematics",
+    "credits": 4,
+    "department_id": "LIB",
+    "prereq_rules": [],
+    "prereq_notes": "One of the following prerequisites is required: MTH 110 Placement Exam, 560 or higher on MATH SAT , 25 or higher on ACT Assessment"
+  },
+
+  {
+    "id": "MTH 140",
+    "title": "Calculus I",
+    "credits": 4,
+    "department_id": "LIB",
+    "prereq_rules": [["MTH 130"]],
+    "prereq_notes": ""
+  },
+
+  {
+    "id": "BUS 228",
+    "title": "Business Statistics I",
+    "credits": 3,
+    "department_id": "BUS",
+    "prereq_rules": [["MTH 106", "MTH 130", "MTH 140"]],
+    "prereq_notes": ""
+  },
+
+  {
+    "id": "CS 368",
+    "title": "Special Topics in Computer Science",
+    "credits": 3,
+    "department_id": "CS",
+    "prereq_rules": [],
+    "prereq_notes": ""
+  },
+
+  {
+    "id": "CS 369",
+    "title": "Special Topics in Computer Science",
+    "credits": 3,
+    "department_id": "CS",
+    "prereq_rules": [],
+    "prereq_notes": ""
+  },
+
+  {
+    "id": "CS 220",
+    "title": "Web Development",
+    "credits": 3,
+    "department_id": "CS",
+    "prereq_rules": [["CS 202"]],
+    "prereq_notes": ""
+  },
+
+  {
+    "id": "CS 462",
+    "title": "Artificial Intelligence I",
+    "credits": 3,
+    "department_id": "CS",
+    "prereq_rules": [["CS 217"]],
+    "prereq_notes": ""
+  },
+
+  {
+    "id": "CS 403",
+    "title": "Programming I for Business",
+    "credits": 4,
+    "department_id": "CS",
+    "prereq_rules": [["CS 201"]],
+    "prereq_notes": ""
+  },
+
+  {
+    "id": "CS 463",
+    "title": "Data Mining and Business Intelligence",
+    "credits": 3,
+    "department_id": "CS",
+    "prereq_rules": [["CS 230"], ["CS 462"]],
+    "prereq_notes": ""
+  },
+
+  {
+    "id": "BUS 201",
+    "title": "Introduction to Business in the 21st Century",
+    "credits": 3,
+    "department_id": "BUS",
+    "prereq_rules": [],
+    "prereq_notes": ""
+  },
+
+  {
+    "id": "BUS 209",
+    "title": "Foundations of Business Information Systems",
+    "credits": 3,
+    "department_id": "BUS",
+    "prereq_rules": [],
+    "prereq_notes": ""
+  },
+
+  {
+    "id": "BUS 210",
+    "title": "Economics for Business",
+    "credits": 3,
+    "department_id": "BUS",
+    "prereq_rules": [],
+    "prereq_notes": ""
+  },
+
+  {
+    "id": "ENG 110C",
+    "title": "Writing 1: Composition & Analysis Accelerated",
+    "credits": 3,
+    "department_id": "LIB",
+    "prereq_rules": [],
+    "prereq_notes": ""
+  },
+
+  {
+    "id": "ENG 112",
+    "title": "World Literature I",
+    "credits": 3,
+    "department_id": "LIB",
+    "prereq_rules": [["ENG 110","ENG 110C"]],
+    "prereq_notes": ""
+  },
+
+  {
+    "id": "ENG 113",
+    "title": "World Literature II",
+    "credits": 3,
+    "department_id": "LIB",
+    "prereq_rules": [["ENG 110","ENG 110C"]],
+    "prereq_notes": ""
+  },
+
+  {
+    "id": "ENG 114",
+    "title": "American Literatures",
+    "credits": 3,
+    "department_id": "LIB",
+    "prereq_rules": [["ENG 110","ENG 110C"]],
+    "prereq_notes": ""
+  },
+
+  {
+    "id": "ENG 115",
+    "title": "Global Literatures",
+    "credits": 3,
+    "department_id": "LIB",
+    "prereq_rules": [["ENG 110","ENG 110C"]],
+    "prereq_notes": ""
+  },
+
+  {
+    "id": "HIS 102",
+    "title": "Perspectives on Modern World History",
+    "credits": 3,
+    "department_id": "LIB",
+    "prereq_rules": [],
+    "prereq_notes": ""
+  },
+
+
+  {
+    "id": "HIS 101",
+    "title": "Perspectives on Premodern World History",
+    "credits": 3,
+    "department_id": "LIB",
+    "prereq_rules": [],
+    "prereq_notes": ""
+  },
+
+  {
+    "id": "PHI 100",
+    "title": "Beginning Philosophy",
+    "credits": 3,
+    "department_id": "LIB",
+    "prereq_rules": [],
+    "prereq_notes": ""
+  },
+
+  {
+    "id": "MTH 105",
+    "title": "Mathematical Tools and Their Use",
+    "credits": 4,
+    "department_id": "LIB",
+    "prereq_rules": [],
+    "prereq_notes": "One of the following prerequisites is required: DSM 09 MW 9 Placement Exam, 500 or higher on MATH SAT, 22 or higher on ACT Assessment"
+  },
+
+  {
+    "id": "BIO 120",
+    "title": "General Biology",
+    "credits": 3,
+    "department_id": "MED",
+    "prereq_rules": [],
+    "prereq_notes": ""
+  },
+
+  {
+    "id": "BIO 120L",
+    "title": "General Biology Lab",
+    "credits": 1,
+    "department_id": "MED",
+    "prereq_rules": [],
+    "prereq_notes": ""
+  },
+
+  {
+    "id": "BIO 122",
+    "title": "General Biology II",
+    "credits": 3,
+    "department_id": "MED",
+    "prereq_rules": [],
+    "prereq_notes": ""
+  },
+
+  {
+    "id": "BIO 122L",
+    "title": "General Biology II Lab",
+    "credits": 1,
+    "department_id": "MED",
+    "prereq_rules": [],
+    "prereq_notes": ""
+  },
+
+
+  {
+    "id": "CHM 103",
+    "title": "General Chemistry I",
+    "credits": 3,
+    "department_id": "MED",
+    "prereq_rules": [["MTH 130"]],
+    "prereq_notes": ""
+  },
+
+  {
+    "id": "CHM 103L",
+    "title": "General Chemistry I Lab",
+    "credits": 1,
+    "department_id": "MED",
+    "prereq_rules": [],
+    "prereq_notes": ""
+  },
+
+  {
+    "id": "CHM 101",
+    "title": "Chemistry for Health Science I",
+    "credits": 3,
+    "department_id": "MED",
+    "prereq_rules": [],
+    "prereq_notes": ""
+  },
+
+  {
+    "id": "CHM 101L",
+    "title": "Chemistry for Health Science I Lab",
+    "credits": 1,
+    "department_id": "MED",
+    "prereq_rules": [],
+    "prereq_notes": ""
+  },
+
+  {
+    "id": "PHY 131",
+    "title": "General Physics",
+    "credits": 3,
+    "department_id": "MED",
+    "prereq_rules": [["MTH 130"]],
+    "prereq_notes": ""
+  },
+
+  {
+    "id": "PHY 131L",
+    "title": "General Physics Lab",
+    "credits": 1,
+    "department_id": "MED",
+    "prereq_rules": [],
+    "prereq_notes": ""
+  },
+  
+  {
+    "id": "PHY 132",
+    "title": "General Physics II",
+    "credits": 3,
+    "department_id": "MED",
+    "prereq_rules": [["PHY 131"], ["PHY 131L"], ["MTH 130"]],
+    "prereq_notes": ""
+  },
+
+  {
+    "id": "PHY 132L",
+    "title": "General Physics II Lab",
+    "credits": 1,
+    "department_id": "MED",
+    "prereq_rules": [],
+    "prereq_notes": ""
+  },
+
+  {
+    "id": "SPA 111",
+    "title": "Spanish Language and Culture I",
+    "credits": 3,
+    "department_id": "LIB",
+    "prereq_rules": [],
+    "prereq_notes": ""
+  },
+
+  {
+    "id": "SPA 112",
+    "title": "Spanish Language and Culture II",
+    "credits": 3,
+    "department_id": "LIB",
+    "prereq_rules": [["SPA 111"]],
+    "prereq_notes": ""
+  },
+
+  {
+    "id": "ITL 111",
+    "title": "Italian Language and Culture I",
+    "credits": 3,
+    "department_id": "LIB",
+    "prereq_rules": [],
+    "prereq_notes": ""
+  },
+
+  {
+    "id": "ITL 112",
+    "title": "Italian Language and Culture II",
+    "credits": 3,
+    "department_id": "LIB",
+    "prereq_rules": [["ITL 111"]],
+    "prereq_notes": ""
+  },
+
+  {
+    "id": "FRE 111",
+    "title": "French Language and Culture I",
+    "credits": 3,
+    "department_id": "LIB",
+    "prereq_rules": [],
+    "prereq_notes": ""
+  },
+
+  {
+    "id": "FRE 112",
+    "title": "French Language and Culture II",
+    "credits": 3,
+    "department_id": "LIB",
+    "prereq_rules": [["FRE 111"]],
+    "prereq_notes": ""
+  },
+
+  {
+    "id": "ART 101",
+    "title": "Introduction to Art",
+    "credits": 3,
+    "department_id": "LIB",
+    "prereq_rules": [],
+    "prereq_notes": ""
+  },
+
+  {
+    "id": "JOU 110",
+    "title": "Journalism, Social Media & You",
+    "credits": 3,
+    "department_id": "LIB",
+    "prereq_rules": [],
+    "prereq_notes": ""
+  },
+
+  {
+    "id": "MA 109",
+    "title": "Media Arts and Technology",
+    "credits": 3,
+    "department_id": "LIB",
+    "prereq_rules": [],
+    "prereq_notes": ""
+  },
+  
+  {
+    "id": "MUS 101",
+    "title": "Introduction to Musical Concepts",
+    "credits": 3,
+    "department_id": "LIB",
+    "prereq_rules": [],
+    "prereq_notes": ""
+  },
+
+  {
+    "id": "THE 111",
+    "title": "The Art of Theatre",
+    "credits": 3,
+    "department_id": "LIB",
+    "prereq_rules": [],
+    "prereq_notes": ""
+  },  
+
+  {
+    "id": "POL 101",
+    "title": "Intro to Political Science",
+    "credits": 3,
+    "department_id": "LIB",
+    "prereq_rules": [],
+    "prereq_notes": ""
+  },  
+
+  {
+    "id": "ECO 101",
+    "title": "Introduction to Macroeconomics",
+    "credits": 3,
+    "department_id": "LIB",
+    "prereq_rules": [],
+    "prereq_notes": ""
+  },  
+
+  {
+    "id": "ECO 102",
+    "title": "Introduction to Microeconomics",
+    "credits": 3,
+    "department_id": "LIB",
+    "prereq_rules": [],
+    "prereq_notes": ""
+  },  
+
+  {
+    "id": "ANT 100",
+    "title": "Physical Anthropology",
+    "credits": 3,
+    "department_id": "LIB",
+    "prereq_rules": [],
+    "prereq_notes": ""
+  },  
+  {
+    "id": "ANT 101",
+    "title": "Cultural Anthropology",
+    "credits": 3,
+    "department_id": "LIB",
+    "prereq_rules": [],
+    "prereq_notes": ""
+  },  
+
+  {
+    "id": "SOC 100",
+    "title": "Introduction to Sociology",
+    "credits": 3,
+    "department_id": "LIB",
+    "prereq_rules": [],
+    "prereq_notes": ""
+  },  
+
+  {
+    "id": "PSY 231",
+    "title": "Lifespan Developmental Psychology",
+    "credits": 3,
+    "department_id": "LIB",
+    "prereq_rules": [],
+    "prereq_notes": ""
+  }
+
+]

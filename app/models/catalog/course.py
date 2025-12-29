@@ -26,7 +26,8 @@ class Course(db.Model):
     
     # terms_offered = db.Column(db.JSON, nullable=False, default=list)
     
-    prereq_course_ids = db.Column(db.JSON, nullable=False, default=list)
+    prereq_rules = db.Column(db.JSON, nullable=False, default=list)
+    prereq_notes = db.Column(db.Text, nullable=True)
     
     
     department = db.relationship("Department", back_populates="courses")

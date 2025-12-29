@@ -3,6 +3,7 @@ from flask_login import login_required, current_user
 from . import v1_bp
 from .auth import auth_bp
 from app.models import StudentProfile
+from app.models.catalog import Campus, Major
 from app.models.student_profile import CourseConflictError
 from app.core import onboarding_required
 from app.core.extensions import db
@@ -28,7 +29,9 @@ def onboarding():
     profile = StudentProfile.query.filter_by(user_id=current_user.id).first()
     if profile and profile.onboarding_complete: 
         return redirect(url_for("v1.dashboard"))
-    return render_template("onboarding/onboarding.html")
+    campuses = Campus.query.order_by(Campus.name).all()
+    majors = Major.query.order_by(Major.name).all()
+    return render_template("onboarding/onboarding.html", campuses=campuses, majors=majors, profile=profile)
 
 
 @v1_bp.post("/onboarding")
@@ -57,10 +60,11 @@ def onboarding_post():
 
     expected_grad_year = None 
     
-    try: 
-        expected_grad_year = int(expected_grad_year_raw)
-    except ValueError:
-        errors.append("Expected graduation year must be a number.")
+    if expected_grad_year:
+        try: 
+            expected_grad_year = int(expected_grad_year_raw)
+        except ValueError:
+            errors.append("Expected graduation year must be a number.")
         
     courses_by_term = {"completed":[], "in_progress":[]}
     if courses_json_raw.strip():

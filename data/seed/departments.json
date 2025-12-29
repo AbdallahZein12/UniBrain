@@ -1,7 +1,27 @@
 [
     {
-        "id": "ENG",
-        "name": "Department of Engineering",
+        "id": "CS",
+        "name": "School of Computer Science",
+        "campus_id": "LIU_BKLN"
+    },
+    {
+        "id": "BUS",
+        "name": "School of Business",
+        "campus_id": "LIU_BKLN"
+    },
+    {
+        "id": "COM",
+        "name": "School of Communications",
+        "campus_id": "LIU_BKLN"
+    },
+    {
+        "id": "LIB",
+        "name": "School of Liberal Arts",
+        "campus_id": "LIU_BKLN"
+    },
+    {
+        "id": "MED",
+        "name": "School of Medicine",
         "campus_id": "LIU_BKLN"
     }
 ]

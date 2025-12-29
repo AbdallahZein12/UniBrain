@@ -269,6 +269,105 @@ input, select {
   color: #bfdbfe;
 }
 
+
+.term-card {
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(10, 15, 30, 0.45);
+  border-radius: 16px;
+  padding: 14px;
+  margin-bottom: 12px;
+}
+
+.term-head {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.term-input {
+  flex: 1;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.15);
+  background: rgba(10,15,30,.8);
+  color: white;
+}
+
+.term-remove {
+  background: transparent;
+  border: 1px solid rgba(255, 107, 107, 0.35);
+  color: #ffb3b3;
+  padding: 10px 12px;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.term-body {
+  margin-top: 12px;
+}
+
+.course-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.course-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.06);
+}
+
+.course-input {
+  width: 120px;
+  padding: 8px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(10,15,30,0.75);
+  color: white;
+  outline: none;
+}
+
+.course-input:focus {
+  border-color: rgba(125,240,255,0.35);
+}
+
+.chip-remove {
+  border: none;
+  background: rgba(255, 107, 107, 0.18);
+  color: #ffd0d0;
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.term-actions {
+  margin-top: 12px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.chip-add,
+.chip-add-multi {
+  background: transparent;
+  border: 1px dashed rgba(255,255,255,.28);
+  color: rgba(255,255,255,0.9);
+  padding: 10px 12px;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.chip-add:hover,
+.chip-add-multi:hover {
+  border-color: rgba(125,240,255,0.35);
+}
+
 @keyframes flashIn {
   from {
     opacity: 0;

@@ -5,7 +5,7 @@ from flask.cli import with_appcontext
 import click  
 
 from app.core import db
-from app.models.catalog import Campus, Major, Department 
+from app.models.catalog import Campus, Major, Department, Course
 
 
 def _load_json(rel_path:str):
@@ -41,9 +41,10 @@ def seed_command():
     campuses = _load_json("data/seed/campuses.json")
     majors = _load_json("data/seed/majors.json")
     departments = _load_json("data/seed/departments.json")
+    courses = _load_json("data/seed/courses.json")
     
-    created = {"campuses": 0, "majors": 0, "departments": 0}
-    updated = {"campuses": 0, "majors": 0, "departments": 0}
+    created = {"campuses": 0, "majors": 0, "departments": 0, "courses": 0}
+    updated = {"campuses": 0, "majors": 0, "departments": 0, "courses": 0}
     
     for c in campuses:
         row, is_new = _upsert(
@@ -70,6 +71,22 @@ def seed_command():
         updated["departments"] += int(not is_new)
         
     db.session.flush()
+    
+    for c in courses:
+        row, is_new = _upsert(
+            Course,
+            c["id"],
+            title=c.get("title"),
+            credits=c.get("credits"),
+            department_id=c.get("department_id"),
+            prereq_rules = c.get("prereq_rules"),
+            prereq_notes = c.get("prereq_notes")
+        )
+        
+        created["courses"] += int(is_new)
+        updated["courses"] += int(not is_new)
+    
+    db.session.flush()
         
     for m in majors: 
         row, is_new = _upsert(
@@ -91,4 +108,5 @@ def seed_command():
     click.echo("Seed complete!")
     click.echo(f"Campuses: created {created['campuses']}, updated {updated['campuses']}")
     click.echo(f"Majors:   created {created['majors']}, updated {updated['majors']}")
-    click.echo(f"Courses:  created {created['departments']}, updated {updated['departments']}")
+    click.echo(f"Departments:  created {created['departments']}, updated {updated['departments']}")
+    click.echo(f"Courses:  created {created['courses']}, updated {updated['courses']}")

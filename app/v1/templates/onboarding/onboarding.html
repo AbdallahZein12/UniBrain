@@ -5,7 +5,7 @@
 <div class="card">
 
   <div class="welcome">
-    <span class="wave">👋</span>
+    <span class="wave"></span>
     <div>
       <strong>
         Welcome{{ " " ~ current_user.email  }}!
@@ -20,7 +20,7 @@
   <h1>Student Profile</h1>
   <p class="subtitle">Let’s set up your academic profile.</p>
 
-  <form method="POST" class="onboarding-form" onsubmit="buildCoursesJson()", action="{{ url_for('v1.onboarding_post') }}">
+  <form method="POST" class="onboarding-form" onsubmit="buildCoursesJson()" action="{{ url_for('v1.onboarding_post') }}">
     <input type="hidden" name="next" value="{{ request.args.get('next','') }}">
 
     <!-- BASIC INFO -->
@@ -33,21 +33,31 @@
       <div>
         <label>Campus</label>
         <select name="campus_id" required>
-          <option value="LIU_BKLN">LIU Brooklyn</option>
+          {% for c in campuses %}
+            <option value="{{ c.id }}" {% if profile and profile.campus_id==c.id %}selected {% endif %}>
+              {{ c.name }}
+            </option>
+          {% endfor %}
+          <!-- <option value="LIU_BKLN">LIU Brooklyn</option> -->
         </select>
       </div>
 
       <div>
         <label>Major</label>
         <select name="major_id" required>
-          <option value="CS_BS">Computer Science (BS)</option>
+          {% for m in majors %} 
+            <option value="{{ m.id }}" {% if profile and profile.major_id==m.id %} selected{% endif %}>
+              {{ m.name }}
+            </option>
+          {% endfor %}
+          <!-- <option value="CS_BS">Computer Science (BS)</option> -->
         </select>
       </div>
     </div>
 
     <div class="section">
       <label>Expected Graduation Year</label>
-      <input type="number" name="expected_grad_year" min="2026" max="2035" required>
+      <input type="number" placeholder="2026" name="expected_grad_year" min="2026" max="2035" >
     </div>
 
     <!-- COURSES -->
