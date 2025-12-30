@@ -1,0 +1,12 @@
+<h1>Welcome {{ current_user.email }}</h1>
+
+<div style="margin-top: 16px;">
+  <a href="{{ url_for('v1.profile_edit_get') }}">
+    <button type="button">Edit Profile</button>
+  </a>
+</div>
+
+<form method="POST" action="{{ url_for('v1.auth.logout_post') }}" style="margin-top: 16px;">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <button type="submit">Log out</button>
+</form>

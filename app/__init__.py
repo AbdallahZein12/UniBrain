@@ -1,7 +1,7 @@
 from flask import Flask 
 from .core import Config
 from app.core.cli import seed_command, make_invite
-from .core import db, migrate, limiter
+from .core import db, migrate, limiter, csrf
 from dotenv import load_dotenv
 from flask_login import LoginManager
 from sqlalchemy import event
@@ -31,6 +31,7 @@ def create_app() -> Flask:
     db.init_app(app)
     migrate.init_app(app,db)
     limiter.init_app(app)
+    csrf.init_app(app)
     
     # import models so Alembic sees them 
     from . import models 

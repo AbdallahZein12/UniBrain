@@ -19,8 +19,9 @@ def auth_fail_redirect(source: str, default_endpoint: str):
 def login_page():
     return render_template("login.html")
 
-
 @auth_bp.post("/login")
+@limiter.limit("5 per 2 minutes")
+@limiter.limit("50 per day")
 def login_post(): 
     
     source = request.form.get("source", "page")
@@ -43,7 +44,12 @@ def login_post():
     
     login_user(user, remember=remember)
     flash("Welcome back!", "success")
-    return redirect(url_for("v1.onboarding"))
+
+    profile = user.student_profile 
+    if not profile or not profile.onboarding_complete:
+        return redirect(url_for("v1.onboarding"))    
+    
+    return redirect(url_for("v1.dashboard"))
 
 @auth_bp.get("/signup")
 def signup_page():
@@ -116,7 +122,13 @@ def signup_post():
     
         login_user(user, remember=remember)
         flash("Account created!", "success")
-        return redirect(url_for("v1.onboarding"))
+        
+        profile = user.student_profile 
+        if not profile or not profile.onboarding_complete:
+            return redirect(url_for("v1.onboarding"))    
+    
+        return redirect(url_for("v1.dashboard"))
+        
     
     except ValueError:
         flash("Invite code is invalid or expired!", "error")

@@ -52,6 +52,7 @@
           <a class="btn primary" href="{{ url_for('v1.onboarding') }}">Continue</a>
 
           <form method="POST" action="{{ url_for('v1.auth.logout_post') }}" style="display:inline;">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
             <button class="btn ghost" type="submit">Logout</button>
           </form>
         {% else %}
@@ -80,6 +81,7 @@
         <a class="btn primary w100" href="{{ url_for('v1.onboarding') }}">Continue</a>
 
         <form method="POST" action="{{ url_for('v1.auth.logout_post') }}" class="w100">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
           <button class="btn ghost w100" type="submit">Logout</button>
         </form>
       {% else %}
@@ -138,6 +140,8 @@
               method="POST"
               action="{{ url_for('v1.auth.login_post') }}"
               novalidate>
+
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
           <label class="field">
             <span>Email</span>
             <input
@@ -185,6 +189,8 @@
               method="POST"
               action="{{ url_for('v1.auth.signup_post') }}"
               novalidate>
+
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 
           <div class="grid-2">
             <label class="field">

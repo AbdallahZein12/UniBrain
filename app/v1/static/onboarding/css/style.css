@@ -336,6 +336,127 @@ input, select {
   border-color: rgba(125,240,255,0.35);
 }
 
+/* --- Onboarding action row --- */
+.form-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 18px;
+}
+
+/* results container spacing */
+.course-check-results {
+  margin-top: 14px;
+}
+
+/* --- Alert blocks --- */
+.ub-alert {
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 14px;
+  padding: 14px 14px;
+  backdrop-filter: blur(10px);
+}
+
+.ub-alert h3 {
+  margin: 0 0 6px 0;
+  font-size: 14px;
+  letter-spacing: 0.2px;
+}
+
+.ub-alert p {
+  margin: 0;
+  opacity: 0.9;
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+.ub-alert--success {
+  background: rgba(46, 204, 113, 0.10);
+  border-color: rgba(46, 204, 113, 0.25);
+}
+
+.ub-alert--warn {
+  background: rgba(241, 196, 15, 0.10);
+  border-color: rgba(241, 196, 15, 0.25);
+}
+
+.ub-alert--error {
+  background: rgba(231, 76, 60, 0.10);
+  border-color: rgba(231, 76, 60, 0.25);
+}
+
+/* --- Unknown list --- */
+.unknown-list {
+  margin-top: 10px;
+  display: grid;
+  gap: 10px;
+}
+
+.unknown-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 10px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.04);
+}
+
+.unknown-code {
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+}
+
+.unknown-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.suggestion-label {
+  font-size: 12px;
+  opacity: 0.9;
+}
+
+/* suggestion chips */
+.suggestion-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.suggest-btn {
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.92);
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: transform 120ms ease, background 120ms ease, border-color 120ms ease;
+}
+
+.suggest-btn:hover {
+  transform: translateY(-1px);
+  background: rgba(255,255,255,0.10);
+  border-color: rgba(255,255,255,0.22);
+}
+
+.suggest-btn:active {
+  transform: translateY(0px);
+}
+
+.muted {
+  opacity: 0.72;
+  font-size: 12px;
+}
+
+
 .chip-remove {
   border: none;
   background: rgba(255, 107, 107, 0.18);
@@ -362,6 +483,9 @@ input, select {
   border-radius: 12px;
   cursor: pointer;
 }
+
+
+
 
 .chip-add:hover,
 .chip-add-multi:hover {

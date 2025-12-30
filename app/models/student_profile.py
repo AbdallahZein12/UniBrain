@@ -1,10 +1,15 @@
 from app.core import db
 import uuid
 from sqlalchemy.sql import func 
-from sqlalchemy import event
+from sqlalchemy import event, select, inspect
 import re 
+from app.models.catalog import Course
+from difflib import get_close_matches
 
-LIU_KNOWN_COURSES: set[str] = set() # TODO: replace with LIU catalog set
+# LIU_KNOWN_COURSES: set[str] = set() # TODO: replace with LIU catalog set
+COURSE_SPLIT_RE = re.compile(r"^([A-Z]{2,4})\s*[-]?\s*(\d{3})([A-Z]?)$")
+
+
 
 def default_courses_by_term():
     return {"completed": [], "in_progress": []}
@@ -68,6 +73,8 @@ class StudentProfile(db.Model):
     
     courses_by_term = db.Column(db.JSON, nullable=False, default=default_courses_by_term)
     unknown_courses = db.Column(db.JSON, nullable=False, default=list)
+    unknown_course_suggestions = db.Column(db.JSON, nullable=True)
+    
     
     # completed_course_ids = db.Column(db.JSON, nullable=False, default=list)
     # in_progress_course_ids = db.Column(db.JSON, nullable=False, default=list)
@@ -82,13 +89,60 @@ class StudentProfile(db.Model):
    
     # HELPERS
    
+    @staticmethod
+    def _parse_course_id(code: str) -> tuple[str, int, str] | None:
+        """Parse canonical code like CS 201 or ENG 110C into ('CS', 201, '') or ('ENG', 110, 'C')"""
+        if not code:
+            return None 
+        m = COURSE_SPLIT_RE.match(code.replace(" ",""))
+        if not m: 
+            return None 
+        dept, num, suffix = m.group(1), int(m.group(2)), m.group(3) or ""
+        return dept, num, suffix
     
+    @staticmethod
+    def suggest_close_courses(unknown_code: str, known_courses: set[str], limit: int = 5) -> list[str]:
+        u = StudentProfile._norm_course(unknown_code)
+        if not u or not known_courses:
+            return []
+        
+        parsed = StudentProfile._parse_course_id(u)
+        if not parsed: 
+            # fallback fuzzy across all
+            return get_close_matches(u, sorted(known_courses), n=limit, cutoff=0.78)
+        
+        dept, num, suffix = parsed
+        
+        same_dept = [k for k in known_courses if k.startswith(dept + " ")]
+        if not same_dept: 
+            return get_close_matches(u, sorted(known_courses), n=limit, cutoff=0.78)
+        
+        def score(k: str) -> tuple[int,int]:
+            pk = StudentProfile._parse_course_id(k)
+            if not pk: 
+                return (10**9, 10**9)
+            _, k_num, k_suf = pk
+            return (abs(k_num - num), 0 if k_suf == suffix else 1)
+        
+        return sorted(same_dept, key=score)[:limit]
+        
     @staticmethod
     def _norm_course(course: str) -> str | None: 
         if not course:
             return None 
-        c = course.strip().upper() 
-        return c or None 
+        
+        raw = course.strip().upper()
+        
+        raw = re.sub(r"\s+", " ", raw)
+        
+        compact = raw.replace(" ", "").replace("-", "")
+        
+        # "CS201" -> "CS 201", "CS-201" -> "CS 201"
+        m = COURSE_SPLIT_RE.match(compact)
+        if m:
+            return f"{m.group(1)} {m.group(2)}{m.group(3)}"
+         
+        return raw or None 
     
     @staticmethod 
     def _norm_term(term: str) -> str: 
@@ -162,6 +216,7 @@ class StudentProfile(db.Model):
         return completed & inprog 
     
     def validate_courses_by_term(self, known_courses: set[str]) -> list[str]: 
+        suggestions: dict[str, list[str]] = {}
         """
         Hard Validations:
         - Term format
@@ -195,6 +250,8 @@ class StudentProfile(db.Model):
                     
                     if known_courses and nc not in known_courses:
                         unknown.add(nc)
+                        suggestions[nc] = StudentProfile.suggest_close_courses(nc, known_courses=known_courses, limit=5)
+                        
                         
                     normed.append(nc)
                 
@@ -204,6 +261,7 @@ class StudentProfile(db.Model):
                     )
                     
         self.unknown_courses = sorted(unknown)
+        self.unknown_course_suggestions = suggestions
         return self.unknown_courses
             
         
@@ -263,8 +321,24 @@ class TermConflictError(ValueError):
 def _student_profile_validate(mapper, connection, target: StudentProfile):
     target.normalize_courses_by_term()
     
+    state = inspect(target)
+    
+    
+    # Only run course recognition when courses_by_term changed
+    if state.persistent and not state.attrs.courses_by_term.history.has_changes():
+        return
+    
+    known_courses = {
+        target._norm_course(cid)
+        # cid.strip().upper()
+        for cid in connection.execute(select(Course.id)).scalars().all()
+        if cid
+    }
+    
+    known_courses.discard(None)
+    
     # hard validation 
-    target.validate_courses_by_term(LIU_KNOWN_COURSES)
+    target.validate_courses_by_term(known_courses=known_courses)
     
     # hard validation
     course_conflicts = target.find_course_conflicts()

@@ -11,22 +11,43 @@
         Welcome{{ " " ~ current_user.email  }}!
       </strong>
       <p class="welcome-sub">
-        We’re happy to have you — let’s finish setting up your academic profile.
+        {% if edit_mode %}
+          Let's get your profile updated.
+        {% else %}
+          We’re happy to have you — let’s finish setting up your academic profile.
+        {% endif %}
       </p>
     </div>
   </div>
 
 
-  <h1>Student Profile</h1>
+  <h1>
+    {% if edit_mode %}
+      Edit Profile
+    {% else %}
+      Student Profile
+    {% endif %}
+  </h1>
   <p class="subtitle">Let’s set up your academic profile.</p>
 
-  <form method="POST" class="onboarding-form" onsubmit="buildCoursesJson()" action="{{ url_for('v1.onboarding_post') }}">
-    <input type="hidden" name="next" value="{{ request.args.get('next','') }}">
 
+  <form method="POST"
+      class="onboarding-form"
+      onsubmit="buildCoursesJson(); return true;"
+      action="{% if edit_mode %}
+                {{ url_for('v1.profile_edit_post') }}
+              {% else %}
+                {{ url_for('v1.onboarding_post') }}
+              {% endif %}">
+  <!-- <form method="POST" class="onboarding-form" onsubmit="buildCoursesJson(); return true;" action="{{ url_for('v1.onboarding_post') }}"> -->
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    
+    <input type="hidden" name="next" value="{{ request.args.get('next','') }}">
+    
     <!-- BASIC INFO -->
     <div class="section">
       <label>Full Name</label>
-      <input type="text" name="full_name" placeholder="Jane Doe" required>
+      <input type="text" name="full_name" placeholder="Jane Doe" value="{{ profile.full_name if profile and profile.full_name else '' }}" required>
     </div>
 
     <div class="section grid">
@@ -57,7 +78,7 @@
 
     <div class="section">
       <label>Expected Graduation Year</label>
-      <input type="number" placeholder="2026" name="expected_grad_year" min="2026" max="2035" >
+      <input type="number" placeholder="2026" name="expected_grad_year" value="{{ profile.expected_grad_year if profile and profile.expected_grad_year else '' }}" min="2026" max="2035" >
     </div>
 
     <!-- COURSES -->
@@ -78,13 +99,28 @@
     </div>
 
     <input type="hidden" name="courses_by_term_json" id="courses-json">
+    
+    <div class="form-actions">
+      <button type="button" class="secondary" id="check-courses-btn">
+        Check Courses
+      </button>
 
-    <button type="submit" class="primary">
-      Save Profile
-    </button>
+      <button type="submit" class="primary">
+        {% if edit_mode %}
+          Save Changes
+        {% else %}
+          Save Profile
+        {% endif %}
+      </button>
+    </div>
+
+    <div id="course-check-results" class="course-check-results" aria-live="polite"></div>
 
   </form>
 </div>
-
+<script>
+  window.__PROFILE_COURSES__ = {{ (profile.courses_by_term if profile and profile.courses_by_term else {"completed": [], "in_progress": []}) | tojson }};
+  window.__VALIDATE_COURSES_URL__ = "{{ url_for('v1.onboarding_validate_courses') }}";
+</script>
 <script src="{{ url_for('v1.static', filename='onboarding/js/onboarding.js') }}"></script>
 {% endblock %}
