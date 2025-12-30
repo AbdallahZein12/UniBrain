@@ -285,6 +285,18 @@ http://localhost:5000
 
 ![Models Diagram](./docs/design/models_v1.1.jpg)
 
+**12/30/2025**: 
+- The onboarding section is complete!
+- Added seed data for campuses, courses, majors and departments 
+- Onboarding page for new users 
+- Edit profile for existing 
+- Course misspelling suggestions using ranking 
+- CRSF protection 
+- Enhanced UX
+- Next stop --> Dashboard page and chatting interface 
+
+![Models Diagram](./docs/design/models_v1.2.jpg)
+
 ---
 
 STATUS:
