@@ -1,0 +1,59 @@
+<aside class="dash-sidebar" aria-label="Sidebar">
+  <div class="sidebar-header">
+    <a class="brand" href="{{ url_for('v1.home') }}">
+      <img class="brand-logo" src="{{ url_for('v1.static', filename='dashboard/img/logo.svg') }}" alt="UniBrain logo">
+      <div class="brand-text">
+        <div class="brand-name">UniBrain</div>
+        <div class="brand-sub">Student Dashboard</div>
+      </div>
+    </a>
+
+    <button class="btn btn-primary btn-newchat" type="button" id="newChatBtn">
+      <span class="btn-dot"></span>
+      New chat
+    </button>
+  </div>
+
+  <div class="sidebar-section">
+    <div class="sidebar-section-title">
+      Sessions
+      <span class="sidebar-badge" id="sessionCount">3</span>
+    </div>
+
+    <div class="sidebar-list" id="sessionList" role="list">
+      <!-- Dummy sessions for design. Replace with Jinja loop later. -->
+      <a class="session-item is-active" href="#" role="listitem">
+        <div class="session-title">Graduation check</div>
+        <div class="session-meta">Updated 2m ago</div>
+      </a>
+
+      <a class="session-item" href="#" role="listitem">
+        <div class="session-title">Next semester plan</div>
+        <div class="session-meta">Updated yesterday</div>
+      </a>
+
+      <a class="session-item" href="#" role="listitem">
+        <div class="session-title">Core requirements</div>
+        <div class="session-meta">Updated Dec 20</div>
+      </a>
+    </div>
+  </div>
+
+  <div class="sidebar-footer">
+    <a class="btn btn-ghost w-full" href="{{ url_for('v1.profile_edit_get') }}">
+      Edit profile
+    </a>
+
+    <form method="POST" action="/v1/auth/logout" class="w-full">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <button type="submit" class="btn btn-ghost w-full danger">
+        Log out
+      </button>
+    </form>
+
+    <div class="sidebar-footnote">
+      <span class="dot"></span>
+      FERPA aligned by design
+    </div>
+  </div>
+</aside>

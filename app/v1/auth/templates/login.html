@@ -13,6 +13,7 @@
 
   <div class="neo-stage" style="height: auto; padding: 18px; border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 0;">
     <form method="post" action="{{ url_for('v1.auth.login_page') }}" style="display: grid; gap: 12px;">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
       <label class="field">
         <span>Email</span>
         <input name="email" type="email" placeholder="you@liu.edu" required autocomplete="email">

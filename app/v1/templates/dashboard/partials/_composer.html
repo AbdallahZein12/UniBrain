@@ -1,0 +1,23 @@
+<form class="composer" method="POST" action="#">
+ 
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+  <div class="composer-box">
+    <textarea
+      class="composer-input"
+      name="message"
+      id="composerInput"
+      rows="1"
+      placeholder="Ask UniBrain… (Shift + Enter for new line)"
+      autocomplete="off"></textarea>
+
+    <button class="btn btn-primary btn-send" type="submit" id="sendBtn">
+      Send
+      <span class="arrow">↵</span>
+    </button>
+  </div>
+
+  <div class="composer-hint">
+    UniBrain explains outcomes computed from your profile and the university ontology.
+  </div>
+</form>

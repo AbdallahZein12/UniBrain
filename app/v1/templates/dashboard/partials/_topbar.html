@@ -1,0 +1,27 @@
+<div class="topbar-left">
+  <div class="topbar-title">
+    Welcome, <span class="accent">{% if current_user.student_profile.full_name %}
+          {{ current_user.student_profile.full_name }}
+        {% else %}
+          {{ current_user.student_profile.email }}
+        {% endif %}</span>
+  </div>
+
+  <div class="topbar-sub">
+    <span class="muted">Campus:</span> <span>LIU Brooklyn</span>
+    <span class="sep">•</span>
+    <span class="muted">Major:</span> <span>Computer Science BS</span>
+  </div>
+
+  <div class="pill-row">
+    <span class="pill ok">Profile complete</span>
+    <span class="pill ok">Courses entered</span>
+    <span class="pill">Last updated: Today</span>
+  </div>
+</div>
+
+<div class="topbar-right">
+  <a class="btn btn-secondary" href="{{ url_for('v1.profile_edit_get') }}">
+    Edit profile
+  </a>
+</div>

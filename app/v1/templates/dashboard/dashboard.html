@@ -1,4 +1,8 @@
-<h1>Welcome {{ current_user.email }}</h1>
+<h1>Welcome  {% if current_user.student_profile.full_name %}
+          {{ current_user.student_profile.full_name }}
+        {% else %}
+          {{ current_user.student_profile.email }}
+        {% endif %}</h1>
 
 <div style="margin-top: 16px;">
   <a href="{{ url_for('v1.profile_edit_get') }}">

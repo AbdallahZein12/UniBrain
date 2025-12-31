@@ -1,0 +1,13 @@
+{% extends "dashboard/base.html" %}
+
+{% block title %}UniBrain | Chat{% endblock %}
+
+{% block content %}
+  <div class="panel panel-chat">
+    {% include "dashboard/partials/_messages.html" %}
+
+    <div class="composer-wrap">
+      {% include "dashboard/partials/_composer.html" %}
+    </div>
+  </div>
+{% endblock %}

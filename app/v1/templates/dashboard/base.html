@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{% block title %}UniBrain | Dashboard{% endblock %}</title>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;500;600&display=swap" rel="stylesheet">
+
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="icon" href="{{ url_for('v1.static', filename='dashboard/img/logo.svg') }}" type="image/svg+xml">
+
+  <link rel="stylesheet" href="{{ url_for('v1.static', filename='dashboard/css/dashboard.css') }}">
+  <script defer src="{{ url_for('v1.static', filename='dashboard/js/dashboard.js') }}"></script>
+</head>
+
+<body class="dash">
+  <div class="dash-shell">
+    {% include "dashboard/partials/_sidebar.html" %}
+
+    <main class="dash-main" role="main">
+      <div class="fade-in">
+        <header class="dash-topbar">
+          {% block topbar %}
+            {% include "dashboard/partials/_topbar.html" %}
+          {% endblock %}
+        </header>
+
+        {% block progress %}
+          {% include "dashboard/partials/_progress_card.html" %}
+        {% endblock %}
+
+        <section class="dash-content">
+          {% block content %}{% endblock %}
+        </section>
+
+        <footer class="dash-footer">
+          {% block footer %}
+            {% include "dashboard/partials/_footer.html" %}
+          {% endblock %}
+        </footer>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

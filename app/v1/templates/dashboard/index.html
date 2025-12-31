@@ -1,0 +1,40 @@
+{% extends "dashboard/base.html" %}
+
+{% block title %}UniBrain | Dashboard{% endblock %}
+
+{% block content %}
+  <div class="panel">
+    <div class="panel-hero">
+      <div class="hero-title">What can I help you with?</div>
+      <div class="hero-sub">
+        Ask UniBrain anything about your requirements, graduation plan, and course roadmap.
+        UniBrain computes outcomes deterministically and explains them clearly.
+      </div>
+    </div>
+
+    <div class="grid-3">
+      <button class="card card-action" type="button"
+              data-suggest="What requirements do I have left for my major?">
+        <div class="card-title">Requirements remaining</div>
+        <div class="card-sub">See what’s satisfied and what’s missing.</div>
+      </button>
+
+      <button class="card card-action" type="button"
+              data-suggest="Can I graduate by my expected graduation date based on my completed and in progress courses?">
+        <div class="card-title">Graduation check</div>
+        <div class="card-sub">Get a quick deterministic audit.</div>
+      </button>
+
+      <button class="card card-action" type="button"
+              data-suggest="What should I take next semester to stay on track?">
+        <div class="card-title">Next semester plan</div>
+        <div class="card-sub">A plan based on your profile and requirements.</div>
+      </button>
+    </div>
+
+    <div class="spacer"></div>
+
+    <!-- Composer (same one used in chat page) -->
+    {% include "dashboard/partials/_composer.html" %}
+  </div>
+{% endblock %}

@@ -245,4 +245,4 @@ def profile_edit_post():
 @login_required
 @onboarding_required
 def dashboard():
-    return render_template("dashboard/dashboard.html")
+    return render_template("dashboard/index.html")
