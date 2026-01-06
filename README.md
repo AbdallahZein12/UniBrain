@@ -297,6 +297,17 @@ http://localhost:5000
 
 ![Models Diagram](./docs/design/models_v1.2.jpg)
 
+**1/5/2026**: 
+- Completed ontology models
+- Created migration for all completed models  
+- Updated all models UML diagram
+- Created seed for all data sets (CS BS major at LIU Brooklyn)
+- Dashboard more dynamic 
+- Enhanced UX
+- Continuing --> Dashboard page and chatting interface 
+
+![Models Diagram](./docs/design/models_v1.3.jpg)
+
 ---
 
 STATUS:
