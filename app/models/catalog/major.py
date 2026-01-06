@@ -1,6 +1,7 @@
 from app.core.extensions import db
-from sqlalchemy.sql import func 
-
+from sqlalchemy.sql import func
+from sqlalchemy import Enum
+from app.models.enums import Degree
 
 class Major(db.Model): 
     __tablename__ = "majors"
@@ -12,7 +13,13 @@ class Major(db.Model):
     id = db.Column(db.String(64), primary_key=True)
     
     name = db.Column(db.String(250), nullable=False)
-    degree = db.Column(db.String(120), nullable=False)
+    
+    
+    # degree = db.Column(db.String(120), nullable=False)
+    degree = db.Column(
+        Enum(Degree, name="degree_enum"),
+        nullable=False
+    )
     
     department_id = db.Column(
         db.String(64), 

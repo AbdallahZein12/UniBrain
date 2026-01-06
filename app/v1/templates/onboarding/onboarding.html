@@ -8,7 +8,11 @@
     <span class="wave"></span>
     <div>
       <strong>
-        Welcome{{ " " ~ current_user.email  }}!
+        {% if current_user.student_profile and current_user.student_profile.full_name %}
+          Welcome{{ " " ~ current_user.student_profile.full_name  }}!
+        {% else %}
+          Welcome{{ " " ~ current_user.email  }}!
+        {% endif %}
       </strong>
       <p class="welcome-sub">
         {% if edit_mode %}
@@ -117,7 +121,37 @@
     <div id="course-check-results" class="course-check-results" aria-live="polite"></div>
 
   </form>
+  <hr class="divider">
+
+  <div class="danger-zone">
+    <h3>Delete Account</h3>
+    <p class="danger-text">
+      This will permanently delete your UniBrain account and student profile. This action cannot be undone.
+    </p>
+
+    <form method="POST" action="{{ url_for('v1.delete_account_post') }}"
+          onsubmit="return confirmDeleteAccount();">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      {# send them back to the page they’re currently on #}
+      <input type="hidden" name="next" value="{{ request.path }}">
+      <button type="submit" class="danger">
+        Delete account
+      </button>
+    </form>
+  </div>
 </div>
+
+<script>
+  function confirmDeleteAccount() {
+    const email = "{{ current_user.email }}";
+    const msg =
+      `Delete your UniBrain account (${email})?\n\n` +
+      `This will permanently delete your account AND your profile.\n` +
+      `This cannot be undone.\n\n` +
+      `Press OK to delete, or Cancel to keep your account.`;
+    return window.confirm(msg);
+  }
+</script>
 <script>
   window.__PROFILE_COURSES__ = {{ (profile.courses_by_term if profile and profile.courses_by_term else {"completed": [], "in_progress": []}) | tojson }};
   window.__VALIDATE_COURSES_URL__ = "{{ url_for('v1.onboarding_validate_courses') }}";

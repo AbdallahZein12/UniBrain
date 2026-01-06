@@ -1,0 +1,338 @@
+[
+  {
+    "id": "8c0d2255-90f5-4ef6-a3ae-af9d3fc36dc1",
+    "requirement_slot_id": "LIU_BKLN__CS_BS__RG__MAJOR_REQUIRED__RS__INTRO_CS",
+    "bundle_id": null,
+    "course_id": "CS 201",
+    "note": null
+  },
+  {
+    "id": "3a77ca43-0be2-46da-b159-587c8bf77915",
+    "requirement_slot_id": "LIU_BKLN__CS_BS__RG__MAJOR_REQUIRED__RS__PROGRAMMING_I",
+    "bundle_id": null,
+    "course_id": "CS 202",
+    "note": null
+  },
+  {
+    "id": "fd534326-949e-4ddf-9067-e9bf867dfad9",
+    "requirement_slot_id": "LIU_BKLN__CS_BS__RG__MAJOR_REQUIRED__RS__PROGRAMMING_II",
+    "bundle_id": null,
+    "course_id": "CS 217",
+    "note": null
+  },
+  {
+    "id": "f4e8ef2e-0880-4412-8a7e-b386dfe39423",
+    "requirement_slot_id": "LIU_BKLN__CS_BS__RG__MAJOR_REQUIRED__RS__COMPUTER_ARCH",
+    "bundle_id": null,
+    "course_id": "CS 218",
+    "note": null
+  },
+  {
+    "id": "b91fb618-49fa-4a45-950e-81600bf19112",
+    "requirement_slot_id": "LIU_BKLN__CS_BS__RG__MAJOR_REQUIRED__RS__DSA",
+    "bundle_id": null,
+    "course_id": "CS 230",
+    "note": null
+  },
+  {
+    "id": "bd99b45d-c725-438e-8aee-082964102948",
+    "requirement_slot_id": "LIU_BKLN__CS_BS__RG__MAJOR_REQUIRED__RS__DISCRETE_STRUC",
+    "bundle_id": null,
+    "course_id": "CS 232",
+    "note": null
+  },
+  {
+    "id": "79cf2162-8436-40d6-a643-89ccd79b6539",
+    "requirement_slot_id": "LIU_BKLN__CS_BS__RG__MAJOR_REQUIRED__RS__DBM",
+    "bundle_id": null,
+    "course_id": "CS 248",
+    "note": null
+  },
+  {
+    "id": "3d972410-6a89-4af5-ae48-ab740eefa333",
+    "requirement_slot_id": "LIU_BKLN__CS_BS__RG__MAJOR_REQUIRED__RS__OS",
+    "bundle_id": null,
+    "course_id": "CS 250",
+    "note": null
+  },
+  {
+    "id": "bec6c742-2d17-4d92-9859-75d3d6da282d",
+    "requirement_slot_id": "LIU_BKLN__CS_BS__RG__MAJOR_REQUIRED__RS__NETWORKING",
+    "bundle_id": null,
+    "course_id": "CS 254",
+    "note": null
+  },
+  {
+    "id": "9eeb9467-f175-4cea-ac0e-e8025cffc667",
+    "requirement_slot_id": "LIU_BKLN__CS_BS__RG__MAJOR_REQUIRED__RS__SWE",
+    "bundle_id": null,
+    "course_id": "CS 264",
+    "note": null
+  },
+  {
+    "id": "4802ca6a-3a30-4d20-a865-422c2fc3549b",
+    "requirement_slot_id": "LIU_BKLN__CS_BS__RG__MAJOR_REQUIRED__RS__MAN_COM",
+    "bundle_id": null,
+    "course_id": "MAN 231",
+    "note": null
+  },
+  {
+    "id": "1edd7171-d250-4f2e-831a-c156d4393647",
+    "requirement_slot_id": "LIU_BKLN__CS_BS__RG__MAJOR_REQUIRED__RS__BUS_STAT",
+    "bundle_id": null,
+    "course_id": "BUS 228",
+    "note": null
+  },
+  {
+    "id": "b14076e5-5dc4-4506-a16d-9b1c95edd284",
+    "requirement_slot_id": "LIU_BKLN__CS_BS__RG__CORE__RS__ENGLISH_COMP",
+    "bundle_id": null,
+    "course_id": "ENG 110",
+    "note": null
+  },
+  {
+    "id": "0a439fa4-9060-46ad-b5db-3e30bb7d254e",
+    "requirement_slot_id": "LIU_BKLN__CS_BS__RG__CORE__RS__ENGLISH_COMP",
+    "bundle_id": null,
+    "course_id": "ENG 110C",
+    "note": null
+  },
+  {
+    "id": "d658ba6a-2993-4244-9194-b419153744e0",
+    "requirement_slot_id": "LIU_BKLN__CS_BS__RG__CORE__RS__ENGLISH_LIT",
+    "bundle_id": null,
+    "course_id": "ENG 112",
+    "note": null
+  },
+  {
+    "id": "15e5fc25-32f5-41f8-8eea-1d08226edf53",
+    "requirement_slot_id": "LIU_BKLN__CS_BS__RG__CORE__RS__ENGLISH_LIT",
+    "bundle_id": null,
+    "course_id": "ENG 113",
+    "note": null
+  },
+  {
+    "id": "90296934-0d5d-47da-a1ad-d39f844c890b",
+    "requirement_slot_id": "LIU_BKLN__CS_BS__RG__CORE__RS__ENGLISH_LIT",
+    "bundle_id": null,
+    "course_id": "ENG 114",
+    "note": null
+  },
+  {
+    "id": "612ea158-3bd8-45bf-ba73-be500bd03212",
+    "requirement_slot_id": "LIU_BKLN__CS_BS__RG__CORE__RS__ENGLISH_LIT",
+    "bundle_id": null,
+    "course_id": "ENG 115",
+    "note": null
+  },
+  {
+    "id": "2bce1150-d953-4a65-8d20-467564e1ea13",
+    "requirement_slot_id": "LIU_BKLN__CS_BS__RG__CORE__RS__HISTORY",
+    "bundle_id": null,
+    "course_id": "HIS 101",
+    "note": null
+  },
+  {
+    "id": "68f6c614-19a1-4a7c-b536-81e404e3355b",
+    "requirement_slot_id": "LIU_BKLN__CS_BS__RG__CORE__RS__HISTORY",
+    "bundle_id": null,
+    "course_id": "HIS 102",
+    "note": null
+  },
+  {
+    "id": "99486eec-a064-4adb-8fdd-704f7d87dd3f",
+    "requirement_slot_id": "LIU_BKLN__CS_BS__RG__CORE__RS__PHILOSOPHY",
+    "bundle_id": null,
+    "course_id": "PHI 100",
+    "note": null
+  },
+  {
+    "id": "34eaea4a-d176-4e10-aab3-b232f49fb7c7",
+    "requirement_slot_id": "LIU_BKLN__CS_BS__RG__CORE__RS__SPEECH",
+    "bundle_id": null,
+    "course_id": "SPE 100",
+    "note": null
+  },
+  {
+    "id": "1d5ed5f1-861f-46e1-a8ce-e965a9a34668",
+    "requirement_slot_id": "LIU_BKLN__CS_BS__RG__CORE__RS__MATH",
+    "bundle_id": null,
+    "course_id": "MTH 105",
+    "note": null
+  },
+  {
+    "id": "30702c79-f804-4749-a0cd-ac6a132249b7",
+    "requirement_slot_id": "LIU_BKLN__CS_BS__RG__CORE__RS__MATH",
+    "bundle_id": null,
+    "course_id": "MTH 106",
+    "note": null
+  },
+  {
+    "id": "9a01e022-1949-4658-a2a9-3af6d86726e4",
+    "requirement_slot_id": "LIU_BKLN__CS_BS__RG__CORE__RS__FOREIGN_LANG",
+    "bundle_id": null,
+    "course_id": "SPA 111",
+    "note": null
+  },
+  {
+    "id": "a6e0cd17-8ee1-4cee-b14b-fff6aace920d",
+    "requirement_slot_id": "LIU_BKLN__CS_BS__RG__CORE__RS__FOREIGN_LANG",
+    "bundle_id": null,
+    "course_id": "ITL 111",
+    "note": null
+  },
+  {
+    "id": "d15a5625-c2be-4283-b7f5-49fbb502449d",
+    "requirement_slot_id": "LIU_BKLN__CS_BS__RG__CORE__RS__FOREIGN_LANG",
+    "bundle_id": null,
+    "course_id": "FRE 111",
+    "note": null
+  },
+  {
+    "id": "362fd990-ac70-4c1c-8444-57f55e13ea58",
+    "requirement_slot_id": "LIU_BKLN__CS_BS__RG__CORE__RS__VISUAL_ARTS",
+    "bundle_id": null,
+    "course_id": "ART 101",
+    "note": null
+  },
+  {
+    "id": "405c4c2b-4a0b-4d08-84f9-ad95435b48b6",
+    "requirement_slot_id": "LIU_BKLN__CS_BS__RG__CORE__RS__VISUAL_ARTS",
+    "bundle_id": null,
+    "course_id": "JOU 110",
+    "note": null
+  },
+  {
+    "id": "ed9d7eb7-6996-4ded-a77e-5e0a22c3109c",
+    "requirement_slot_id": "LIU_BKLN__CS_BS__RG__CORE__RS__VISUAL_ARTS",
+    "bundle_id": null,
+    "course_id": "MA 109",
+    "note": null
+  },
+  {
+    "id": "8b370631-2ca8-4b1c-914e-821f3c6230b3",
+    "requirement_slot_id": "LIU_BKLN__CS_BS__RG__CORE__RS__VISUAL_ARTS",
+    "bundle_id": null,
+    "course_id": "MUS 101",
+    "note": null
+  },
+  {
+    "id": "b3dd2606-0d17-43a7-8254-766afbb3f0b4",
+    "requirement_slot_id": "LIU_BKLN__CS_BS__RG__CORE__RS__VISUAL_ARTS",
+    "bundle_id": null,
+    "course_id": "THE 111",
+    "note": null
+  },
+  {
+    "id": "ffad6d93-36ca-4a1d-8993-257abc07f061",
+    "requirement_slot_id": "LIU_BKLN__CS_BS__RG__CORE__RS__SOC_SCIENCES_I",
+    "bundle_id": null,
+    "course_id": "POL 101",
+    "note": null
+  },
+  {
+    "id": "acc09283-845b-4b3c-9350-ef9aaf1a9072",
+    "requirement_slot_id": "LIU_BKLN__CS_BS__RG__CORE__RS__SOC_SCIENCES_I",
+    "bundle_id": null,
+    "course_id": "ECO 101",
+    "note": null
+  },
+  {
+    "id": "da6162e9-e4fe-4b5a-90e6-3a02ac0a1118",
+    "requirement_slot_id": "LIU_BKLN__CS_BS__RG__CORE__RS__SOC_SCIENCES_I",
+    "bundle_id": null,
+    "course_id": "ANT 100",
+    "note": null
+  },
+  {
+    "id": "6603c752-1ff4-4862-9c0a-cc7bcfffd336",
+    "requirement_slot_id": "LIU_BKLN__CS_BS__RG__CORE__RS__SOC_SCIENCES_I",
+    "bundle_id": null,
+    "course_id": "SOC 100",
+    "note": null
+  },
+  {
+    "id": "4cd4e752-d624-4cf5-b453-0b0c16057adf",
+    "requirement_slot_id": "LIU_BKLN__CS_BS__RG__CORE__RS__SOC_SCIENCES_I",
+    "bundle_id": null,
+    "course_id": "PSY 231",
+    "note": null
+  },
+  {
+    "id": "e79acd59-b6e9-4b93-a169-7648183da91f",
+    "requirement_slot_id": "LIU_BKLN__CS_BS__RG__CORE__RS__SOC_SCIENCES_I",
+    "bundle_id": null,
+    "course_id": "HIS 101",
+    "note": null
+  },
+  {
+    "id": "af206a1e-f285-49bd-a770-2a1afb57a48f",
+    "requirement_slot_id": "LIU_BKLN__CS_BS__RG__CORE__RS__SOC_SCIENCES_II",
+    "bundle_id": null,
+    "course_id": "POL 101",
+    "note": null
+  },
+  {
+    "id": "db51680b-9df4-41c2-b657-df411a8c1c7f",
+    "requirement_slot_id": "LIU_BKLN__CS_BS__RG__CORE__RS__SOC_SCIENCES_II",
+    "bundle_id": null,
+    "course_id": "ECO 101",
+    "note": null
+  },
+  {
+    "id": "40e108a4-c862-4c64-9fa5-3c583569f945",
+    "requirement_slot_id": "LIU_BKLN__CS_BS__RG__CORE__RS__SOC_SCIENCES_II",
+    "bundle_id": null,
+    "course_id": "ANT 100",
+    "note": null
+  },
+  {
+    "id": "cc02b99b-ab91-4a19-8788-a29dac6622fe",
+    "requirement_slot_id": "LIU_BKLN__CS_BS__RG__CORE__RS__SOC_SCIENCES_II",
+    "bundle_id": null,
+    "course_id": "SOC 100",
+    "note": null
+  },
+  {
+    "id": "ac983ab4-4843-456e-89f5-66e1c63ceea7",
+    "requirement_slot_id": "LIU_BKLN__CS_BS__RG__CORE__RS__SOC_SCIENCES_II",
+    "bundle_id": null,
+    "course_id": "PSY 231",
+    "note": null
+  },
+  {
+    "id": "2aaa63c8-ac41-4441-b8c0-03a8f67279c6",
+    "requirement_slot_id": "LIU_BKLN__CS_BS__RG__CORE__RS__SOC_SCIENCES_II",
+    "bundle_id": null,
+    "course_id": "HIS 101",
+    "note": null
+  },
+  {
+    "id": "34196c4a-0c0c-4443-8c5a-7d42fc5dbbfc",
+    "requirement_slot_id": null,
+    "bundle_id": "LIU_BKLN__CS_BS__RS__SCIENCE_BIO_120",
+    "course_id": "BIO 120",
+    "note": null
+  },
+  {
+    "id": "af8a9e3d-4ce9-42d3-adc1-ab23c3015fe1",
+    "requirement_slot_id": null,
+    "bundle_id": "LIU_BKLN__CS_BS__RS__SCIENCE_BIO_120",
+    "course_id": "BIO 120L",
+    "note": null
+  },
+  {
+    "id": "9ba52210-545e-46ff-9f95-614fde3e4caf",
+    "requirement_slot_id": null,
+    "bundle_id": "LIU_BKLN__CS_BS__RS__SCIENCE_BIO_122",
+    "course_id": "BIO 122",
+    "note": null
+  },
+  {
+    "id": "e696e1f9-6a43-4254-88f2-46837eba35f3",
+    "requirement_slot_id": null,
+    "bundle_id": "LIU_BKLN__CS_BS__RS__SCIENCE_BIO_122",
+    "course_id": "BIO 122L",
+    "note": null
+  }
+]

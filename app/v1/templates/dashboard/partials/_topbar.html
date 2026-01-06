@@ -14,9 +14,18 @@
   </div>
 
   <div class="pill-row">
+    {%if current_user.student_profile.profile_complete %}
     <span class="pill ok">Profile complete</span>
+    {% else %}
+    <span class="pill notok">Profile incomplete</span>
+    {% endif %}
+
+    {%if current_user.student_profile.courses_filled %}
     <span class="pill ok">Courses entered</span>
-    <span class="pill">Last updated: Today</span>
+    {% else %}
+    <span class="pill notok">Courses missing</span>
+    {% endif %}
+    <span class="pill">Last updated: {{ current_user.student_profile.last_updated_at_formatted }}</span>
   </div>
 </div>
 

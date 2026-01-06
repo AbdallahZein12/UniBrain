@@ -1,0 +1,33 @@
+[
+    {
+        "id":"LIU_BKLN__CS_BS__RS__SCIENCE_BIO_120",
+        "requirement_slot_id":"LIU_BKLN__CS_BS__RG__CORE__RS__SCIENCE",
+        "label":"Biology bundle for science requirement 120",
+        "note":null,
+        "must_be_same_term": true
+    },
+
+    {
+        "id":"LIU_BKLN__CS_BS__RS__SCIENCE_BIO_122",
+        "requirement_slot_id":"LIU_BKLN__CS_BS__RG__CORE__RS__SCIENCE",
+        "label":"Biology bundle for science requirement 122",
+        "note":null,
+        "must_be_same_term": true
+    },
+
+    {
+        "id":"LIU_BKLN__CS_BS__RS__SCIENCE_CHM",
+        "requirement_slot_id":"LIU_BKLN__CS_BS__RG__CORE__RS__SCIENCE",
+        "label":"Chemistry bundle for science requirement",
+        "note":null,
+        "must_be_same_term": true
+    },
+
+    {
+        "id":"LIU_BKLN__CS_BS__RS__SCIENCE_PHY",
+        "requirement_slot_id":"LIU_BKLN__CS_BS__RG__CORE__RS__SCIENCE",
+        "label":"Physics bundle for science requirement",
+        "note":null,
+        "must_be_same_term": true
+    }
+]

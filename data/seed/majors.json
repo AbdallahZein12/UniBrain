@@ -1,9 +1,9 @@
 [
     {
-        "id": "CS_BS",
+        "id": "LIU_BKLN__CS_BS",
         "name": "Bachelors of Science in Computer Science",
-        "degree": "Bachelors of Science",
-        "department_id": "CS",
+        "degree": "BS",
+        "department_id": "LIU_BKLN__CS",
         "campus_id": "LIU_BKLN",
         "total_credits_required":120
     }

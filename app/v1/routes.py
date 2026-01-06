@@ -1,8 +1,8 @@
 from flask import render_template, Response, request, redirect, url_for, flash, jsonify
-from flask_login import login_required, current_user
+from flask_login import login_required, current_user, logout_user
 from . import v1_bp
 from .auth import auth_bp
-from app.models import StudentProfile
+from app.models import StudentProfile, User
 from app.models.catalog import Campus, Major, Course
 from app.models.student_profile import CourseConflictError
 from app.core import onboarding_required
@@ -19,6 +19,16 @@ v1_bp.register_blueprint(auth_bp, url_prefix="/auth")
 #   <button type="submit">Log out</button>
 # </form>
 # """
+
+
+def safe_next_url(fallback_endpoint: str):
+    """
+    Basic safety: allow only relative paths so nobody can send users to evil.com
+    """
+    nxt = (request.form.get("next") or "").strip()
+    if nxt.startswith("/"):
+        return nxt
+    return url_for(fallback_endpoint)
 
 @v1_bp.get("/home")
 def home():
@@ -148,6 +158,32 @@ def onboarding_post():
         return redirect(next_url)
     
     return redirect(url_for("v1.dashboard"))
+
+
+@v1_bp.post("/account/delete")
+@login_required
+def delete_account_post():
+    next_url = safe_next_url("v1.onboarding_get")
+    
+    try:
+        # user = current_user
+        user = db.session.get(User, current_user.id)
+        
+        # important to log out before deleting the row to avoid stale session 
+        logout_user()
+        
+        # should cascade
+        db.session.delete(user)
+        db.session.commit()
+        
+        flash("Your account has been deleted.", "success")
+        return redirect(url_for("v1.home"))
+    
+    except Exception as e: 
+        print(e)
+        db.session.rollback()
+        flash("Could not delete account. Please try again.", "error")
+        return redirect(next_url)
 
 @v1_bp.get("/profile/edit")
 @login_required

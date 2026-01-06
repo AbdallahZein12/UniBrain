@@ -5,6 +5,8 @@ from sqlalchemy import event, select, inspect
 import re 
 from app.models.catalog import Course
 from difflib import get_close_matches
+from datetime import datetime, timezone 
+from functools import reduce
 
 # LIU_KNOWN_COURSES: set[str] = set() # TODO: replace with LIU catalog set
 COURSE_SPLIT_RE = re.compile(r"^([A-Z]{2,4})\s*[-]?\s*(\d{3})([A-Z]?)$")
@@ -285,8 +287,42 @@ class StudentProfile(db.Model):
     @property
     def onboarding_complete(self) -> bool: 
         return bool(self.full_name and self.campus_id and self.major_id)
+    
+    @property
+    def courses_filled(self) -> bool:
+        return bool(len(self.courses_by_term["in_progress"]) >= 1 or len(self.courses_by_term["completed"]) >= 1) 
+    
+    @property 
+    def profile_complete(self) -> bool:
+        return bool(self.expected_grad_year and self.courses_filled)
         
-
+    @property
+    def last_updated_at_formatted(self) -> str:
+        last_updated_at = self.updated_at.replace(tzinfo=timezone.utc)
+        today = datetime.now(timezone.utc)
+        difference = today - last_updated_at
+        difference_days = difference.days
+        difference_minutes = difference.seconds // 60
+        
+        if difference_minutes == 0: 
+            return f"{difference.seconds} seconds ago"
+        if difference_days == 0: 
+            return f"{difference_minutes} minutes ago" if difference_minutes > 1 else  f"{difference_minutes} minute ago"
+        if difference_days <= 7:
+            return f"{difference.days} days ago" if difference.days > 1 else f"{difference.days} day ago"
+        
+        return f"{difference.weeks} weeks ago" if difference.weeks > 1 else  f"{difference.weeks} week ago"
+    
+    @property 
+    def total_credits_completed(self) -> int:
+        completed_courses = self.flatten_courses()[0]
+        course_objects = [db.session.get(Course, id) for id in completed_courses]
+        credits = [c.credits for c in course_objects]
+        sum_ = reduce(lambda x,y : x + y, credits, 0)
+        return sum_
+        
+        
+        
 
 class CourseConflictError(ValueError):
     """Raised when a course appears in both completed and in_progress."""

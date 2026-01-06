@@ -2,13 +2,13 @@
   <div class="progress-left">
     <div class="progress-title">Degree progress</div>
     <div class="progress-sub">
-      Rough estimate based on your entered courses. We’ll make this fully deterministic soon.
+      Rough estimate based on your entered courses and information.
     </div>
 
     <div class="progress-metrics">
       <div class="metric">
         <div class="metric-label">Credits completed</div>
-        <div class="metric-value">72 / 120</div>
+        <div class="metric-value">{{ current_user.student_profile.total_credits_completed }} / {{ current_user.student_profile.major.total_credits_required }}</div>
       </div>
       <div class="metric">
         <div class="metric-label">Requirements satisfied</div>
@@ -36,7 +36,7 @@
         <div class="bar-fill" style="width:60%"></div>
       </div>
       <div class="bar-meta">
-        <span class="muted">Target graduation:</span> <span>Dec 2025</span>
+        <span class="muted">Target graduation:</span> <span>{% if current_user.student_profile.expected_grad_year %} {{current_user.student_profile.expected_grad_year}} {% else %} Not filled {% endif %} </span>
       </div>
     </div>
   </div>

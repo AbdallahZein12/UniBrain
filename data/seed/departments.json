@@ -1,27 +1,122 @@
 [
     {
-        "id": "CS",
+        "id": "LIU_BKLN__CS",
         "name": "School of Computer Science",
         "campus_id": "LIU_BKLN"
     },
     {
-        "id": "BUS",
+        "id": "LIU_BKLN__SPE",
+        "name": "School of Speech",
+        "campus_id": "LIU_BKLN"
+    },
+    {
+        "id": "LIU_BKLN__ENG",
+        "name": "School of English",
+        "campus_id": "LIU_BKLN"
+    },
+    {
+        "id": "LIU_BKLN__MAN",
+        "name": "School of Management",
+        "campus_id": "LIU_BKLN"
+    },
+    {
+        "id": "LIU_BKLN__MTH",
+        "name": "School of Math",
+        "campus_id": "LIU_BKLN"
+    },
+    {
+        "id": "LIU_BKLN__HIS",
+        "name": "School of History",
+        "campus_id": "LIU_BKLN"
+    },
+    {
+        "id": "LIU_BKLN__PHI",
+        "name": "School of Philosophy",
+        "campus_id": "LIU_BKLN"
+    },
+    {
+        "id": "LIU_BKLN__BIO",
+        "name": "School of Biology",
+        "campus_id": "LIU_BKLN"
+    },
+    {
+        "id": "LIU_BKLN__CHM",
+        "name": "School of Chemistry",
+        "campus_id": "LIU_BKLN"
+    },
+    {
+        "id": "LIU_BKLN__PHY",
+        "name": "School of Physics",
+        "campus_id": "LIU_BKLN"
+    },
+    {
+        "id": "LIU_BKLN__SPA",
+        "name": "School of Spanish",
+        "campus_id": "LIU_BKLN"
+    },
+    {
+        "id": "LIU_BKLN__ITL",
+        "name": "School of Italian",
+        "campus_id": "LIU_BKLN"
+    },
+    {
+        "id": "LIU_BKLN__FRE",
+        "name": "School of French",
+        "campus_id": "LIU_BKLN"
+    },
+    {
+        "id": "LIU_BKLN__ART",
+        "name": "School of Art",
+        "campus_id": "LIU_BKLN"
+    },
+    {
+        "id": "LIU_BKLN__JOU",
+        "name": "School of Journal",
+        "campus_id": "LIU_BKLN"
+    },
+    {
+        "id": "LIU_BKLN__MA",
+        "name": "School of Media Arts",
+        "campus_id": "LIU_BKLN"
+    },
+    {
+        "id": "LIU_BKLN__MUS",
+        "name": "School of Music",
+        "campus_id": "LIU_BKLN"
+    },
+    {
+        "id": "LIU_BKLN__THE",
+        "name": "School of Theater",
+        "campus_id": "LIU_BKLN"
+    },
+    {
+        "id": "LIU_BKLN__POL",
+        "name": "School of Political Science",
+        "campus_id": "LIU_BKLN"
+    },
+    {
+        "id": "LIU_BKLN__ECO",
+        "name": "School of Economics",
+        "campus_id": "LIU_BKLN"
+    },
+    {
+        "id": "LIU_BKLN__ANT",
+        "name": "School of Anthropology",
+        "campus_id": "LIU_BKLN"
+    },
+    {
+        "id": "LIU_BKLN__SOC",
+        "name": "School of Sociology",
+        "campus_id": "LIU_BKLN"
+    },
+    {
+        "id": "LIU_BKLN__PSY",
+        "name": "School of Psychology",
+        "campus_id": "LIU_BKLN"
+    },
+    {
+        "id": "LIU_BKLN__BUS",
         "name": "School of Business",
-        "campus_id": "LIU_BKLN"
-    },
-    {
-        "id": "COM",
-        "name": "School of Communications",
-        "campus_id": "LIU_BKLN"
-    },
-    {
-        "id": "LIB",
-        "name": "School of Liberal Arts",
-        "campus_id": "LIU_BKLN"
-    },
-    {
-        "id": "MED",
-        "name": "School of Medicine",
         "campus_id": "LIU_BKLN"
     }
 ]

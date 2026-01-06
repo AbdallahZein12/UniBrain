@@ -484,6 +484,37 @@ input, select {
   cursor: pointer;
 }
 
+.divider {
+  margin: 24px 0;
+  opacity: 0.15;
+}
+
+.danger-zone {
+  margin-top: 8px;
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 80, 80, 0.25);
+  background: rgba(255, 80, 80, 0.06);
+}
+
+.danger-text {
+  margin: 6px 0 12px;
+  opacity: 0.9;
+  line-height: 1.3;
+}
+
+button.danger {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 80, 80, 0.45);
+  background: rgba(255, 80, 80, 0.15);
+  cursor: pointer;
+  font-weight: 600;
+}
+button.danger:hover {
+  background: rgba(255, 80, 80, 0.22);
+}
 
 
 

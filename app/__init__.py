@@ -36,6 +36,7 @@ def create_app() -> Flask:
     # import models so Alembic sees them 
     from . import models 
     from app.models import catalog
+    from app.models import ontology
     from .models import User
     
     #register blueprints 

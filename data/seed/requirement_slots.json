@@ -1,0 +1,277 @@
+[
+    {
+        "id": "LIU_BKLN__CS_BS__RG__MAJOR_REQUIRED__RS__INTRO_CS",
+        "requirement_group_id": "LIU_BKLN__CS_BS__RG__MAJOR_REQUIRED",
+        "label": "Fundamentals of Computer Science and Information Sciences",
+        "min_credits_required": 3,
+        "slot_type": "COURSE",
+        "slot_rule": {},
+        "position": 1
+    },
+
+    {
+        "id": "LIU_BKLN__CS_BS__RG__MAJOR_REQUIRED__RS__PROGRAMMING_I",
+        "requirement_group_id": "LIU_BKLN__CS_BS__RG__MAJOR_REQUIRED",
+        "label": "Programming I",
+        "min_credits_required": 4,
+        "slot_type": "COURSE",
+        "slot_rule": {},
+        "position": 2
+    },
+    
+    {
+        "id": "LIU_BKLN__CS_BS__RG__MAJOR_REQUIRED__RS__PROGRAMMING_II",
+        "requirement_group_id": "LIU_BKLN__CS_BS__RG__MAJOR_REQUIRED",
+        "label": "Programming II",
+        "min_credits_required": 4,
+        "slot_type": "COURSE",
+        "slot_rule": {},
+        "position": 3
+    },
+
+    {
+        "id": "LIU_BKLN__CS_BS__RG__MAJOR_REQUIRED__RS__COMPUTER_ARCH",
+        "requirement_group_id": "LIU_BKLN__CS_BS__RG__MAJOR_REQUIRED",
+        "label": "Computer Architecture",
+        "min_credits_required": 3,
+        "slot_type": "COURSE",
+        "slot_rule": {},
+        "position": 4
+    },
+
+    {
+        "id": "LIU_BKLN__CS_BS__RG__MAJOR_REQUIRED__RS__DSA",
+        "requirement_group_id": "LIU_BKLN__CS_BS__RG__MAJOR_REQUIRED",
+        "label": "Algorithms and Data Structure",
+        "min_credits_required": 3,
+        "slot_type": "COURSE",
+        "slot_rule": {},
+        "position": 5
+    },
+
+    {
+        "id": "LIU_BKLN__CS_BS__RG__MAJOR_REQUIRED__RS__DISCRETE_STRUC",
+        "requirement_group_id": "LIU_BKLN__CS_BS__RG__MAJOR_REQUIRED",
+        "label": "Discrete Structures in Computer Science",
+        "min_credits_required": 3,
+        "slot_type": "COURSE",
+        "slot_rule": {},
+        "position": 6
+    },
+
+    {
+        "id": "LIU_BKLN__CS_BS__RG__MAJOR_REQUIRED__RS__DBM",
+        "requirement_group_id": "LIU_BKLN__CS_BS__RG__MAJOR_REQUIRED",
+        "label": "Database Management",
+        "min_credits_required": 4,
+        "slot_type": "COURSE",
+        "slot_rule": {},
+        "position": 7
+    },
+
+    {
+        "id": "LIU_BKLN__CS_BS__RG__MAJOR_REQUIRED__RS__OS",
+        "requirement_group_id": "LIU_BKLN__CS_BS__RG__MAJOR_REQUIRED",
+        "label": "Operating Systems",
+        "min_credits_required": 4,
+        "slot_type": "COURSE",
+        "slot_rule": {},
+        "position": 8
+    },
+
+    {
+        "id": "LIU_BKLN__CS_BS__RG__MAJOR_REQUIRED__RS__NETWORKING",
+        "requirement_group_id": "LIU_BKLN__CS_BS__RG__MAJOR_REQUIRED",
+        "label": "Networking",
+        "min_credits_required": 4,
+        "slot_type": "COURSE",
+        "slot_rule": {},
+        "position": 9
+    },
+
+    {
+        "id": "LIU_BKLN__CS_BS__RG__MAJOR_REQUIRED__RS__SWE",
+        "requirement_group_id": "LIU_BKLN__CS_BS__RG__MAJOR_REQUIRED",
+        "label": "Software Engineering",
+        "min_credits_required": 3,
+        "slot_type": "COURSE",
+        "slot_rule": {},
+        "position": 10
+    },
+
+    {
+        "id": "LIU_BKLN__CS_BS__RG__MAJOR_REQUIRED__RS__MAN_COM",
+        "requirement_group_id": "LIU_BKLN__CS_BS__RG__MAJOR_REQUIRED",
+        "label": "Managerial Communications",
+        "min_credits_required": 3,
+        "slot_type": "COURSE",
+        "slot_rule": {},
+        "position": 11
+    },
+
+    {
+        "id": "LIU_BKLN__CS_BS__RG__MAJOR_REQUIRED__RS__BUS_STAT",
+        "requirement_group_id": "LIU_BKLN__CS_BS__RG__MAJOR_REQUIRED",
+        "label": "Business Statistics I",
+        "min_credits_required": 3,
+        "slot_type": "COURSE",
+        "slot_rule": {},
+        "position": 12
+    },
+    
+    {
+        "id": "LIU_BKLN__CS_BS__RG__ADV_MAJOR_ELECTIVES__RS__BUCKET",
+        "requirement_group_id": "LIU_BKLN__CS_BS__RG__ADV_MAJOR_ELECTIVES",
+        "label": "13 Credits of any Computer Science courses numbered over 202",
+        "min_credits_required": 13,
+        "slot_type": "BUCKET",
+        "slot_rule": {
+            "department_ids_any": ["LIU_BKLN__CS"],
+            "course_number_min_exc": 202,
+            "course_number_max_inc": null,
+            "exclude_course_ids": ["CS 217", "CS 218", "CS 230", "CS 232", "CS 248", "CS 250", "CS 254", "CS 264"]
+        },
+        "position": 1
+    },
+    
+    {
+        "id": "LIU_BKLN__CS_BS__RG__MAJOR_ELECTIVES__RS__BUCKET",
+        "requirement_group_id": "LIU_BKLN__CS_BS__RG__MAJOR_ELECTIVES",
+        "label": "9 Credits of any introductory or advanced courses offered by the School of Business, Public Administration and Information Sciences",
+        "min_credits_required": 9,
+        "slot_type": "BUCKET",
+        "slot_rule": {
+            "department_ids_any": ["LIU_BKLN__CS","LIU_BKLN__BUS"],
+            "course_number_min_exc": null,
+            "course_number_max_inc": null,
+            "exclude_course_ids": ["BUS 228", "MAN 231", "CS 217", "CS 218", "CS 230", "CS 232", "CS 248", "CS 250", "CS 254", "CS 264", "CS 201", "CS 202"]
+        },
+        "position": 1
+    },
+
+    {
+        "id": "LIU_BKLN__CS_BS__RG__CORE__RS__ENGLISH_COMP",
+        "requirement_group_id": "LIU_BKLN__CS_BS__RG__CORE",
+        "label": "English Composition",
+        "min_credits_required": 3,
+        "slot_type": "COURSE",
+        "slot_rule": {},
+        "position": 1
+    },
+
+    {
+        "id": "LIU_BKLN__CS_BS__RG__CORE__RS__ENGLISH_LIT",
+        "requirement_group_id": "LIU_BKLN__CS_BS__RG__CORE",
+        "label": "English Literature",
+        "min_credits_required": 3,
+        "slot_type": "COURSE",
+        "slot_rule": {},
+        "position": 2
+    },
+
+    {
+        "id": "LIU_BKLN__CS_BS__RG__CORE__RS__HISTORY",
+        "requirement_group_id": "LIU_BKLN__CS_BS__RG__CORE",
+        "label": "History",
+        "min_credits_required": 3,
+        "slot_type": "COURSE",
+        "slot_rule": {},
+        "position": 3
+    },
+
+    {
+        "id": "LIU_BKLN__CS_BS__RG__CORE__RS__PHILOSOPHY",
+        "requirement_group_id": "LIU_BKLN__CS_BS__RG__CORE",
+        "label": "Philosophy",
+        "min_credits_required": 3,
+        "slot_type": "COURSE",
+        "slot_rule": {},
+        "position": 4
+    },
+
+    {
+        "id": "LIU_BKLN__CS_BS__RG__CORE__RS__SPEECH",
+        "requirement_group_id": "LIU_BKLN__CS_BS__RG__CORE",
+        "label": "Speech",
+        "min_credits_required": 3,
+        "slot_type": "COURSE",
+        "slot_rule": {},
+        "position": 5
+    },
+
+    {
+        "id": "LIU_BKLN__CS_BS__RG__CORE__RS__MATH",
+        "requirement_group_id": "LIU_BKLN__CS_BS__RG__CORE",
+        "label": "Mathematics",
+        "min_credits_required": 3,
+        "slot_type": "COURSE",
+        "slot_rule": {},
+        "position": 6
+    },
+
+    {
+        "id": "LIU_BKLN__CS_BS__RG__CORE__RS__SCIENCE",
+        "requirement_group_id": "LIU_BKLN__CS_BS__RG__CORE",
+        "label": "Science Lab-Based Course",
+        "min_credits_required": 4,
+        "slot_type": "BUNDLE",
+        "slot_rule": {},
+        "position": 7
+    },
+    
+    {
+        "id": "LIU_BKLN__CS_BS__RG__CORE__RS__FOREIGN_LANG",
+        "requirement_group_id": "LIU_BKLN__CS_BS__RG__CORE",
+        "label": "Foreign Language",
+        "min_credits_required": 3,
+        "slot_type": "COURSE",
+        "slot_rule": {},
+        "position": 8
+    },
+    
+    {
+        "id": "LIU_BKLN__CS_BS__RG__CORE__RS__VISUAL_ARTS",
+        "requirement_group_id": "LIU_BKLN__CS_BS__RG__CORE",
+        "label": "Visual and Performing Arts",
+        "min_credits_required": 3,
+        "slot_type": "COURSE",
+        "slot_rule": {},
+        "position": 9
+    },
+    
+    {
+        "id": "LIU_BKLN__CS_BS__RG__CORE__RS__SOC_SCIENCES_I",
+        "requirement_group_id": "LIU_BKLN__CS_BS__RG__CORE",
+        "label": "Social Sciences I",
+        "min_credits_required": 3,
+        "slot_type": "COURSE",
+        "slot_rule": {},
+        "position": 10
+    },
+    
+    {
+        "id": "LIU_BKLN__CS_BS__RG__CORE__RS__SOC_SCIENCES_II",
+        "requirement_group_id": "LIU_BKLN__CS_BS__RG__CORE",
+        "label": "Social Sciences II",
+        "min_credits_required": 3,
+        "slot_type": "COURSE",
+        "slot_rule": {},
+        "position": 11
+    },
+
+    {
+        "id": "LIU_BKLN__CS_BS__RG__GEN_ELECTIVES__RS__BUCKET",
+        "requirement_group_id": "LIU_BKLN__CS_BS__RG__GEN_ELECTIVES",
+        "label": "Required General Electives",
+        "min_credits_required": 21,
+        "slot_type": "BUCKET",
+        "slot_rule": {
+            "department_ids_any": ["LIU_BKLN__SOC","LIU_BKLN__PSY", "LIU_BKLN__POL", "LIU_BKLN__HIS", "LIU_BKLN__ECO", "LIU_BKLN__ANT", "LIU_BKLN__THE", "LIU_BKLN__MUS", "LIU_BKLN__MA", "LIU_BKLN__JOU", "LIU_BKLN__ART", "LIU_BKLN__FRE", "LIU_BKLN__ITL", "LIU_BKLN__SPA", "LIU_BKLN__MTH", "LIU_BKLN__SPE", "LIU_BKLN__PHI", "LIU_BKLN__ENG"],
+            "course_number_min_exc": null,
+            "course_number_max_inc": null,
+            "exclude_course_ids": []
+        },
+        "position": 1
+    }
+
+]

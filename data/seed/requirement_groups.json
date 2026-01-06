@@ -1,0 +1,46 @@
+[
+    {
+        "id": "LIU_BKLN__CS_BS__RG__MAJOR_REQUIRED",
+        "name": "Required B.S. in Computer Science Courses",
+        "scope": "major",
+        "owner_id": "LIU_BKLN__CS_BS", 
+        "rule_type": "ALL",
+        "choose_n":null
+    },
+
+    {
+        "id": "LIU_BKLN__CS_BS__RG__ADV_MAJOR_ELECTIVES",
+        "name": "Advanced Computer Science Electives",
+        "scope": "major",
+        "owner_id": "LIU_BKLN__CS_BS", 
+        "rule_type": "ALL",
+        "choose_n":null
+    },
+
+    {
+        "id": "LIU_BKLN__CS_BS__RG__MAJOR_ELECTIVES",
+        "name": "Business or Computer Science Electives",
+        "scope": "major",
+        "owner_id": "LIU_BKLN__CS_BS", 
+        "rule_type": "ALL",
+        "choose_n":null
+    },
+    
+    {
+        "id": "LIU_BKLN__CS_BS__RG__CORE",
+        "name": "Required Core Courses",
+        "scope": "major",
+        "owner_id": "LIU_BKLN__CS_BS", 
+        "rule_type": "ALL",
+        "choose_n":null
+    },
+
+    {
+        "id": "LIU_BKLN__CS_BS__RG__GEN_ELECTIVES",
+        "name": "Required General Electives",
+        "scope": "major",
+        "owner_id": "LIU_BKLN__CS_BS", 
+        "rule_type": "ALL",
+        "choose_n":null
+    }
+]

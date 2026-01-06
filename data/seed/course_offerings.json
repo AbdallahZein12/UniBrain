@@ -1,0 +1,390 @@
+[
+  {
+    "id": "LIU_BKLN_CS201",
+    "course_id": "CS 201",
+    "campus_id": "LIU_BKLN",
+    "terms_offered": ["fall", "spring"]
+  },
+  {
+    "id": "LIU_BKLN_CS202",
+    "course_id": "CS 202",
+    "campus_id": "LIU_BKLN",
+    "terms_offered": ["fall", "spring"]
+  },
+  {
+    "id": "LIU_BKLN_CS217",
+    "course_id": "CS 217",
+    "campus_id": "LIU_BKLN",
+    "terms_offered": ["fall", "spring"]
+  },
+  {
+    "id": "LIU_BKLN_CS218",
+    "course_id": "CS 218",
+    "campus_id": "LIU_BKLN",
+    "terms_offered": ["fall"]
+  },
+  {
+    "id": "LIU_BKLN_CS230",
+    "course_id": "CS 230",
+    "campus_id": "LIU_BKLN",
+    "terms_offered": ["fall"]
+  },
+  {
+    "id": "LIU_BKLN_CS232",
+    "course_id": "CS 232",
+    "campus_id": "LIU_BKLN",
+    "terms_offered": ["spring"]
+  },
+  {
+    "id": "LIU_BKLN_CS248",
+    "course_id": "CS 248",
+    "campus_id": "LIU_BKLN",
+    "terms_offered": ["spring"]
+  },
+  {
+    "id": "LIU_BKLN_CS250",
+    "course_id": "CS 250",
+    "campus_id": "LIU_BKLN",
+    "terms_offered": ["spring"]
+  },
+  {
+    "id": "LIU_BKLN_CS254",
+    "course_id": "CS 254",
+    "campus_id": "LIU_BKLN",
+    "terms_offered": ["spring"]
+  },
+  {
+    "id": "LIU_BKLN_CS264",
+    "course_id": "CS 264",
+    "campus_id": "LIU_BKLN",
+    "terms_offered": ["spring"]
+  },
+
+  {
+    "id": "LIU_BKLN_SPE100",
+    "course_id": "SPE 100",
+    "campus_id": "LIU_BKLN",
+    "terms_offered": ["fall", "spring"]
+  },
+  {
+    "id": "LIU_BKLN_ENG110",
+    "course_id": "ENG 110",
+    "campus_id": "LIU_BKLN",
+    "terms_offered": ["fall", "spring"]
+  },
+  {
+    "id": "LIU_BKLN_MAN231",
+    "course_id": "MAN 231",
+    "campus_id": "LIU_BKLN",
+    "terms_offered": ["fall", "spring"]
+  },
+  {
+    "id": "LIU_BKLN_MTH106",
+    "course_id": "MTH 106",
+    "campus_id": "LIU_BKLN",
+    "terms_offered": ["fall", "spring"]
+  },
+  {
+    "id": "LIU_BKLN_MTH130",
+    "course_id": "MTH 130",
+    "campus_id": "LIU_BKLN",
+    "terms_offered": ["fall", "spring"]
+  },
+  {
+    "id": "LIU_BKLN_MTH140",
+    "course_id": "MTH 140",
+    "campus_id": "LIU_BKLN",
+    "terms_offered": ["fall", "spring"]
+  },
+
+  {
+    "id": "LIU_BKLN_BUS228",
+    "course_id": "BUS 228",
+    "campus_id": "LIU_BKLN",
+    "terms_offered": ["fall"]
+  },
+  {
+    "id": "LIU_BKLN_CS368",
+    "course_id": "CS 368",
+    "campus_id": "LIU_BKLN",
+    "terms_offered": ["fall"]
+  },
+  {
+    "id": "LIU_BKLN_CS369",
+    "course_id": "CS 369",
+    "campus_id": "LIU_BKLN",
+    "terms_offered": ["fall", "spring"]
+  },
+  {
+    "id": "LIU_BKLN_CS220",
+    "course_id": "CS 220",
+    "campus_id": "LIU_BKLN",
+    "terms_offered": ["spring"]
+  },
+  {
+    "id": "LIU_BKLN_CS462",
+    "course_id": "CS 462",
+    "campus_id": "LIU_BKLN",
+    "terms_offered": ["spring"]
+  },
+  {
+    "id": "LIU_BKLN_CS403",
+    "course_id": "CS 403",
+    "campus_id": "LIU_BKLN",
+    "terms_offered": ["fall"]
+  },
+  {
+    "id": "LIU_BKLN_CS463",
+    "course_id": "CS 463",
+    "campus_id": "LIU_BKLN",
+    "terms_offered": ["fall"]
+  },
+
+  {
+    "id": "LIU_BKLN_BUS201",
+    "course_id": "BUS 201",
+    "campus_id": "LIU_BKLN",
+    "terms_offered": ["fall", "spring"]
+  },
+  {
+    "id": "LIU_BKLN_BUS209",
+    "course_id": "BUS 209",
+    "campus_id": "LIU_BKLN",
+    "terms_offered": ["fall", "spring"]
+  },
+  {
+    "id": "LIU_BKLN_BUS210",
+    "course_id": "BUS 210",
+    "campus_id": "LIU_BKLN",
+    "terms_offered": ["fall"]
+  },
+
+  {
+    "id": "LIU_BKLN_ENG110C",
+    "course_id": "ENG 110C",
+    "campus_id": "LIU_BKLN",
+    "terms_offered": ["fall", "spring"]
+  },
+  {
+    "id": "LIU_BKLN_ENG112",
+    "course_id": "ENG 112",
+    "campus_id": "LIU_BKLN",
+    "terms_offered": ["fall", "spring"]
+  },
+  {
+    "id": "LIU_BKLN_ENG113",
+    "course_id": "ENG 113",
+    "campus_id": "LIU_BKLN",
+    "terms_offered": ["spring"]
+  },
+  {
+    "id": "LIU_BKLN_ENG114",
+    "course_id": "ENG 114",
+    "campus_id": "LIU_BKLN",
+    "terms_offered": ["fall", "spring"]
+  },
+  {
+    "id": "LIU_BKLN_ENG115",
+    "course_id": "ENG 115",
+    "campus_id": "LIU_BKLN",
+    "terms_offered": ["fall", "spring"]
+  },
+
+  {
+    "id": "LIU_BKLN_HIS102",
+    "course_id": "HIS 102",
+    "campus_id": "LIU_BKLN",
+    "terms_offered": ["fall", "spring"]
+  },
+
+  {
+    "id": "LIU_BKLN_HIS101",
+    "course_id": "HIS 101",
+    "campus_id": "LIU_BKLN",
+    "terms_offered": ["fall", "spring"]
+  },
+  
+  {
+    "id": "LIU_BKLN_PHI100",
+    "course_id": "PHI 100",
+    "campus_id": "LIU_BKLN",
+    "terms_offered": ["fall", "spring"]
+  },
+
+  {
+    "id": "LIU_BKLN_MTH105",
+    "course_id": "MTH 105",
+    "campus_id": "LIU_BKLN",
+    "terms_offered": ["fall", "spring"]
+  },
+
+  {
+    "id": "LIU_BKLN_BIO120",
+    "course_id": "BIO 120",
+    "campus_id": "LIU_BKLN",
+    "terms_offered": ["fall", "spring"]
+  },
+  {
+    "id": "LIU_BKLN_BIO120L",
+    "course_id": "BIO 120L",
+    "campus_id": "LIU_BKLN",
+    "terms_offered": ["fall", "spring"]
+  },
+  {
+    "id": "LIU_BKLN_BIO122",
+    "course_id": "BIO 122",
+    "campus_id": "LIU_BKLN",
+    "terms_offered": ["fall", "spring"]
+  },
+  {
+    "id": "LIU_BKLN_BIO122L",
+    "course_id": "BIO 122L",
+    "campus_id": "LIU_BKLN",
+    "terms_offered": ["fall", "spring"]
+  },
+
+  {
+    "id": "LIU_BKLN_CHM103",
+    "course_id": "CHM 103",
+    "campus_id": "LIU_BKLN",
+    "terms_offered": ["fall", "spring"]
+  },
+  {
+    "id": "LIU_BKLN_CHM103L",
+    "course_id": "CHM 103L",
+    "campus_id": "LIU_BKLN",
+    "terms_offered": ["fall", "spring"]
+  },
+  {
+    "id": "LIU_BKLN_CHM101",
+    "course_id": "CHM 101",
+    "campus_id": "LIU_BKLN",
+    "terms_offered": ["fall", "spring"]
+  },
+  {
+    "id": "LIU_BKLN_CHM101L",
+    "course_id": "CHM 101L",
+    "campus_id": "LIU_BKLN",
+    "terms_offered": ["fall", "spring"]
+  },
+
+  {
+    "id": "LIU_BKLN_PHY131",
+    "course_id": "PHY 131",
+    "campus_id": "LIU_BKLN",
+    "terms_offered": ["fall", "spring"]
+  },
+  {
+    "id": "LIU_BKLN_PHY131L",
+    "course_id": "PHY 131L",
+    "campus_id": "LIU_BKLN",
+    "terms_offered": ["fall", "spring"]
+  },
+  {
+    "id": "LIU_BKLN_PHY132",
+    "course_id": "PHY 132",
+    "campus_id": "LIU_BKLN",
+    "terms_offered": ["fall", "spring"]
+  },
+  {
+    "id": "LIU_BKLN_PHY132L",
+    "course_id": "PHY 132L",
+    "campus_id": "LIU_BKLN",
+    "terms_offered": ["fall", "spring"]
+  },
+
+  {
+    "id": "LIU_BKLN_SPA111",
+    "course_id": "SPA 111",
+    "campus_id": "LIU_BKLN",
+    "terms_offered": ["fall", "spring"]
+  },
+  {
+    "id": "LIU_BKLN_ITL111",
+    "course_id": "ITL 111",
+    "campus_id": "LIU_BKLN",
+    "terms_offered": ["fall", "spring"]
+  },
+  {
+    "id": "LIU_BKLN_FRE111",
+    "course_id": "FRE 111",
+    "campus_id": "LIU_BKLN",
+    "terms_offered": ["fall", "spring"]
+  },
+
+  {
+    "id": "LIU_BKLN_ART101",
+    "course_id": "ART 101",
+    "campus_id": "LIU_BKLN",
+    "terms_offered": ["fall", "spring"]
+  },
+  {
+    "id": "LIU_BKLN_JOU110",
+    "course_id": "JOU 110",
+    "campus_id": "LIU_BKLN",
+    "terms_offered": ["fall", "spring"]
+  },
+  {
+    "id": "LIU_BKLN_MA109",
+    "course_id": "MA 109",
+    "campus_id": "LIU_BKLN",
+    "terms_offered": ["fall", "spring"]
+  },
+  {
+    "id": "LIU_BKLN_MUS101",
+    "course_id": "MUS 101",
+    "campus_id": "LIU_BKLN",
+    "terms_offered": ["fall"]
+  },
+  {
+    "id": "LIU_BKLN_THE111",
+    "course_id": "THE 111",
+    "campus_id": "LIU_BKLN",
+    "terms_offered": ["fall", "spring"]
+  },
+
+  {
+    "id": "LIU_BKLN_POL101",
+    "course_id": "POL 101",
+    "campus_id": "LIU_BKLN",
+    "terms_offered": ["fall", "spring"]
+  },
+  {
+    "id": "LIU_BKLN_ECO101",
+    "course_id": "ECO 101",
+    "campus_id": "LIU_BKLN",
+    "terms_offered": ["fall", "spring"]
+  },
+  {
+    "id": "LIU_BKLN_ECO102",
+    "course_id": "ECO 102",
+    "campus_id": "LIU_BKLN",
+    "terms_offered": ["fall", "spring"]
+  },
+
+  {
+    "id": "LIU_BKLN_ANT100",
+    "course_id": "ANT 100",
+    "campus_id": "LIU_BKLN",
+    "terms_offered": ["fall"]
+  },
+  {
+    "id": "LIU_BKLN_ANT101",
+    "course_id": "ANT 101",
+    "campus_id": "LIU_BKLN",
+    "terms_offered": ["fall"]
+  },
+
+  {
+    "id": "LIU_BKLN_SOC100",
+    "course_id": "SOC 100",
+    "campus_id": "LIU_BKLN",
+    "terms_offered": ["fall", "spring"]
+  },
+  {
+    "id": "LIU_BKLN_PSY231",
+    "course_id": "PSY 231",
+    "campus_id": "LIU_BKLN",
+    "terms_offered": ["fall", "spring"]
+  }
+]
