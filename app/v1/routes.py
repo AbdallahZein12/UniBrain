@@ -4,11 +4,17 @@ from . import v1_bp
 from .auth import auth_bp
 from app.models import StudentProfile, User
 from app.models.catalog import Campus, Major, Course
+from app.models.ontology import CourseAllocation, RequirementGroup, RequirementSlot
 from app.models.student_profile import CourseConflictError
 from app.core import onboarding_required
 from app.core.extensions import db
 import json
 from sqlalchemy import select
+
+from app.services import recompute_for_user
+from app.services.engines.recompute_course_allocations import extract_course_instances, preferred_term_by_course
+from app.services.engines.build_eligible_slots_by_course import build_eligible_slots_by_course
+
 
 v1_bp.register_blueprint(auth_bp, url_prefix="/auth")
 
@@ -154,6 +160,15 @@ def onboarding_post():
     
     flash("Profile saved!", "success")
     
+    try:
+        recompute_for_user(current_user.id)
+        db.session.commit()
+    except Exception as e:
+        print(e)
+        db.session.rollback()
+        # Don’t fail onboarding because allocations failed 
+        flash("Profile saved, but we couldn't update your degree progress yet.", "warning")
+    
     if next_url and next_url.startswith("/") and not next_url.startswith("//"):
         return redirect(next_url)
     
@@ -272,6 +287,14 @@ def profile_edit_post():
     
     flash("Profile saved!", "success")
     
+    try:
+        recompute_for_user(current_user.id)
+        db.session.commit()
+    except Exception as e:
+        print(e)
+        db.session.rollback()
+        flash("Profile saved, but we couldn't update your degree progress yet.", "warning")
+    
     if next_url and next_url.startswith("/") and not next_url.startswith("//"):
         return redirect(next_url)
     
@@ -282,3 +305,61 @@ def profile_edit_post():
 @onboarding_required
 def dashboard():
     return render_template("dashboard/index.html")
+
+
+@v1_bp.get("/allocations")
+@login_required
+@onboarding_required
+def allocations_get():
+    profile = current_user.student_profile
+    
+    # flatten courses_by_term
+    instances = extract_course_instances(profile.courses_by_term or {})
+    term_by_course = preferred_term_by_course(instances=instances)
+    taken_course_ids = sorted(term_by_course.keys())
+    
+    # load current allocs
+    allocs = CourseAllocation.query.filter_by(student_profile_id=profile.id).all()
+    alloc_by_course = {a.course_id: a for a in allocs}
+    
+    # load slots + groups (for labels)
+    groups = RequirementGroup.query.filter_by(owner_id=profile.major_id).all()
+    group_ids = [g.id for g in groups]
+    slots = RequirementSlot.query.filter(RequirementSlot.requirement_group_id.in_(group_ids)).all()
+    slots_by_id = {s.id: s for s in slots}
+    
+    # load course titles for display 
+    courses = Course.query.filter(Course.id.in_(taken_course_ids)).all()
+    courses_by_id = {c.id:c for c in courses}
+    
+    eligible_by_course = build_eligible_slots_by_course(
+        taken_course_ids=taken_course_ids,
+        slots_by_id=slots_by_id,
+    )
+    
+    # build view 
+    
+    rows = [] 
+    for cid in taken_course_ids: 
+        c = courses_by_id.get(cid)
+        alloc = alloc_by_course.get(cid)
+        eligible_slots = [slots_by_id[sid] for sid in sorted(eligible_by_course.get(cid,[])) if sid in slots_by_id]
+
+        
+        rows.append({
+            "course_id": cid,
+            "title": getattr(c, "title", cid),
+            "credits": getattr(c, "credits", None),
+            "term": term_by_course.get(cid, "UNKNOWN"),
+            "allocation": None if not alloc else {
+                "requirement_slot_id": alloc.requirement_slot_id,
+                "label": getattr(slots_by_id.get(alloc.requirement_slot_id), "label", alloc.requirement_slot_id),
+                "locked": alloc.locked,
+                "reason": alloc.reason,
+            },
+            "eligible_slots": [{"id": s.id, "label": s.label} for s in eligible_slots],
+            "has_overlap": len(eligible_slots) > 1,
+        })
+    
+        
+    return render_template("allocations/allocations.html", rows=rows)

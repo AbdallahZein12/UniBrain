@@ -24,6 +24,8 @@ class RequirementGroup(db.Model):
         nullable=False 
     )
     
+    priority = db.Column(db.Integer, nullable=False, index=True, default=0)
+    
     choose_n = db.Column(db.Integer, nullable=True)
     slots = db.relationship(
         "RequirementSlot",

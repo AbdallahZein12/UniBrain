@@ -298,20 +298,40 @@ class StudentProfile(db.Model):
         
     @property
     def last_updated_at_formatted(self) -> str:
-        last_updated_at = self.updated_at.replace(tzinfo=timezone.utc)
-        today = datetime.now(timezone.utc)
-        difference = today - last_updated_at
-        difference_days = difference.days
-        difference_minutes = difference.seconds // 60
+        dt = self.updated_at
         
-        if difference_minutes == 0: 
-            return f"{difference.seconds} seconds ago"
-        if difference_days == 0: 
-            return f"{difference_minutes} minutes ago" if difference_minutes > 1 else  f"{difference_minutes} minute ago"
-        if difference_days <= 7:
-            return f"{difference.days} days ago" if difference.days > 1 else f"{difference.days} day ago"
-        
-        return f"{difference.weeks} weeks ago" if difference.weeks > 1 else  f"{difference.weeks} week ago"
+        if dt is None:
+            return "never"
+
+        # Ensure UTC-aware
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=timezone.utc)
+
+        now = datetime.now(timezone.utc)
+        diff_seconds = int((now - dt).total_seconds())
+
+        if diff_seconds < 0:
+            return "just now"
+
+        # Seconds
+        if diff_seconds < 60:
+            return "just now" if diff_seconds < 30 else "1 minute ago"
+
+        minutes = diff_seconds // 60
+        if minutes < 60:
+            return "1 minute ago" if minutes == 1 else f"{minutes} minutes ago"
+
+        hours = minutes // 60
+        if hours < 24:
+            return "1 hour ago" if hours == 1 else f"{hours} hours ago"
+
+        days = hours // 24
+        if days < 7:
+            return "1 day ago" if days == 1 else f"{days} days ago"
+
+        weeks = days // 7
+        return "1 week ago" if weeks == 1 else f"{weeks} weeks ago"
+    
     
     @property 
     def total_credits_completed(self) -> int:

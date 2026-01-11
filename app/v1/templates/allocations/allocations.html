@@ -1,0 +1,95 @@
+{% extends "allocations/base.html" %}
+
+{% block title %}Allocations · UniBrain{% endblock %}
+
+{% block head %}
+<link rel="stylesheet"
+      href="{{ url_for('v1.static', filename='allocations/css/allocations.css') }}">
+{% endblock %}
+
+{% block content %}
+<section class="alloc-hero">
+  <div class="alloc-title">
+    <img src="{{ url_for('v1.static', filename='allocations/img/logo.svg') }}" alt="" />
+    <div>
+      <h1>Course Allocations</h1>
+      <p>Review how your courses satisfy degree requirements.</p>
+    </div>
+  </div>
+
+  <form method="POST" action="#">
+    <button class="btn">Reset all</button>
+  </form>
+</section>
+
+<section class="alloc-card">
+  <table class="alloc-table">
+    <thead>
+      <tr>
+        <th>Course</th>
+        <th>Term</th>
+        <th>Status</th>
+        <th>Applied to</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for row in rows %}
+    <tr class="alloc-row">
+        <td data-label="Course">
+        <strong>{{ row.course_id }}</strong>
+        <div class="muted">{{ row.title }}</div>
+        </td>
+
+        <td data-label="Term">{{ row.term }}</td>
+
+        <td data-label="Status">
+        {% if row.status == "completed" %}
+            <span class="badge badge-good">Completed</span>
+        {% else %}
+            <span class="badge badge-muted">In progress</span>
+        {% endif %}
+        </td>
+
+        <td data-label="Applied to">
+        {% if row.allocation %}
+            {{ row.allocation.label }}
+            {% if row.allocation.locked %}
+            <span class="badge badge-warn">Locked</span>
+            {% else %}
+            <span class="badge badge-auto">Auto</span>
+            {% endif %}
+        {% else %}
+            —
+        {% endif %}
+        </td>
+
+        <td data-label="Action">
+        {% if row.has_overlap %}
+            <form method="POST" action="#" class="action-form">
+            <input type="hidden" name="course_id" value="{{ row.course_id }}">
+            <select name="requirement_slot_id" class="select">
+                {% for opt in row.eligible_slots %}
+                <option value="{{ opt.id }}"
+                    {% if row.allocation and row.allocation.requirement_slot_id == opt.id %}selected{% endif %}>
+                    {{ opt.label }}
+                </option>
+                {% endfor %}
+            </select>
+            <button class="btn btn-primary" type="submit">Apply</button>
+            </form>
+
+            <form method="POST" action="#" class="action-form">
+            <input type="hidden" name="course_id" value="{{ row.course_id }}">
+            <button class="btn" type="submit">Reset</button>
+            </form>
+        {% else %}
+            —
+        {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endblock %}
