@@ -11,7 +11,7 @@ function addCourse(termCardEl, value = "") {
   const chip = document.createElement("div");
   chip.className = "course-chip";
   chip.innerHTML = `
-    <input type="text" class="course-input" placeholder="CS 101" value="${escapeHtml(value)}" />
+    <input type="text" class="course-input" placeholder="CS 201" value="${escapeHtml(value)}" />
     <button type="button" class="chip-remove" title="Remove course">−</button>
   `;
 
@@ -61,7 +61,7 @@ function addTerm(bucket, termValue = "", coursesList = null) {
   card.querySelector(".chip-add").addEventListener("click", () => addCourse(card));
 
   card.querySelector(".chip-add-multi").addEventListener("click", () => {
-    const raw = prompt("Paste courses (comma / space / newline separated):", "CS 101, MATH 205");
+    const raw = prompt("Paste courses (comma / space / newline separated):", "CS 201, MATH 205");
     if (!raw) return;
     raw
       .split(/[\n,]+/)

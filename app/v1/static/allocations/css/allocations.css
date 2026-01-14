@@ -126,6 +126,72 @@
   border-color: rgba(108,167,255,.38);
   background: linear-gradient(135deg, rgba(108,167,255,.25), rgba(125,92,255,.18));
 }
+/* Keep the action column from expanding */
+.alloc-table td[data-label="Action"]{
+  min-width: 0;
+}
+
+/* The select should never force horizontal overflow */
+.select{
+  width: 100%;
+  max-width: 360px;   /* adjust to taste */
+  min-width: 0;
+}
+
+
+.flash-container {
+  position: fixed;
+  top: 90px; /* below navbar */
+  right: 24px;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.flash {
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  min-width: 260px;
+  max-width: 420px;
+  font-size: 0.9rem;
+  border: 1px solid transparent;
+  backdrop-filter: blur(10px);
+  animation: flashIn 220ms ease-out;
+}
+
+/* Categories */
+.flash.success {
+  background: rgba(0, 200, 120, 0.18);
+  border-color: rgba(0, 200, 120, 0.45);
+  color: #7af0c1;
+}
+
+.flash.error {
+  background: rgba(255, 80, 80, 0.18);
+  border-color: rgba(255, 80, 80, 0.45);
+  color: #ffb3b3;
+}
+
+.flash.warning {
+  background: rgba(255, 170, 0, 0.18);
+  border-color: rgba(255, 170, 0, 0.45);
+  color: #ffd27a;
+}
+
+.flash.info {
+  background: rgba(96, 165, 250, 0.18);
+  border-color: rgba(96, 165, 250, 0.45);
+  color: #bfdbfe;
+}
+
+/* On smaller screens make it full width */
+@media (max-width: 820px){
+  .select{
+    max-width: 100%;
+  }
+}
+
 
 /* -----------------------------
    Responsive: TABLE -> CARDS
@@ -187,6 +253,8 @@
     width: 100%;
   }
 }
+
+
 
 @media (max-width: 480px){
   .alloc-hero h1{

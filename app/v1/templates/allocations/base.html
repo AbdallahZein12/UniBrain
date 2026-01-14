@@ -283,6 +283,7 @@
           <div class="user-actions">
             <span>{{ current_user.email }}</span>
             <form method="POST" action="{{ url_for('v1.auth.logout_post') }}">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
               <button class="btn" type="submit">Log out</button>
             </form>
           </div>
@@ -302,5 +303,27 @@
         </div>
       </footer>
     </div>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <div class="flash-container">
+        {% for category, message in messages %}
+          <div class="flash {{ category }}">
+            {{ message }}
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  <script>
+    setTimeout(() => {
+      document.querySelectorAll(".flash").forEach(flash => {
+        flash.style.opacity = "0";
+        flash.style.transform = "translateY(-6px)";
+        setTimeout(() => flash.remove(), 250);
+      });
+    }, 4000);
+  </script>
   </body>
 </html>

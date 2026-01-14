@@ -2,6 +2,7 @@ from flask import render_template, Response, request, redirect, url_for, flash, 
 from flask_login import login_required, current_user, logout_user
 from . import v1_bp
 from .auth import auth_bp
+from app.models.enums import SlotType
 from app.models import StudentProfile, User
 from app.models.catalog import Campus, Major, Course
 from app.models.ontology import CourseAllocation, RequirementGroup, RequirementSlot
@@ -9,10 +10,10 @@ from app.models.student_profile import CourseConflictError
 from app.core import onboarding_required
 from app.core.extensions import db
 import json
-from sqlalchemy import select
+from sqlalchemy import select, delete
 
 from app.services import recompute_for_user
-from app.services.engines.recompute_course_allocations import extract_course_instances, preferred_term_by_course
+from app.services.engines.recompute_course_allocations import extract_course_instances, preferred_term_by_course, recompute_course_allocations
 from app.services.engines.build_eligible_slots_by_course import build_eligible_slots_by_course
 
 
@@ -304,7 +305,48 @@ def profile_edit_post():
 @login_required
 @onboarding_required
 def dashboard():
-    return render_template("dashboard/index.html")
+    profile = current_user.student_profile 
+    
+    req_groups = RequirementGroup.query.filter_by(owner_id=profile.major_id).all()
+    group_ids = [g.id for g in req_groups]
+    
+    
+    slots = RequirementSlot.query.filter(RequirementSlot.requirement_group_id.in_(group_ids)).all()
+    slots_by_id = {s.id: s for s in slots}
+    
+    total_slots = len(slots)
+    
+    allocs = CourseAllocation.query.filter_by(student_profile_id=profile.id).all()
+    
+    allocs_by_slot = {} 
+    for a in allocs: 
+        allocs_by_slot.setdefault(a.requirement_slot_id, []).append(a)
+    
+    satisfied = 0 
+    
+    for slot_id, slot in slots_by_id.items():
+        slot_allocs = allocs_by_slot.get(slot_id, [])
+        
+        if not slot_allocs:
+            continue 
+        
+        if slot.slot_type == SlotType.BUCKET: 
+            course_ids = [a.course_id for a in slot_allocs]
+            courses = Course.query.filter(Course.id.in_(course_ids)).all()
+            credits = sum(int(c.credits or 0) for c in courses)
+            if credits >= int(slot.min_credits_required or 0):
+                satisfied += 1 
+                
+        else: 
+            satisfied += 1 
+            
+    percentage_completed = int(round(((satisfied / total_slots) * 100))) if total_slots else 0 
+    percentage_completed = max(0, min(100, percentage_completed))
+            
+            
+    
+    
+    return render_template("dashboard/index.html", slots_satisfied=satisfied, slots_total=total_slots, percentage_completed=percentage_completed)
 
 
 @v1_bp.get("/allocations")
@@ -335,6 +377,7 @@ def allocations_get():
     eligible_by_course = build_eligible_slots_by_course(
         taken_course_ids=taken_course_ids,
         slots_by_id=slots_by_id,
+        include_bucket_slots= True
     )
     
     # build view 
@@ -344,10 +387,14 @@ def allocations_get():
         c = courses_by_id.get(cid)
         alloc = alloc_by_course.get(cid)
         eligible_slots = [slots_by_id[sid] for sid in sorted(eligible_by_course.get(cid,[])) if sid in slots_by_id]
-
+    
+        
+        completed = profile.flatten_courses()[0]
+        in_prog = profile.flatten_courses()[1]
         
         rows.append({
             "course_id": cid,
+            "status": "Completed" if cid in completed else ("In progress" if cid in in_prog else "Unknown"),
             "title": getattr(c, "title", cid),
             "credits": getattr(c, "credits", None),
             "term": term_by_course.get(cid, "UNKNOWN"),
@@ -363,3 +410,190 @@ def allocations_get():
     
         
     return render_template("allocations/allocations.html", rows=rows)
+
+@v1_bp.post("/allocations/override")
+@login_required
+@onboarding_required
+def allocations_override_post():
+    profile = current_user.student_profile
+    
+    request_form = request.form
+    cid = (request_form.get("course_id") or "").strip().upper()
+    req_slot_id = (request_form.get("requirement_slot_id") or "").strip()
+    
+    if not cid or not req_slot_id: 
+        flash("Missing course or requirement selection.", "error")
+    
+    # ensure course is actually in the student's courses_by_term    
+    instances = extract_course_instances(profile.courses_by_term or {})
+    term_by_course = preferred_term_by_course(instances)
+    
+    if cid not in term_by_course:
+        flash("That course is not in your profile!", "error")
+        return redirect(url_for("v1.allocations_get"))
+    
+    term = term_by_course[cid]
+    
+    # ensure req_slot_id is in the student's curr (owned by major)
+    group_ids = db.session.execute(
+        select(RequirementGroup.id).where(RequirementGroup.owner_id == profile.major_id)
+        
+    ).scalars().all()
+    
+    slot = db.session.execute(
+        select(RequirementSlot).where(
+            RequirementSlot.id == req_slot_id,
+            RequirementSlot.requirement_group_id.in_(group_ids)
+        )
+    ).scalars().first()
+    
+    if not slot: 
+        flash("That requirement is not part of your curriculum!", "error")
+        return redirect(url_for("v1.allocations_get"))
+    
+    # ensure course is eligible for that slot 
+    # build curriculum slots map once 
+    
+    curr_slots = db.session.execute(
+        select(RequirementSlot).where(RequirementSlot.requirement_group_id.in_(group_ids))
+    ).scalars().all()
+    slots_by_id = {s.id: s for s in curr_slots}
+    
+    eligible_by_course = build_eligible_slots_by_course(
+        taken_course_ids=[cid], 
+        slots_by_id=slots_by_id, 
+        session=db.session, 
+        include_bucket_slots=True 
+    )
+    
+    if req_slot_id not in (eligible_by_course.get(cid) or set()):
+        flash("That course can't satisfy the selected requirement!", "error")
+        return redirect(url_for("v1.allocations_get"))
+    
+    # upsert alloc for this course:
+    existing = CourseAllocation.query.filter_by(
+        student_profile_id=profile.id, 
+        course_id=cid
+    ).first() 
+    
+    if existing: 
+        existing.requirement_slot_id = req_slot_id 
+        existing.term = term 
+        existing.locked = True 
+        existing.reason = "student_selected"
+    else: 
+        db.session.add(
+            CourseAllocation(
+                student_profile_id=profile.id, 
+                course_id=cid, 
+                requirement_slot_id=req_slot_id, 
+                term=term, 
+                locked=True, 
+                reason="student_selected"
+            )
+        )
+    
+    try:
+        db.session.commit() 
+    except Exception as e: 
+        print(e)
+        db.session.rollback()
+        flash("Could not save your override. Please try again", "error")
+        return redirect(url_for("v1.allocations.get"))
+    
+    # recompute 
+    try: 
+        recompute_course_allocations(profile.id, session=db.session)
+        db.session.commit() 
+    except Exception as e: 
+        print(e)
+        db.session.rollback() 
+        flash("Override saved, but we couldn't refresh your other allocations yet", "warning")
+        return redirect(url_for("v1.allocations_get"))
+    
+    flash("Allocation updated", "success")
+    return redirect(url_for("v1.allocations_get"))
+    
+    
+@v1_bp.post("/allocations/reset")
+@login_required
+@onboarding_required
+def allocations_reset_post():
+    profile = current_user.student_profile
+
+    cid = (request.form.get("course_id") or "").strip().upper()
+    if not cid:
+        flash("Missing course id.", "error")
+        return redirect(url_for("v1.allocations_get"))
+
+    # Ensure the course is actually in the student's profile (so nobody can submit random ids)
+    instances = extract_course_instances(profile.courses_by_term or {})
+    term_by_course = preferred_term_by_course(instances)
+    if cid not in term_by_course:
+        flash("That course is not in your profile.", "error")
+        return redirect(url_for("v1.allocations_get"))
+
+    alloc = CourseAllocation.query.filter_by(
+        student_profile_id=profile.id,
+        course_id=cid
+    ).first()
+
+    if not alloc:
+        flash("Nothing to reset for that course.", "warning")
+        return redirect(url_for("v1.allocations_get"))
+
+    try:
+        # delete and let solver re-create it
+        db.session.delete(alloc)
+        db.session.commit()
+    except Exception as e:
+        print(e)
+        db.session.rollback()
+        flash("Could not reset that allocation.", "error")
+        return redirect(url_for("v1.allocations_get"))
+
+    # Recompute around it
+    try:
+        recompute_course_allocations(profile.id, session=db.session)
+        db.session.commit()
+    except Exception as e:
+        print(e)
+        db.session.rollback()
+        flash("Reset saved, but we couldn't refresh the plan yet.", "warning")
+        return redirect(url_for("v1.allocations_get"))
+
+    flash("Reset to recommended.", "success")
+    return redirect(url_for("v1.allocations_get"))
+
+@v1_bp.post("/allocations/reset_all")
+@login_required
+@onboarding_required
+def allocations_reset_all_post():
+    profile = current_user.student_profile
+
+    try:
+        # Delete ALL allocations for this student (locked + unlocked)
+        db.session.execute(
+            delete(CourseAllocation).where(
+                CourseAllocation.student_profile_id == profile.id
+            )
+        )
+        db.session.commit()
+    except Exception as e:
+        print(e)
+        db.session.rollback()
+        flash("Could not reset allocations. Please try again.", "error")
+        return redirect(url_for("v1.allocations_get"))
+
+    # Recompute fresh recommended allocations
+    try:
+        recompute_course_allocations(profile.id, session=db.session)
+        db.session.commit()
+    except Exception as e:
+        print(e)
+        db.session.rollback()
+        flash("Allocations cleared, but we couldn't recompute recommendations yet.", "warning")
+        return redirect(url_for("v1.allocations_get"))
+
+    flash("All allocations reset to recommended.", "success")
+    return redirect(url_for("v1.allocations_get"))

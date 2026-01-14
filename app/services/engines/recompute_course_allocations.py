@@ -253,6 +253,15 @@ def recompute_course_allocations(student_profile_id: str, session: Optional[Sess
     for cid, sids in list(eligible_slots_by_course.items()):
         eligible_slots_by_course[cid] = {sid for sid in sids if sid in slots_by_id}
 
+    bundle_courses: Dict[str, Set[str]] = {} 
+    for co in cos: 
+        if co.bundle_id: 
+            bundle_courses.setdefault(co.bundle_id, set()).add(co.course_id)
+    
+    def course_term(course_id: str) -> str: 
+        return term_by_course.get(course_id, "UNKNOWN")
+    
+    
     # ----------------------------
     # 6) Build candidates per COURSE/BUNDLE slot
     # ----------------------------
@@ -285,26 +294,95 @@ def recompute_course_allocations(student_profile_id: str, session: Optional[Sess
         if sid in locked_slots:
             continue
 
-        chosen = None
-        for cid in candidates_by_slot.get(sid, []):
-            if cid not in used_courses:
-                chosen = cid
-                break
-
-        if not chosen:
+        slot = slots_by_id.get(sid)
+        if not slot:
             continue
 
-        session.add(
-            CourseAllocation(
-                student_profile_id=student_profile_id,
-                course_id=chosen,
-                requirement_slot_id=sid,
-                term=term_by_course.get(chosen, "UNKNOWN"),
-                locked=False,
-                reason="most_constrained",
+        # ---- CASE A: Normal COURSE slot (existing behavior)
+        if slot.slot_type == SlotType.COURSE:
+            chosen = None
+            for cid in candidates_by_slot.get(sid, []):
+                if cid not in used_courses:
+                    chosen = cid
+                    break
+
+            if not chosen:
+                continue
+
+            session.add(
+                CourseAllocation(
+                    student_profile_id=student_profile_id,
+                    course_id=chosen,
+                    requirement_slot_id=sid,
+                    term=term_by_course.get(chosen, "UNKNOWN"),
+                    locked=False,
+                    reason="most_constrained",
+                )
             )
-        )
-        used_courses.add(chosen)
+            used_courses.add(chosen)
+            continue
+
+        # ---- CASE B: BUNDLE slot (NEW behavior)
+        if slot.slot_type == SlotType.BUNDLE:
+            # Find which bundle_ids could satisfy THIS slot
+            # A bundle satisfies a slot if CourseBundle.requirement_slot_id == sid
+            candidate_bundle_ids = [
+                b_id for b_id, b in bundles_by_id.items()
+                if b.requirement_slot_id == sid and b_id in bundle_courses
+            ]
+
+            chosen_bundle_id = None
+            chosen_bundle_courses: Set[str] = set()
+
+            for b_id in candidate_bundle_ids:
+                b = bundles_by_id.get(b_id)
+                req_courses = set(bundle_courses.get(b_id, set()))
+                if not req_courses:
+                    continue
+
+                # Must have all courses in the bundle
+                if not req_courses.issubset(set(taken_course_ids)):
+                    continue
+
+                # Must not already have used courses
+                if any(c in used_courses for c in req_courses):
+                    continue
+
+                # Same-term constraint
+                if b and getattr(b, "must_be_same_term", False):
+                    terms = {course_term(c) for c in req_courses}
+                    if len(terms) != 1:
+                        continue
+
+                chosen_bundle_id = b_id
+                chosen_bundle_courses = req_courses
+                break
+
+            if not chosen_bundle_id:
+                continue
+
+            # Allocate ALL bundle courses to this slot
+            # Use a consistent term: if same-term, it's that one; else keep each course's own term
+            same_term = False
+            b = bundles_by_id.get(chosen_bundle_id)
+            if b and getattr(b, "must_be_same_term", False):
+                same_term = True
+                bundle_term = next(iter({course_term(c) for c in chosen_bundle_courses}), "UNKNOWN")
+
+            for cid in chosen_bundle_courses:
+                session.add(
+                    CourseAllocation(
+                        student_profile_id=student_profile_id,
+                        course_id=cid,
+                        requirement_slot_id=sid,
+                        term=bundle_term if same_term else course_term(cid),
+                        locked=False,
+                        reason="bundle_fill",
+                    )
+                )
+                used_courses.add(cid)
+
+            continue
 
     session.flush()
 

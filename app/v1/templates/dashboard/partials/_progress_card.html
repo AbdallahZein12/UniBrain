@@ -1,4 +1,9 @@
-<div class="progress-card">
+{% set p = (percentage_completed or 0)|int %}
+{% if p < 0 %}{% set p = 0 %}{% endif %}
+{% if p > 100 %}{% set p = 100 %}{% endif %}
+
+
+<div class="progress-card" data-progress="{{ p }}">
   <div class="progress-left">
     <div class="progress-title">Degree progress</div>
     <div class="progress-sub">
@@ -12,7 +17,7 @@
       </div>
       <div class="metric">
         <div class="metric-label">Requirements satisfied</div>
-        <div class="metric-value">18 / 26</div>
+        <div class="metric-value">{{ slots_satisfied }} / {{ slots_total }}</div>
       </div>
       <div class="metric">
         <div class="metric-label">On track</div>
@@ -25,7 +30,7 @@
     <div class="progress-ring">
       <div class="ring">
         <div class="ring-inner">
-          <div class="ring-big">60%</div>
+          <div class="ring-big">{{ p }}%</div>
           <div class="ring-small">complete</div>
         </div>
       </div>
@@ -33,11 +38,44 @@
 
     <div class="progress-bar">
       <div class="bar-track">
-        <div class="bar-fill" style="width:60%"></div>
+        <div class="bar-fill"></div>
       </div>
       <div class="bar-meta">
-        <span class="muted">Target graduation:</span> <span>{% if current_user.student_profile.expected_grad_year %} {{current_user.student_profile.expected_grad_year}} {% else %} Not filled {% endif %} </span>
+        <span class="muted">Target graduation:</span>
+        <span>
+          {% if current_user.student_profile.expected_grad_year %}
+            {{ current_user.student_profile.expected_grad_year }}
+          {% else %}
+            Not filled
+          {% endif %}
+        </span>
       </div>
     </div>
   </div>
 </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const card = document.querySelector(".progress-card");
+    if (!card) return;
+
+    const p = Math.max(0, Math.min(100, parseInt(card.dataset.progress || "0", 10)));
+
+    const ring = card.querySelector(".ring");
+    const bar = card.querySelector(".bar-fill");
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        if (ring) ring.style.setProperty("--p", String(p));
+        if (bar) bar.style.width = p + "%";
+
+        card.classList.add("is-animated");
+
+        // 🎉 success state
+        if (p === 100) {
+          card.classList.add("is-complete");
+        }
+      });
+    });
+  });
+</script>

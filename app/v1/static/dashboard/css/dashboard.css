@@ -24,6 +24,10 @@
   --shadow: 0 18px 50px rgba(0,0,0,.55);
 
   --sidebar-w: 280px;
+
+  --ok-strong: rgba(34,197,94,.95);
+  --ok-soft: rgba(34,197,94,.55);
+
 }
 
 *{ box-sizing:border-box; }
@@ -603,19 +607,87 @@ body::before{
   justify-content:flex-end;
   width:100%;
 }
-
 .ring{
   width: 108px;
   height: 108px;
   border-radius: 999px;
+
+  --p: 0;
+  --ring-main: rgba(47,107,255,.95);
+  --ring-rest: rgba(255,255,255,.08);
+
   background:
-    conic-gradient(rgba(47,107,255,.95) 0 60%, rgba(255,255,255,.08) 60% 100%);
+    conic-gradient(
+      var(--ring-main) 0 calc(var(--p) * 1%),
+      var(--ring-rest) calc(var(--p) * 1%) 100%
+    );
+
   box-shadow: 0 16px 40px rgba(47,107,255,.14);
   border: 1px solid rgba(255,255,255,.10);
   display:flex;
   align-items:center;
   justify-content:center;
+
+  transition: --p 1.1s cubic-bezier(.22,.61,.36,1),
+              box-shadow .4s ease;
 }
+
+/* Green success state */
+.progress-card.is-complete .ring{
+  --ring-main: var(--ok-strong);
+  box-shadow: 0 18px 45px rgba(34,197,94,.35);
+}
+/* This makes the custom property animatable in modern browsers */
+@property --p {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 0;
+}
+
+/* Progress bar (animated) */
+.bar-fill{
+  height:100%;
+  width:0%;
+  border-radius: 999px;
+
+  background: linear-gradient(
+    90deg,
+    rgba(47,107,255,.95),
+    rgba(47,107,255,.55)
+  );
+
+  box-shadow: 0 10px 30px rgba(47,107,255,.18);
+  transition: width 1.1s cubic-bezier(.22,.61,.36,1),
+              background .4s ease,
+              box-shadow .4s ease;
+}
+
+/* Green success state */
+.progress-card.is-complete .bar-fill{
+  background: linear-gradient(
+    90deg,
+    var(--ok-strong),
+    var(--ok-soft)
+  );
+  box-shadow: 0 12px 32px rgba(34,197,94,.35);
+}
+.progress-card.is-complete .ring-big{
+  color: var(--okText);
+}
+/* Optional: animate the big number too (tiny pop-in) */
+.ring-big{
+  font-weight: 1000;
+  font-size: 20px;
+  letter-spacing: .2px;
+  transform: translateY(2px);
+  opacity: .85;
+  transition: transform .6s ease, opacity .6s ease;
+}
+.progress-card.is-animated .ring-big{
+  transform: translateY(0);
+  opacity: 1;
+}
+
 
 .ring-inner{
   width: 86px;
@@ -627,12 +699,6 @@ body::before{
   flex-direction:column;
   align-items:center;
   justify-content:center;
-}
-
-.ring-big{
-  font-weight: 1000;
-  font-size: 20px;
-  letter-spacing: .2px;
 }
 
 .ring-small{
@@ -653,12 +719,7 @@ body::before{
   overflow:hidden;
 }
 
-.bar-fill{
-  height:100%;
-  border-radius: 999px;
-  background: linear-gradient(90deg, rgba(47,107,255,.95), rgba(47,107,255,.55));
-  box-shadow: 0 10px 30px rgba(47,107,255,.18);
-}
+
 
 .bar-meta{
   margin-top: 8px;

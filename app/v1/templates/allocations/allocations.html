@@ -17,7 +17,8 @@
     </div>
   </div>
 
-  <form method="POST" action="#">
+  <form method="POST" action="{{ url_for('v1.allocations_reset_all_post') }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
     <button class="btn">Reset all</button>
   </form>
 </section>
@@ -38,16 +39,16 @@
     <tr class="alloc-row">
         <td data-label="Course">
         <strong>{{ row.course_id }}</strong>
-        <div class="muted">{{ row.title }}</div>
+        <div class="muted">{{ row.title }} <br><br>{{row.credits}} credits</div>
         </td>
 
         <td data-label="Term">{{ row.term }}</td>
 
         <td data-label="Status">
-        {% if row.status == "completed" %}
+        {% if row.status == "Completed" %}
             <span class="badge badge-good">Completed</span>
         {% else %}
-            <span class="badge badge-muted">In progress</span>
+            <span class="badge badge-muted">{{row.status}}</span>
         {% endif %}
         </td>
 
@@ -66,20 +67,23 @@
 
         <td data-label="Action">
         {% if row.has_overlap %}
-            <form method="POST" action="#" class="action-form">
+            <form method="POST" action="{{ url_for('v1.allocations_override_post') }}" class="action-form">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
             <input type="hidden" name="course_id" value="{{ row.course_id }}">
             <select name="requirement_slot_id" class="select">
                 {% for opt in row.eligible_slots %}
                 <option value="{{ opt.id }}"
-                    {% if row.allocation and row.allocation.requirement_slot_id == opt.id %}selected{% endif %}>
-                    {{ opt.label }}
+                  title="{{ opt.label }}"
+                  {% if row.allocation and row.allocation.requirement_slot_id == opt.id %}selected{% endif %}>
+                  {{ opt.label[:100] }}{% if opt.label|length > 100 %}…{% endif %}
                 </option>
                 {% endfor %}
             </select>
             <button class="btn btn-primary" type="submit">Apply</button>
             </form>
 
-            <form method="POST" action="#" class="action-form">
+            <form method="POST" action="{{ url_for('v1.allocations_reset_post') }}" class="action-form">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
             <input type="hidden" name="course_id" value="{{ row.course_id }}">
             <button class="btn" type="submit">Reset</button>
             </form>
