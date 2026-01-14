@@ -308,6 +308,18 @@ http://localhost:5000
 
 ![Models Diagram](./docs/design/models_v1.3.jpg)
 
+**1/13/2026**: 
+- Completed course allocations engine
+- Completed course allocations page
+- Allows reseting to recommended allocations or manual allocations
+- New CourseAllocation Model 
+- Dynamic progress bar and ring 
+- Enhanced UX
+- Continuing --> Dashboard page and chatting interface 
+
+![Models Diagram](./docs/design/models_v1.4.jpg)
+
+
 ---
 
 STATUS:
